@@ -141,4 +141,7 @@ signals:
     assert observation.source_unit == "km/h"
     assert observation.normalized_unit == "m/s"
     assert observation.robot_family == "demo_rover"
+    assert observation.canonical_signal == "wheel.speed"
+    assert observation.signal_semantic == "linear_velocity"
+    assert observation.source_field_path == "v"
     assert observation.unit_conversion.startswith("km/h->m/s")
