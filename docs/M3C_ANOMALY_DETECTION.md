@@ -108,7 +108,7 @@ measured figure higher (reported as measured).
 - cross-signal inconsistency only under a declared affine relationship, matching units, a shared clock domain, and an explicit maximum timestamp skew;
 - persistence labeling that retains short-lived events instead of silently deleting them.
 
-The functions accept finite, already-normalized `SignalPoint` values with source references. They do not infer units, expected transitions, clock synchronization, or signal relationships. They currently form a tested rule-engine layer; the existing M3c CLI detector registry/configuration is unchanged, so these new rules are not yet selectable through `evidence detect-anomalies`. Pilot-specific config integration and validation against reviewed/labeled recordings remain outstanding.
+The functions accept finite, already-normalized `SignalPoint` values with source references. They do not infer units, expected transitions, clock synchronization, or signal relationships. The separate robot-specific profile adapter described below exposes these rules through the evidence CLI without changing the existing M3c detector registry.
 
 
 
