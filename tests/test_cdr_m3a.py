@@ -267,6 +267,24 @@ def cdr_cap():
 # ------------------------------------------------------------------ 5. typed values from freshly serialized messages
 
 @needs_decoder
+@pytest.mark.parametrize("store_name", ["ROS2_HUMBLE", "ROS2_JAZZY", "ROS2_KILTED", "ROS2_LYRICAL"])
+def test_common_ros2_scalar_schema_decodes_across_distribution_typestores(tmp_path, cf, store_name):
+    """The same standard signal remains readable from embedded definitions across ROS 2 distro generations."""
+    ts = cf.typestore(store_name)
+    msgtype = "std_msgs/msg/Float64"
+    message = ts.types[msgtype](data=12.5)
+    schema = ts.generate_msgdef(msgtype, ros_version=2)[0].encode()
+    payload = bytes(ts.serialize_cdr(message, msgtype))
+    path = cf.write_cdr_mcap(
+        tmp_path / f"{store_name}.mcap",
+        [("/test/value", msgtype, [(cf.t(0), payload)])],
+        schema_override={msgtype: schema},
+    )
+    leaf = one_leaf(decode_topic(inspect_evidence(path), "/test/value"), "data")
+    assert (leaf.value, leaf.ros_type, leaf.quality) == ("12.5", "float64", "ok")
+
+
+@needs_decoder
 @pytest.mark.parametrize("typename, build, signal, expected, ros_type", [
     ("std_msgs/msg/Int64", lambda cf, ts: ts.types["std_msgs/msg/Int64"](data=9223372036854775807), "data", "9223372036854775807", "int64"),
     ("std_msgs/msg/UInt64", lambda cf, ts: ts.types["std_msgs/msg/UInt64"](data=18446744073709551615), "data", "18446744073709551615", "uint64"),
