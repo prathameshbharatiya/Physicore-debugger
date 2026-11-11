@@ -18,13 +18,10 @@ def _unesc(s: str) -> str:
 
 def _escape_md(s: str) -> str:
     """Escape punctuation for the Markdown table cell using the renderer's rule."""
-    return re.sub(
-        r"([!-/:-@\\[-`{-~])",
-        lambda mm: "\\\\" + mm.group(1) if mm.group(1) not in "/,;?'\"%^$.-_" else mm.group(1),
-        s,
-    )
-
-
+    def escape(match):
+        ch = match.group(1)
+        return chr(92) + ch if ch not in "/,;?'\\"%^$.-_" else ch
+    return re.sub(r"([!-/:-@[-`{-~])", escape, s)
 def md_tables(text: str):
     out, cur = [], None
     for ln in text.splitlines():
@@ -119,7 +116,8 @@ def check_markdown(report_bytes: bytes, md: str) -> list[str]:
             problems.append(f"counts {got} != {want}")
     for ln in rep["lanes"]:
         escaped_domain = _escape_md(ln["domain"])
-        if f"Clock domain: {escaped_domain}." not in md and ln["domain"] not in md.replace("\\\\", ""):
+        escaped_domain = _escape_md(ln["domain"])
+        if f"Clock domain: {escaped_domain}." not in md and ln["domain"] not in md.replace("\\", ""):
             problems.append(f"lane {ln['domain']} missing")
     if f"SHA-256 {hashlib.sha256(report_bytes).hexdigest()}" not in md.replace("\\\\", ""):
         problems.append("report digest missing")
