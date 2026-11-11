@@ -285,6 +285,9 @@ class _Ctx:
         for m in self.ev.messages.get(topic, []):
             value, quality, ts, _basis, _dom, ros_type = extract(m, self.decoded(m), field_path, time_source, time_field)
             source_value = source_unit = normalized_unit = conversion = robot_family = None
+            canonical_signal = definition.canonical_name if definition is not None else None
+            signal_semantic = definition.semantic if definition is not None else None
+            source_field_path = definition.field_path if definition is not None else None
             if definition is not None and isinstance(value, Decimal) and definition.unit is not None:
                 source_unit = definition.source_unit or definition.unit
                 try:
@@ -299,7 +302,8 @@ class _Ctx:
             out.append(Sample(ts=ts, seq=(m.order, m.index), value=value, quality=quality, channel_id=m.channel_id,
                               artifact_ref=m.artifact_ref, segment_sha256=m.segment_sha256, parser_status=m.parser_status,
                               ros_type=ros_type, source_value=source_value, source_unit=source_unit,
-                              normalized_unit=normalized_unit, unit_conversion=conversion, robot_family=robot_family))
+                              normalized_unit=normalized_unit, unit_conversion=conversion, robot_family=robot_family,
+                              canonical_signal=canonical_signal, signal_semantic=signal_semantic, source_field_path=source_field_path))
         out.sort(key=lambda s: (s.ts is None, s.ts if s.ts is not None else 0, s.seq))
         return out
 
@@ -320,7 +324,8 @@ def _observation(ctx: _Ctx, s: Sample, topic: str, signal: str, basis: str, doma
                        message_index=s.seq[1], signal=signal, value=s.value, value_type=value_type(s.value), timestamp_ns=s.ts,
                        timestamp_basis=basis, clock_domain=domain, quality=s.quality, parser_status=s.parser_status, ros_type=s.ros_type,
                        source_value=s.source_value, source_unit=s.source_unit, normalized_unit=s.normalized_unit,
-                       unit_conversion=s.unit_conversion, robot_family=s.robot_family)
+                       unit_conversion=s.unit_conversion, robot_family=s.robot_family,
+                       canonical_signal=s.canonical_signal, signal_semantic=s.signal_semantic, source_field_path=s.source_field_path)
 
 
 def _source(ctx: _Ctx, s: Sample, topic: str, role: str) -> SourceRef:
