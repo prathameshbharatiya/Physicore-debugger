@@ -1,0 +1,195 @@
+"""PRES-01..11 (TEST_PLAN 15): the accepted tree (Phase 1/2, M3a, M3b, M3c) is byte-identical to the Step-0 manifest except the one approved
+additive edit to cli.py (D2, allowed from Step 8), new files stay inside the M3d paths, help output of every accepted command is unchanged,
+import isolation holds, no dependency was added."""
+import ast
+import hashlib
+import os
+import subprocess
+import sys
+from pathlib import Path
+
+import pytest
+
+ROOT = Path(__file__).resolve().parents[2]
+G = Path(__file__).with_name("golden")
+MANIFEST = G / "M3D_BASE_FILES.sha256"
+MANIFEST_SHA = "3eeef358e6be23843f7a0f246852c7b271b3c2aad4370b24458daa5ca22dc776"
+APPROVED_TEST_EDIT = "tests/anomaly/test_preservation.py"
+ALLOWED_EDIT = "src/physicore_collector/cli.py"
+ALLOWED_NEW_PREFIXES = ("src/physicore_collector/localization/", "tests/localization/", "examples/localization/", "docs/M3D_", "m3d_records/",
+                        # M3e (plan approved 2026-11-07): the additive investigation-view package and its tests, docs, example and records
+                        "src/physicore_collector/investigation_view/", "tests/investigation_view/", "examples/investigation_view/", "docs/M3E_", "m3e_records/")
+ALLOWED_NEW_PREFIXES = ALLOWED_NEW_PREFIXES + ("src/physicore_collector/rootcause/", "tests/rootcause/", "examples/rootcause/", "docs/M4_", "m4_records/")  # M4 (plan approved 2026-11-08): the additive root-cause package and its tests, docs, examples and records
+
+
+def _manifest():
+    out = {}
+    for line in MANIFEST.read_text().splitlines():
+        sha, _, name = line.partition("  ")
+        out[name] = sha
+    return out
+
+
+def _sha(p):
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+
+
+def _tracked_now():
+    skip = {".git", "__pycache__", ".pytest_cache"}
+    out = []
+    for dp, dn, fn in os.walk(ROOT):
+        dn[:] = [d for d in dn if d not in skip and not d.endswith(".egg-info")]
+        for f in fn:
+            if f.endswith(".pyc"):
+                continue
+            out.append(str(Path(dp, f).relative_to(ROOT)))
+    return sorted(out)
+
+
+def test_PRES_02_manifest_is_the_pinned_one():
+    assert hashlib.sha256(MANIFEST.read_bytes()).hexdigest() == MANIFEST_SHA
+
+
+def test_PRES_02_accepted_files_byte_identical_except_allowed_edit():
+    changed, missing = [], []
+    for name, sha in _manifest().items():
+        p = ROOT / name
+        if not p.exists():
+            missing.append(name)
+        elif _sha(p) != sha and name not in (ALLOWED_EDIT, APPROVED_TEST_EDIT):
+            changed.append(name)
+    assert not missing and not changed, (missing, changed)
+
+
+def test_PRES_02_the_one_approved_test_edit_is_exactly_the_localization_exemption():
+    """Approved 2026-11-07: tests/anomaly/test_preservation.py::PRES_09 skips `/localization/`. Nothing else in that file may differ from the accepted one."""
+    import subprocess
+    r = subprocess.run(["git", "diff", "--numstat", "b7bf26044b49", "HEAD", "--", APPROVED_TEST_EDIT], cwd=ROOT, capture_output=True, text=True)
+    if r.returncode != 0:
+        pytest.skip("git history of the M3c baseline is not available")
+    assert r.stdout.split()[:2] in ([], ["1", "1"]), r.stdout
+    now = (ROOT / APPROVED_TEST_EDIT).read_text()
+    assert now.count('"/localization/" in str(p)') == 1
+
+
+def test_PRES_03_new_files_only_in_allowed_paths():
+    base = set(_manifest())
+    stray = [f for f in _tracked_now() if f not in base and not f.startswith(ALLOWED_NEW_PREFIXES)]
+    assert not stray, stray
+
+
+def _cli_text(path):
+    return path.read_text().splitlines()
+
+
+def test_PRES_04_cli_py_diff_is_purely_additive():
+    cur = ROOT / ALLOWED_EDIT
+    if _sha(cur) == _manifest()[ALLOWED_EDIT]:
+        return                                              # not yet edited (before Step 8): identical is trivially additive
+    import difflib
+    base = (ROOT / "m3d_records" / "cli_base.py.txt").read_text().splitlines()
+    removed = [l for l in difflib.unified_diff(base, _cli_text(cur), lineterm="", n=0) if l.startswith("-") and not l.startswith("---")]
+    assert not removed, removed
+
+
+def test_PRES_09_no_dependency_change():
+    assert "pyproject.toml" in _manifest()
+    assert _sha(ROOT / "pyproject.toml") == _manifest()["pyproject.toml"]
+
+
+def _golden_cases():
+    return sorted(p.stem for p in (G / "help_m3c_tree").glob("*.txt"))
+
+
+@pytest.mark.parametrize("name", _golden_cases())
+def test_PRES_05_help_of_accepted_commands_is_byte_identical(name):
+    # goldens are named <group>_<command>; a command whose own name starts with '_' (capture _supervise) appears as '__'
+    argv = [] if name == "root" else name.replace("__", "_\0").split("_")
+    argv = [a.replace("\0", "_") for a in argv]
+    env = {**os.environ, "COLUMNS": "100", "NO_COLOR": "1", "TERM": "dumb"}
+    r = subprocess.run([sys.executable, "-m", "physicore_collector", *argv, "--help"], capture_output=True, text=True, env=env, cwd=ROOT)
+    assert r.returncode == 0
+    golden = (G / "help_m3c_tree" / f"{name}.txt").read_text()
+    if name == "evidence":
+        # Step 8 (approved, additive): the group help gains exactly the `localize` row; every other line is byte-identical to the accepted golden.
+        got = r.stdout.splitlines(keepends=True)
+        keep = list(got)
+        for cmd in ("localize", "render"):                       # M3e (plan approved 2026-11-07): the group help gains exactly the `render` row too
+            rows = [i for i, l in enumerate(keep) if l.startswith(f"\u2502 {cmd} ")]
+            assert rows, f"the evidence group help lists `{cmd}`"
+            i = rows[0]
+            j = i + 1
+            while j < len(keep) and keep[j].startswith("\u2502                  "):
+                j += 1
+            keep = keep[:i] + keep[j:]
+        for cmd in ("system-model", "hypotheses"):  # M4: the group help gains exactly the `system-model` and `hypotheses` rows too
+            rows = [i for i, l in enumerate(keep) if l.startswith(f"\u2502 {cmd} ")]
+            assert rows, f"the evidence group help lists `{cmd}`"
+            i = rows[0]
+            j = i + 1
+            while j < len(keep) and keep[j].startswith("\u2502                  "):
+                j += 1
+            keep = keep[:i] + keep[j:]
+        assert "".join(keep) == golden, "everything but the localize and render rows equals the accepted golden"
+        return
+    assert r.stdout == golden
+
+
+def _imports(path):
+    out = []
+    for n in ast.walk(ast.parse(path.read_text())):
+        if isinstance(n, ast.Import):
+            out += [a.name for a in n.names]
+        elif isinstance(n, ast.ImportFrom):
+            out.append(("." * n.level) + (n.module or ""))
+            out += [("." * n.level) + (n.module or "") + "." + a.name for a in n.names]
+    return out
+
+
+SRC = ROOT / "src" / "physicore_collector"
+
+
+def test_PRES_07_localization_import_isolation():
+    forbidden = ("cdr", "mcap", "mcap_ros2", "rosbags", "access", "observations.load_evidence", "decoding")
+    bad = []
+    for p in (SRC / "localization").glob("*.py"):
+        for imp in _imports(p):
+            parts = imp.replace("..", ".").strip(".").split(".")
+            if (any(x in ("cdr", "mcap", "mcap_ros2", "rosbags", "decoding", "access") for x in parts)
+                    or imp.endswith("observations.load_evidence") or imp.endswith(".load_evidence")):
+                bad.append((p.name, imp))
+    assert not bad, bad
+
+
+def test_PRES_07_accepted_packages_do_not_import_localization():
+    bad = []
+    for p in SRC.rglob("*.py"):
+        if "rootcause" in p.parts:  # M4: the root-cause package builds on the localization package (approved plan)
+            continue
+        if "localization" in p.parts or "investigation_view" in p.parts:        # the M3e package builds on the localization package (approved plan)
+            continue
+        for imp in _imports(p):
+            if "localization" in imp.split("."):
+                if p.name == "cli.py" and (ROOT / ALLOWED_EDIT).exists():
+                    continue                                 # the one approved lazy import, inside the new command (Step 8)
+                bad.append((str(p.relative_to(SRC)), imp))
+    assert not bad, bad
+
+
+def test_PRES_10_cdr_is_the_only_importer_of_the_third_party_decoder():
+    bad = []
+    for p in SRC.rglob("*.py"):
+        text = p.read_text()
+        if p.name == "cdr.py" and p.parent.name == "investigator":
+            continue
+        if "mcap_ros2" in text or "import rosbags" in text or "from rosbags" in text:
+            bad.append(str(p.relative_to(SRC)))
+    assert not bad, bad
+
+
+def test_PRES_08_package_imports_without_the_ros2_extra():
+    code = ("import sys; sys.modules['mcap_ros2']=None; sys.modules['rosbags']=None\n"
+            "import physicore_collector.localization.vocabulary, physicore_collector.localization.intervals, physicore_collector.localization.report\n"
+            "print('ok')")
+    r = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True, env={**os.environ, "PYTHONPATH": str(ROOT / "src")})
+    assert r.returncode == 0 and r.stdout.strip() == "ok", r.stderr

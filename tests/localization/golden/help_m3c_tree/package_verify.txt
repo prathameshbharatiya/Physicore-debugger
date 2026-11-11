@@ -1,0 +1,20 @@
+                                                                                                    
+ Usage: physicore-collector package verify [OPTIONS] {package}                                      
+                                                                                                    
+ Re-check a package against its manifest, fully offline.                                            
+                                                                                                    
+ Verifies that every listed file exists with the recorded size and SHA-256, that no unlisted        
+ or symlinked file is present, and that the manifest is internally consistent.                      
+ A matching hash shows the bytes equal what was recorded at export time. It does NOT show the       
+ sensor data is true, nor that the recording is complete (see `known_gaps` in the manifest).        
+                                                                                                    
+ Exit codes: 0 = verified, 1 = problems found, 2 = not a package directory.                         
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    package      <path>  An exported evidence package directory. [required]                     │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --json          Machine-readable JSON output.                                                    │
+│ --help          Show this message and exit.                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

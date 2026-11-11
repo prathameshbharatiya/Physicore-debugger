@@ -1,0 +1,17 @@
+# Profile matching the synthetic fixtures in examples/fixtures (no real robot data).
+# Unlike example_robot.profile.yaml it DECLARES log_time_basis, so a trigger that carries an
+# explicit compatibility attestation can be compared with the recording's log_time.
+profile_schema_version: "1.0"
+profile_id: synthetic-fixture-v1
+robot_name: Synthetic Fixture Robot
+log_time_basis: system_time
+required_metadata_keys: [operator, session_label]
+topics:
+  - name: /joint_states
+    required: true
+    expected_hz: 50            # threshold = 2.0 / 50 = 0.04 s
+  - name: /camera/image
+    required: true
+    max_gap_seconds: 0.5
+  - name: /diagnostics
+    required: false

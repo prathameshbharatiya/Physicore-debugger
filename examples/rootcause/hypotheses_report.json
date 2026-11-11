@@ -1,0 +1,893 @@
+{
+  "checks": [
+    {
+      "check_id": "c1",
+      "expectation_ids": [],
+      "instance_id": "h-7a997b35c05af7c7",
+      "kind": "range",
+      "outcome": "not_runnable",
+      "reason": "no_constraint",
+      "source": "none",
+      "symptom_ids": [],
+      "topics": [
+        "/diagnostics",
+        "/rosout"
+      ]
+    }
+  ],
+  "exit_code": 0,
+  "generated_contract_sha256": null,
+  "inputs": {
+    "baseline": null,
+    "catalogue": {
+      "digest": "72ec7278514f6847b9dbef946d50903276221949b1df8b72179f17558b6d9302",
+      "entries_used_by_review_status": {
+        "proposed": 8,
+        "reviewed": 0,
+        "user_supplied": 0
+      },
+      "sources": [
+        {
+          "declared_by": "PhysiCore M4b built-in catalogue v1",
+          "file_sha256": "b825f6b60d786dca8dab5338f6083d89b8b4821e7618c2694665516937af9cef",
+          "supplied_by": "builtin"
+        }
+      ]
+    },
+    "dependencies": {
+      "sha256": "54b257df81ce76dc8201d91d6f2459910c17934dacfd2ab15671ee29292cc255",
+      "supplied": false
+    },
+    "evidence": {
+      "supplied": false
+    },
+    "localization_report": {
+      "schema": "1.0",
+      "sha256": "9c758f59edb4d49c05e958d7e7f1c638062ddd35f208aa55f0de1e3cd00676fe",
+      "size": 14867
+    },
+    "model": null
+  },
+  "investigation_report_version": "1.0",
+  "ladder": [
+    {
+      "level": 0,
+      "name": "observed_order",
+      "reachable": true,
+      "wording": "The symptoms of this unit were observed in the recording in the order listed."
+    },
+    {
+      "level": 1,
+      "name": "consistent_with_declared_dependency",
+      "reachable": true,
+      "wording": "The order fits a declared dependency edge and window, which is consistent with propagation along the declared edge."
+    },
+    {
+      "level": 2,
+      "name": "compatible_with_mechanism",
+      "reachable": true,
+      "wording": "The evidence is compatible with this mechanism; it is supported by the listed evidence."
+    },
+    {
+      "level": 3,
+      "name": "alternatives_excluded_within_coverage",
+      "reachable": true,
+      "wording": "The recorded evidence favours this mechanism over the listed alternatives."
+    },
+    {
+      "level": 4,
+      "name": "difference_evidence",
+      "reachable": true,
+      "wording": "The evidence indicates this mechanism, supported by a contrast between these recordings."
+    },
+    {
+      "level": 5,
+      "name": "controlled_intervention",
+      "reachable": false,
+      "wording": null
+    }
+  ],
+  "limitations": [
+    "Tiers order candidates by how many of their predictions the evidence meets. They are not probabilities.",
+    "A prediction that the evidence does not meet stays open; the report cannot show that nothing happened on a topic.",
+    "Results on the synthetic corpus show that the software follows its definitions, not accuracy on real robots.",
+    "Real-recording validation and decoder licensing clearance are still outstanding.",
+    "The catalogue entries are proposals until a named reviewer has signed each one off; the review status of every entry is shown.",
+    "The level printed next to a hypothesis is the highest level whose evidence is fully present. It is not a measure of how likely the mechanism is."
+  ],
+  "problems": [
+    "The report was made with a dependency file that was not supplied here, so declared neighbours are bound from the system model only."
+  ],
+  "rule": "A set has a leader only if its first instance is supported, has a satisfied share of at least 1/2, exceeds every other instance that is not contradicted by at least 1/3, and its unit has no blocker. Otherwise the set is competing, or unresolved when nothing is supported.",
+  "sensitivity": [],
+  "summary": {
+    "claim_levels": {
+      "0": 8,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    "instances": 8,
+    "leaders": 0,
+    "set_status": {
+      "competing": 0,
+      "leading": 0,
+      "no_applicable_mechanism": 0,
+      "unresolved": 1
+    },
+    "units": 1
+  },
+  "units": [
+    {
+      "always_present": [
+        {
+          "member": "m3d_common_or_independent_origin_not_excluded",
+          "sentence": "A common or independent source of these symptoms is not excluded by the declared dependencies or the observations."
+        },
+        {
+          "member": "m3d_observation_or_timing_artifact_not_excluded",
+          "sentence": "An artifact of observation or timing is not excluded: recorder receipt time is not occurrence time, and the recording may be incomplete."
+        },
+        {
+          "member": "unresolved",
+          "sentence": "The available evidence does not separate the candidate mechanisms, and it is not enough to choose among them."
+        }
+      ],
+      "assumptions": [],
+      "categories": [
+        "diagnostic_status",
+        "log_severity"
+      ],
+      "covered_topics": [
+        "/diagnostics",
+        "/rosout"
+      ],
+      "diagnostic_asks": [
+        {
+          "description": "Calibration state of the sensor.",
+          "entry_id": "invalid_sensor_data_propagated",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "calibration_state",
+          "would_discriminate_from": [
+            "configuration_mismatch",
+            "hardware_degradation",
+            "recording_or_observation_artifact"
+          ]
+        },
+        {
+          "description": "Logs of the component that owns the state.",
+          "entry_id": "state_or_mode_transition_error",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "controller_logs",
+          "would_discriminate_from": [
+            "command_not_followed",
+            "configuration_mismatch",
+            "software_exception_or_crash"
+          ]
+        },
+        {
+          "description": "Processor load of the host over time.",
+          "entry_id": "resource_exhaustion",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "cpu_load",
+          "would_discriminate_from": [
+            "hardware_degradation",
+            "rate_degradation_under_load",
+            "software_exception_or_crash"
+          ]
+        },
+        {
+          "description": "Raw output of the sensor driver before publication.",
+          "entry_id": "invalid_sensor_data_propagated",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "driver_output",
+          "would_discriminate_from": [
+            "configuration_mismatch",
+            "hardware_degradation",
+            "recording_or_observation_artifact"
+          ]
+        },
+        {
+          "description": "Memory use of the host over time.",
+          "entry_id": "resource_exhaustion",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "memory_use",
+          "would_discriminate_from": [
+            "hardware_degradation",
+            "rate_degradation_under_load",
+            "software_exception_or_crash"
+          ]
+        },
+        {
+          "description": "Current drawn by the device over time.",
+          "entry_id": "hardware_degradation",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "motor_current",
+          "would_discriminate_from": [
+            "rate_degradation_under_load",
+            "resource_exhaustion",
+            "software_exception_or_crash"
+          ]
+        },
+        {
+          "description": "Temperature of the device over time.",
+          "entry_id": "hardware_degradation",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "motor_temperature",
+          "would_discriminate_from": [
+            "rate_degradation_under_load",
+            "resource_exhaustion",
+            "software_exception_or_crash"
+          ]
+        },
+        {
+          "description": "Whether the process was running during the interval.",
+          "entry_id": "software_exception_or_crash",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "node_liveness",
+          "would_discriminate_from": [
+            "message_loss_in_transport",
+            "resource_exhaustion",
+            "upstream_source_silent"
+          ]
+        },
+        {
+          "description": "Whether the publishing process was running during the interval.",
+          "entry_id": "upstream_source_silent",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "node_liveness",
+          "would_discriminate_from": [
+            "message_loss_in_transport",
+            "recording_or_observation_artifact",
+            "software_exception_or_crash"
+          ]
+        },
+        {
+          "description": "Parameter values of the publisher and of its consumers over time.",
+          "entry_id": "configuration_mismatch",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "parameter_values",
+          "would_discriminate_from": [
+            "recording_or_observation_artifact",
+            "software_exception_or_crash"
+          ]
+        },
+        {
+          "description": "Exit status or signal of the affected process.",
+          "entry_id": "software_exception_or_crash",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "process_exit_status",
+          "would_discriminate_from": [
+            "message_loss_in_transport",
+            "resource_exhaustion",
+            "upstream_source_silent"
+          ]
+        },
+        {
+          "description": "Recorder-side counters of dropped samples.",
+          "entry_id": "recording_or_observation_artifact",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "recorder_drop_counters",
+          "would_discriminate_from": [
+            "message_loss_in_transport",
+            "timestamp_or_clock_fault",
+            "upstream_source_silent"
+          ]
+        },
+        {
+          "description": "A second recording of the same situation.",
+          "entry_id": "recording_or_observation_artifact",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "repeat_recording",
+          "would_discriminate_from": [
+            "message_loss_in_transport",
+            "timestamp_or_clock_fault",
+            "upstream_source_silent"
+          ]
+        },
+        {
+          "description": "Counters of messages sent and received on the topic.",
+          "entry_id": "upstream_source_silent",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "transport_statistics",
+          "would_discriminate_from": [
+            "message_loss_in_transport",
+            "recording_or_observation_artifact",
+            "software_exception_or_crash"
+          ]
+        },
+        {
+          "description": "Confirmation that the declared edge has the direction that the model states.",
+          "entry_id": "upstream_source_silent",
+          "meaning": "If this measurement is available and shows what the mechanism predicts, its level can rise; if it shows the opposite, the mechanism is contradicted.",
+          "measurement": "verified_dependency_direction",
+          "would_discriminate_from": [
+            "message_loss_in_transport",
+            "recording_or_observation_artifact",
+            "software_exception_or_crash"
+          ]
+        }
+      ],
+      "instances": [
+        {
+          "baseline_note": null,
+          "binding_sources": {
+            "device_topics": "m3d_report"
+          },
+          "bindings": {
+            "device_topics": [
+              "/diagnostics",
+              "/rosout"
+            ]
+          },
+          "cap_sentences": [],
+          "caps": [],
+          "claim_level": 0,
+          "claim_name": "observed_order",
+          "claim_sentence": "The symptoms of this unit were observed in the recording in the order listed.",
+          "components": {
+            "contradicted": 0,
+            "direct": 0,
+            "open": 1,
+            "satisfied": 0
+          },
+          "contradictions": [],
+          "contrast": null,
+          "entry_id": "hardware_degradation",
+          "family": "hardware",
+          "instance_id": "h-91fb96bbeeb96ec4",
+          "ledger": [
+            {
+              "item_id": "h-91fb96bbeeb96ec4#1",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "motor_current"
+            },
+            {
+              "item_id": "h-91fb96bbeeb96ec4#2",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "motor_temperature"
+            }
+          ],
+          "mechanism": "A physical device degraded in performance, and its outputs became slower, noisier or absent.",
+          "order": 1,
+          "predictions": [
+            {
+              "prediction_id": "p1",
+              "state": "not_evaluable",
+              "text": "Device telemetry such as current or temperature moved outside its normal band before the symptom."
+            }
+          ],
+          "review_status": "proposed",
+          "satisfied_share": "0/0",
+          "status": "cannot_be_assessed",
+          "supplied_by": "builtin",
+          "tier": "not_assessed",
+          "uncapped_level": 0,
+          "would_raise": "A declared dependency edge and window in which the order of the symptoms fits would raise this to level 1."
+        },
+        {
+          "baseline_note": null,
+          "binding_sources": {
+            "observed_topics": "m3d_report"
+          },
+          "bindings": {
+            "observed_topics": [
+              "/diagnostics",
+              "/rosout"
+            ]
+          },
+          "cap_sentences": [],
+          "caps": [],
+          "claim_level": 0,
+          "claim_name": "observed_order",
+          "claim_sentence": "The symptoms of this unit were observed in the recording in the order listed.",
+          "components": {
+            "contradicted": 0,
+            "direct": 0,
+            "open": 1,
+            "satisfied": 0
+          },
+          "contradictions": [],
+          "contrast": null,
+          "entry_id": "recording_or_observation_artifact",
+          "family": "observation_artifact",
+          "instance_id": "h-e4168debf41ed025",
+          "ledger": [
+            {
+              "item_id": "h-e4168debf41ed025#1",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "recorder_drop_counters"
+            },
+            {
+              "item_id": "h-e4168debf41ed025#2",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "repeat_recording"
+            }
+          ],
+          "mechanism": "The recorder or the order of receipt, and not the robot, produced the apparent symptom, for example through capture loss, receipt-time ordering or a recording boundary.",
+          "order": 2,
+          "predictions": [
+            {
+              "prediction_id": "p1",
+              "state": "not_evaluable",
+              "text": "A repeat recording or recorder-side counters would not show the symptom."
+            }
+          ],
+          "review_status": "proposed",
+          "satisfied_share": "0/0",
+          "status": "cannot_be_assessed",
+          "supplied_by": "builtin",
+          "tier": "not_assessed",
+          "uncapped_level": 0,
+          "would_raise": "A declared dependency edge and window in which the order of the symptoms fits would raise this to level 1."
+        },
+        {
+          "baseline_note": null,
+          "binding_sources": {
+            "affected_topics": "m3d_report"
+          },
+          "bindings": {
+            "affected_topics": [
+              "/diagnostics",
+              "/rosout"
+            ]
+          },
+          "cap_sentences": [],
+          "caps": [],
+          "claim_level": 0,
+          "claim_name": "observed_order",
+          "claim_sentence": "The symptoms of this unit were observed in the recording in the order listed.",
+          "components": {
+            "contradicted": 0,
+            "direct": 0,
+            "open": 1,
+            "satisfied": 0
+          },
+          "contradictions": [],
+          "contrast": null,
+          "entry_id": "software_exception_or_crash",
+          "family": "software_fault",
+          "instance_id": "h-129c06091525dad1",
+          "ledger": [
+            {
+              "item_id": "h-129c06091525dad1#1",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "node_liveness"
+            },
+            {
+              "item_id": "h-129c06091525dad1#2",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "process_exit_status"
+            }
+          ],
+          "mechanism": "A process raised an unhandled exception or exited, which ended or interrupted its outputs.",
+          "order": 3,
+          "predictions": [
+            {
+              "prediction_id": "p1",
+              "state": "restates_symptom",
+              "text": "A log message from the affected component reports an error or an exit near the start of the interval."
+            },
+            {
+              "prediction_id": "p2",
+              "state": "not_evaluable",
+              "text": "The process exit status shows a non-zero code or a signal."
+            }
+          ],
+          "review_status": "proposed",
+          "satisfied_share": "0/0",
+          "status": "cannot_be_assessed",
+          "supplied_by": "builtin",
+          "tier": "not_assessed",
+          "uncapped_level": 0,
+          "would_raise": "A declared dependency edge and window in which the order of the symptoms fits would raise this to level 1."
+        },
+        {
+          "baseline_note": null,
+          "binding_sources": {
+            "state_topics": "m3d_report"
+          },
+          "bindings": {
+            "state_topics": [
+              "/diagnostics",
+              "/rosout"
+            ]
+          },
+          "cap_sentences": [],
+          "caps": [],
+          "claim_level": 0,
+          "claim_name": "observed_order",
+          "claim_sentence": "The symptoms of this unit were observed in the recording in the order listed.",
+          "components": {
+            "contradicted": 0,
+            "direct": 0,
+            "open": 1,
+            "satisfied": 0
+          },
+          "contradictions": [],
+          "contrast": null,
+          "entry_id": "state_or_mode_transition_error",
+          "family": "state",
+          "instance_id": "h-b71a197126c0f92a",
+          "ledger": [
+            {
+              "item_id": "h-b71a197126c0f92a#1",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "controller_logs"
+            }
+          ],
+          "mechanism": "A component entered a mode or state that does not match the transition sequence that was declared or commanded.",
+          "order": 4,
+          "predictions": [
+            {
+              "prediction_id": "p1",
+              "state": "not_evaluable",
+              "text": "The recorded sequence of states contains a transition that the expectation does not allow."
+            }
+          ],
+          "review_status": "proposed",
+          "satisfied_share": "0/0",
+          "status": "cannot_be_assessed",
+          "supplied_by": "builtin",
+          "tier": "not_assessed",
+          "uncapped_level": 0,
+          "would_raise": "A declared dependency edge and window in which the order of the symptoms fits would raise this to level 1."
+        },
+        {
+          "baseline_note": null,
+          "binding_sources": {
+            "changed_topics": "m3d_report",
+            "consumers": "not_bound"
+          },
+          "bindings": {
+            "changed_topics": [
+              "/diagnostics",
+              "/rosout"
+            ],
+            "consumers": []
+          },
+          "cap_sentences": [],
+          "caps": [],
+          "claim_level": 0,
+          "claim_name": "observed_order",
+          "claim_sentence": "The symptoms of this unit were observed in the recording in the order listed.",
+          "components": {
+            "contradicted": 0,
+            "direct": 1,
+            "open": 2,
+            "satisfied": 0
+          },
+          "contradictions": [],
+          "contrast": null,
+          "entry_id": "configuration_mismatch",
+          "family": "configuration",
+          "instance_id": "h-d5e38b1a51c193a5",
+          "ledger": [
+            {
+              "item_id": "h-d5e38b1a51c193a5#1",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "parameter_values"
+            }
+          ],
+          "mechanism": "A parameter or configuration value differs from what the consumers of a topic expect, so the shape or content of its messages changed.",
+          "order": 5,
+          "predictions": [
+            {
+              "prediction_id": "p1",
+              "state": "not_evaluable",
+              "text": "A declared parameter change lies shortly before the change in the messages."
+            },
+            {
+              "prediction_id": "p2",
+              "state": "binding_missing",
+              "text": "Consumers named by a declared edge show a symptom after the change."
+            }
+          ],
+          "review_status": "proposed",
+          "satisfied_share": "0/1",
+          "status": "cannot_be_assessed",
+          "supplied_by": "builtin",
+          "tier": "not_assessed",
+          "uncapped_level": 0,
+          "would_raise": "A declared dependency edge and window in which the order of the symptoms fits would raise this to level 1."
+        },
+        {
+          "baseline_note": null,
+          "binding_sources": {
+            "consumers": "not_bound",
+            "sensor_topics": "m3d_report"
+          },
+          "bindings": {
+            "consumers": [],
+            "sensor_topics": [
+              "/diagnostics",
+              "/rosout"
+            ]
+          },
+          "cap_sentences": [
+            "A check of this mechanism could not be run or answered, so the level is capped at 1."
+          ],
+          "caps": [
+            "check_not_run"
+          ],
+          "claim_level": 0,
+          "claim_name": "observed_order",
+          "claim_sentence": "The symptoms of this unit were observed in the recording in the order listed.",
+          "components": {
+            "contradicted": 0,
+            "direct": 2,
+            "open": 2,
+            "satisfied": 0
+          },
+          "contradictions": [],
+          "contrast": null,
+          "entry_id": "invalid_sensor_data_propagated",
+          "family": "data_validity",
+          "instance_id": "h-7a997b35c05af7c7",
+          "ledger": [
+            {
+              "check_id": "c1",
+              "item_id": "h-7a997b35c05af7c7#1",
+              "kind": "unconfirmed",
+              "outcome": "not_runnable",
+              "prediction_id": "p1",
+              "reason": "no_constraint",
+              "stance": "missing"
+            },
+            {
+              "item_id": "h-7a997b35c05af7c7#2",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "calibration_state"
+            },
+            {
+              "item_id": "h-7a997b35c05af7c7#3",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "driver_output"
+            }
+          ],
+          "mechanism": "A sensor topic carried values that are not valid numbers or lie outside declared bounds, and consumers of the topic received those values.",
+          "order": 6,
+          "predictions": [
+            {
+              "prediction_id": "p1",
+              "state": "check_open",
+              "text": "The values on the sensor topic violate the declared value range or are not finite."
+            },
+            {
+              "prediction_id": "p2",
+              "state": "binding_missing",
+              "text": "Consumers named by a declared edge show a symptom after the first invalid value."
+            }
+          ],
+          "review_status": "proposed",
+          "satisfied_share": "0/2",
+          "status": "cannot_be_assessed",
+          "supplied_by": "builtin",
+          "tier": "not_assessed",
+          "uncapped_level": 0,
+          "would_raise": "A declared dependency edge and window in which the order of the symptoms fits would raise this to level 1."
+        },
+        {
+          "baseline_note": null,
+          "binding_sources": {
+            "affected_topics": "m3d_report",
+            "siblings": "not_bound"
+          },
+          "bindings": {
+            "affected_topics": [
+              "/diagnostics",
+              "/rosout"
+            ],
+            "siblings": []
+          },
+          "cap_sentences": [],
+          "caps": [],
+          "claim_level": 0,
+          "claim_name": "observed_order",
+          "claim_sentence": "The symptoms of this unit were observed in the recording in the order listed.",
+          "components": {
+            "contradicted": 0,
+            "direct": 1,
+            "open": 2,
+            "satisfied": 0
+          },
+          "contradictions": [],
+          "contrast": null,
+          "entry_id": "resource_exhaustion",
+          "family": "resource",
+          "instance_id": "h-6c6f4a70e55d3657",
+          "ledger": [
+            {
+              "item_id": "h-6c6f4a70e55d3657#1",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "cpu_load"
+            },
+            {
+              "item_id": "h-6c6f4a70e55d3657#2",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "memory_use"
+            }
+          ],
+          "mechanism": "A shared resource such as processor time, memory, bandwidth or disk space was exhausted, which delayed or prevented work in several components.",
+          "order": 7,
+          "predictions": [
+            {
+              "prediction_id": "p1",
+              "state": "binding_missing",
+              "text": "Several unrelated topics of the same host show a lower rate or a gap in the same period."
+            },
+            {
+              "prediction_id": "p2",
+              "state": "not_evaluable",
+              "text": "Host measurements show a resource at its limit in that period."
+            }
+          ],
+          "review_status": "proposed",
+          "satisfied_share": "0/1",
+          "status": "cannot_be_assessed",
+          "supplied_by": "builtin",
+          "tier": "not_assessed",
+          "uncapped_level": 0,
+          "would_raise": "A declared dependency edge and window in which the order of the symptoms fits would raise this to level 1."
+        },
+        {
+          "baseline_note": null,
+          "binding_sources": {
+            "consumers": "not_bound",
+            "siblings": "not_bound",
+            "silent_topics": "m3d_report"
+          },
+          "bindings": {
+            "consumers": [],
+            "siblings": [],
+            "silent_topics": [
+              "/diagnostics",
+              "/rosout"
+            ]
+          },
+          "cap_sentences": [],
+          "caps": [],
+          "claim_level": 0,
+          "claim_name": "observed_order",
+          "claim_sentence": "The symptoms of this unit were observed in the recording in the order listed.",
+          "components": {
+            "contradicted": 0,
+            "direct": 2,
+            "open": 3,
+            "satisfied": 0
+          },
+          "contradictions": [],
+          "contrast": null,
+          "entry_id": "upstream_source_silent",
+          "family": "communication",
+          "instance_id": "h-fb0153c89b505d96",
+          "ledger": [
+            {
+              "item_id": "h-fb0153c89b505d96#1",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "node_liveness"
+            },
+            {
+              "item_id": "h-fb0153c89b505d96#2",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "transport_statistics"
+            },
+            {
+              "item_id": "h-fb0153c89b505d96#3",
+              "kind": "unconfirmed",
+              "prediction_id": null,
+              "stance": "missing",
+              "token": "verified_dependency_direction"
+            }
+          ],
+          "mechanism": "The publisher of a topic was silent for an interval while the recorder kept running, so consumers of that topic received no input during the interval.",
+          "order": 8,
+          "predictions": [
+            {
+              "prediction_id": "p1",
+              "state": "binding_missing",
+              "text": "Consumers named by a declared edge show a symptom at or after the start of the silent interval."
+            },
+            {
+              "prediction_id": "p2",
+              "state": "binding_missing",
+              "text": "Other topics of the same component show no symptom during the interval."
+            },
+            {
+              "prediction_id": "p3",
+              "state": "not_evaluable",
+              "text": "The silence ends or the recording ends; no message lies inside the interval."
+            }
+          ],
+          "review_status": "proposed",
+          "satisfied_share": "0/2",
+          "status": "cannot_be_assessed",
+          "supplied_by": "builtin",
+          "tier": "not_assessed",
+          "uncapped_level": 0,
+          "would_raise": "A declared dependency edge and window in which the order of the symptoms fits would raise this to level 1."
+        }
+      ],
+      "leader": null,
+      "missing_evidence": [
+        "calibration_state",
+        "controller_logs",
+        "cpu_load",
+        "driver_output",
+        "memory_use",
+        "motor_current",
+        "motor_temperature",
+        "node_liveness",
+        "parameter_values",
+        "process_exit_status",
+        "recorder_drop_counters",
+        "repeat_recording",
+        "transport_statistics",
+        "verified_dependency_direction"
+      ],
+      "propagation_facts": [
+        {
+          "edge_id": "e1",
+          "from_coverage": "covered",
+          "from_node": "/rosout",
+          "from_symptom_count": 1,
+          "reading": "endpoints_have_symptoms",
+          "sentence": "Both endpoints of the declared edge show symptoms.",
+          "to_coverage": "covered",
+          "to_node": "/diagnostics",
+          "to_symptom_count": 1
+        }
+      ],
+      "reason": "nothing_supported",
+      "set_sentence": "The available evidence does not separate the candidate mechanisms, and it is not enough to choose among them.",
+      "set_status": "unresolved",
+      "symptom_ids": [
+        "s-4bd2015939fdeda6",
+        "s-c872a01752e24777"
+      ],
+      "topics": [
+        "/diagnostics",
+        "/rosout"
+      ],
+      "unit_id": "c-8c302e6e642646ee",
+      "unit_kind": "component"
+    }
+  ],
+  "verification": null,
+  "wording": {
+    "released": {
+      "1": [
+        "propagation"
+      ]
+    }
+  }
+}

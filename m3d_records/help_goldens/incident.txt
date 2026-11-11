@@ -1,0 +1,19 @@
+                                                                                                    
+ Usage: physicore-collector incident [OPTIONS] COMMAND [ARGS]...                                    
+                                                                                                    
+ Prepare, list and inspect investigation-ready incident packages from a capture or an existing      
+ recording (offline).                                                                               
+                                                                                                    
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --help          Show this message and exit.                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
+│ prepare  Prepare an investigation-ready incident package from a capture or an EXISTING           │
+│          recording.                                                                              │
+│ list     List incidents, and capture sessions that have none yet. Read-only.                     │
+│ show     Show one incident: the four separate statements, what is not established, known gaps.   │
+│          Read-only.                                                                              │
+│ pending  Pending incident preparation: sessions that still need a package, and an idle-only      │
+│          command to drain them.                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

@@ -1,0 +1,22 @@
+                                                                                                    
+ Usage: physicore-collector session inspect [OPTIONS] {recording}                                   
+                                                                                                    
+ Show topics, message counts, and min/max log_time of a recording.                                  
+                                                                                                    
+ For a rosbag2 bag directory every storage segment is inspected and cross-checked against           
+ metadata.yaml; missing, unreadable, unsupported or unaccounted files are reported, never           
+ skipped silently.                                                                                  
+                                                                                                    
+ Exit codes: 0 = fully readable, 1 = partially readable (truncated/malformed/incomplete bag;        
+ what could be read is shown), 2 = unreadable or inaccessible.                                      
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    recording      <path>  Path to an .mcap file, a rosbag2 bag directory, or a capture session │
+│                             directory.                                                           │
+│                             [required]                                                           │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --json          Machine-readable JSON output.                                                    │
+│ --help          Show this message and exit.                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

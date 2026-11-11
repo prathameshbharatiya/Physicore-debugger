@@ -1,0 +1,45 @@
+== (a) public accessors M3d needs
+  OK  anomaly.service.run_anomaly_detection
+  OK  anomaly.service.all_detectors
+  OK  anomaly.findings.AnomalyReport
+  OK  anomaly.findings.Finding
+  OK  anomaly.findings.DetectorResult
+  OK  anomaly.findings.ObservationRef
+  OK  anomaly.findings.CATEGORIES
+  OK  anomaly.findings.find_forbidden
+  OK  anomaly.findings.canonical_json
+  OK  anomaly.clock.ClockedValue
+  OK  anomaly.clock.ClockDomainError
+  OK  anomaly.clock.LOG_TIME_DOMAIN
+  OK  investigator.investigate
+  OK  investigator.load_contract
+  OK  investigator.InvestigationResult
+  OK  inventory.inspect_evidence
+  OK  inventory.exit_code
+  signature run_anomaly_detection: (path: 'str | Path', config_path: 'str | Path', *, detector_ids: 'Iterable[str] | None' = None, fail_on_findings: 'bool' = False) -> 'AnomalyReport'
+  signature investigate: (inventory: 'EvidenceInventory', loaded: 'LoadedContract', *, evidence_root: 'Path | None' = None) -> 'InvestigationResult'
+  signature inspect_evidence: (path: 'str | Path') -> 'EvidenceInventory'
+  M2 models public (no underscore): ['Finding', 'ExpectationResult', 'EvidenceSummary', 'TimePoint', 'SourceRef', 'BlindSpot']
+  inventory fields: ['artifacts']
+== (b) category -> detector emitted category/time fields (static from source)
+  tier_a_battery.py            categories=['power_status'] explicit_times_arg=False
+  tier_a_diagnostics.py        categories=['diagnostic_status'] explicit_times_arg=False
+  tier_a_goal_status.py        categories=['goal_status'] explicit_times_arg=False
+  tier_a_log.py                categories=['log_severity'] explicit_times_arg=False
+  tier_b_array_length.py       categories=['array_length_change'] explicit_times_arg=True
+  tier_b_gap.py                categories=['publishing_gap'] explicit_times_arg=True
+  tier_b_non_finite.py         categories=['non_finite_value'] explicit_times_arg=False
+  tier_b_rate.py               categories=['rate_change'] explicit_times_arg=True
+  tier_b_stamp_order.py        categories=[] explicit_times_arg=True
+  CATEGORIES = ('log_severity', 'diagnostic_status', 'goal_status', 'power_status', 'publishing_gap', 'rate_change', 'timestamp_regression', 'timestamp_duplicate', 'array_length_change', 'non_finite_value')
+== (d) yaml.safe_load behaviour
+  anchors/aliases accepted by safe_load (shared refs, not expanded): list 0.0011s  -> loader must refuse aliases itself (token scan)
+  python tag refused by safe_load: ConstructorError
+  nesting 100: parsed 0.003s
+  nesting 1000: parsed 0.486s
+  nesting 10000: RecursionError (must be caught/refused by loader)
+  json nesting 1000: parsed
+  json nesting 100000: RecursionError (must be caught/refused)
+  merge key '<<' accepted by safe_load: {'a': {'k': 1}, 'b': {'k': 1}}
+  duplicate keys accepted silently by safe_load: {'a': 2}
+  yaml bool-ish scalars: 'on' -> {'x': True} ; window 5e8 -> '5e8' ; 500_000_000 -> 500000000

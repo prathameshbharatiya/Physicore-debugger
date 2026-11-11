@@ -1,0 +1,49 @@
+M3d localization report (schema 1.0, tool 0.1.0)
+Scope: This is the earliest symptom observed by the detectors that ran, under their configured parameters, using recorder receipt time. It is not a statement about which event occurred first in the robot.
+Severity: Severity labels are copied from the source findings. They are not used for ordering, grouping or aggregation and carry no statement of impact.
+Evidence: 1 recording artifact(s); inputs: anomaly configuration 071df63bfe6bc19c3684692b2f523f0d3153871d68eaf03d3157386ef2551fe3, expectations none, dependencies 54b257df81ce76dc8201d91d6f2459910c17934dacfd2ab15671ee29292cc255.
+Exit code 0: completed.
+Counts: 2 symptom(s), 1 link(s) reported of 1, 1 component(s), 1 chain(s) reported, 0 blocker(s), 9 caveat(s).
+Lane mcap_log_time: 2 symptom(s) in 2 layer(s).
+  Statement for this lane: This is the earliest symptom observed by the detectors that ran, under their configured parameters, using recorder receipt time. It is not a statement about which event occurred first in the robot.
+  Earliest symptom(s) in this lane: s-c872a01752e24777.
+Symptom s-4bd2015939fdeda6: source m3c_finding tierA.diagnostics, category diagnostic_status, topic "/diagnostics", node "/diagnostics", onset 1700000000003000000 ns (basis received_message, lanes mcap_log_time), severity error as reported by the source.
+  Identity as reported by the source: diagnostic_name "motor_driver".
+  Identity as reported by the source: hardware_id "hw1".
+  Source coverage complete; truncated no; notes none.
+Symptom s-c872a01752e24777: source m3c_finding tierA.ros_log, category log_severity, topic "/rosout", node "/rosout", onset 1700000000001000000 ns (basis received_message, lanes mcap_log_time), severity error as reported by the source.
+  Identity as reported by the source: logger_name "navigation".
+  Source coverage complete; truncated no; notes none.
+Link l-3e86390a65b78bbe: lane mcap_log_time, symptom s-c872a01752e24777 on "/rosout" then symptom s-4bd2015939fdeda6 on "/diagnostics" along edge(s) e1: label consistent_with_propagation; separation 2000000 to 2000000 ns; window 10000000 ns.
+  Notes: declared_edge_unverified.
+  Declared-edge reading: consistent_with. The order of these two symptoms is consistent with the declared edge.
+Component c-8c302e6e642646ee: symptoms s-4bd2015939fdeda6, s-c872a01752e24777; links 1; defence defended_structure.
+Chain ch-a504204354b92e69 (lane mcap_log_time, head s-c872a01752e24777): s-c872a01752e24777 then s-4bd2015939fdeda6; nodes "/rosout" then "/diagnostics"; defence defended_structure.
+  Hypothesis common_or_independent_origin_not_excluded: not_excluded. A common or independent source of these symptoms is not excluded by the declared dependencies or the observations.
+    Declared ancestors of the head node not on the chain: 0 (0 listed): none.
+    Evidence that would discriminate: an intervention or a repeat recording; a declared edge for the ancestor.
+  Hypothesis observation_or_timing_artifact_not_excluded: not_excluded. An artifact of observation or timing is not excluded: recorder receipt time is not occurrence time, and the recording may be incomplete.
+    Evidence that would discriminate: an intervention or a repeat recording; recorder-side drop counters (not available in this format).
+Chains: 1 in total (exact).
+Localization (where symptoms were observed; not where a fault is):
+  Component c-8c302e6e642646ee, lane mcap_log_time: first layer on nodes "/rosout"; last layer on nodes "/diagnostics".
+Edge "e1" ("/rosout" to "/diagnostics"): 1 symptom(s) on the first node, 1 on the second; endpoints_have_symptoms.
+Pairs of symptoms with no declared path in either direction (counted per lane): 0; pairs with a declared path but no common lane: 0.
+  Lane mcap_log_time, topic "/diagnostics", layer 1: symptoms s-4bd2015939fdeda6.
+  Lane mcap_log_time, topic "/rosout", layer 0: symptoms s-c872a01752e24777.
+Caveat [detector_not_configured]: A detector was not configured; nothing is said about what it would have seen. Scope: detector tierA.battery.
+Caveat [detector_not_configured]: A detector was not configured; nothing is said about what it would have seen. Scope: detector tierA.goal_status.
+Caveat [detector_not_configured]: A detector was not configured; nothing is said about what it would have seen. Scope: detector tierB.array_length.
+Caveat [detector_not_configured]: A detector was not configured; nothing is said about what it would have seen. Scope: detector tierB.non_finite.
+Caveat [detector_not_configured]: A detector was not configured; nothing is said about what it would have seen. Scope: detector tierB.publishing_gap.
+Caveat [detector_not_configured]: A detector was not configured; nothing is said about what it would have seen. Scope: detector tierB.rate_change.
+Caveat [detector_not_configured]: A detector was not configured; nothing is said about what it would have seen. Scope: detector tierB.stamp_order.
+Caveat [real_recording_validation_outstanding]: Validation against real robot recordings is outstanding. Scope: detector any.
+Caveat [receipt_order_not_occurrence_order]: Recorder log time is receipt order, not occurrence order. Scope: detector any.
+Limitation 1: Receipt order is not occurrence order; transport, QoS and recorder queueing are invisible.
+Limitation 2: A chain is a structure in the observed symptoms plus the user's declarations; the declarations cannot be verified by this tool.
+Limitation 3: The detectors determine what can be a symptom; a fault that no enabled detector reports does not appear here.
+Limitation 4: Gap and rate symptoms cannot tell capture loss from silence; mode baselines come from the recording itself.
+Limitation 5: Validation so far is on synthetic recordings; validation on real robot recordings and the decoder licensing review are outstanding.
+Limitation 6: Mixed or unrelated clocks give several earliest symptoms; this tool does not relate them.
+Limitation 7: The memory and performance statements of the anomaly detection step are unchanged; its measured overhead exceeds its stated budget.

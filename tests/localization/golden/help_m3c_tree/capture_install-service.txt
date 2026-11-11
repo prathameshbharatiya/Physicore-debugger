@@ -1,0 +1,39 @@
+                                                                                                    
+ Usage: physicore-collector capture install-service [OPTIONS]                                       
+                                                                                                    
+ Install the systemd service for unattended capture. Needs root for /etc/systemd/system.            
+                                                                                                    
+ Nothing is enabled or started unless you ask: installing is not opting in to recording at boot.    
+ Exit codes: 0 = installed (or dry run), 2 = refused (see message).                                 
+                                                                                                    
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --name                   <str>   Service name; the unit is                                    │
+│                                     physicore-collector-<name>.service.                          │
+│                                     [required]                                                   │
+│ *  --user                   <str>   Account the service runs as (required; root is refused       │
+│                                     unless --allow-root).                                        │
+│                                     [required]                                                   │
+│ *  --profile                <path>  Profile to record with (validated now). [required]           │
+│ *  --out                    <path>  EXISTING output directory for capture sessions. [required]   │
+│    --ros-setup              <str>   ROS setup script to source (repeatable). No distro is        │
+│                                     assumed.                                                     │
+│    --env                    <str>   KEY=VALUE to forward (allow-listed ROS variables only).      │
+│    --group                  <str>                                                                │
+│    --restart                <str>   'on-failure' (rate limited; each restart is a NEW session)   │
+│                                     or 'no'.                                                     │
+│                                     [default: on-failure]                                        │
+│    --executable             <str>   Absolute path of physicore-collector (default: the one on    │
+│                                     PATH).                                                       │
+│    --dest-dir               <path>  Where to write the unit file. [default: /etc/systemd/system] │
+│    --enable                         Also enable at boot. WITHOUT this the service never starts   │
+│                                     by itself.                                                   │
+│    --start                          Also start it now.                                           │
+│    --force                          Replace an existing unit written by this tool.               │
+│    --allow-root                                                                                  │
+│    --dry-run                        Validate and print the unit; write nothing.                  │
+│    --no-systemctl                   Do not call systemctl (daemon-reload/enable/start).          │
+│    --no-auto-prepare                Generate a unit that does NOT prepare incident packages      │
+│                                     after a clean stop.                                          │
+│    --help                           Show this message and exit.                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

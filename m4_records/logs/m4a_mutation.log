@@ -1,0 +1,120 @@
+CONTROL (unmodified)                       PASS
+mo: version type not checked               KILLED
+mo: version value not checked              KILLED
+mo: empty declared_by accepted             KILLED
+mo: system_name optional                   KILLED
+mo: empty system_name accepted             KILLED
+mo: dependency digest unchecked            KILLED
+mo: unknown top keys accepted              KILLED
+mo: component role unchecked               KILLED
+mo: duplicate component accepted           KILLED
+mo: component keys unchecked               KILLED
+mo: component id format unchecked          KILLED
+mo: binding component unchecked            KILLED
+mo: duplicate binding accepted             KILLED
+mo: topic format unchecked                 KILLED
+mo: field format unchecked                 KILLED
+mo: type format unchecked                  KILLED
+mo: bad binding field still kept           SURVIVED
+mo: binding keys unchecked                 KILLED
+mo: version kind unchecked                 KILLED
+mo: duplicate version accepted             KILLED
+mo: version digest unchecked               KILLED
+mo: empty name or version accepted         KILLED
+mo: version component unchecked            KILLED
+mo: constraint kind unchecked              KILLED
+mo: duplicate constraint accepted          KILLED
+mo: constraint reference unresolved        KILLED
+mo: min greater than max accepted          KILLED
+mo: negative rate accepted                 KILLED
+mo: empty range accepted                   KILLED
+mo: exact type check relaxed               KILLED
+mo: non-finite number accepted             KILLED
+mo: deadline not positive                  KILLED
+mo: members count unchecked                KILLED
+mo: duplicate member accepted              KILLED
+mo: min_healthy upper bound                KILLED
+mo: min_healthy lower bound                KILLED
+mo: constraint kept despite problems       SURVIVED
+mo: intervention kind unchecked            KILLED
+mo: negative time accepted                 KILLED
+mo: clock domain unchecked                 KILLED
+mo: restart with parameter accepted        KILLED
+mo: parameter not required                 KILLED
+mo: duplicate intervention accepted        KILLED
+mo: edge relation unchecked                KILLED
+mo: self edge accepted                     KILLED
+mo: edge endpoint unchecked                KILLED
+mo: duplicate edge accepted                KILLED
+mo: window not positive                    KILLED
+mo: edge topic format unchecked            KILLED
+mo: item declaration ignored               KILLED
+mo: wrong declaration source               KILLED
+mo: control chars allowed                  KILLED
+mo: newline allowed everywhere             KILLED
+mo: string length unchecked                KILLED
+mo: section limit unchecked                KILLED
+mo: file limit off by one                  KILLED
+mo: digest not canonical                   SURVIVED
+mo: lists not ordered                      KILLED
+mo: edges not ordered                      KILLED
+mo: interventions not ordered              KILLED
+mo: bindings not ordered                   KILLED
+mo: NUL accepted                           SURVIVED
+mo: lenient decoding                       KILLED
+mo: symlink followed                       KILLED
+mo: non-regular file read                  KILLED
+mo: file size unchecked before read        SURVIVED
+mo: json duplicate keys accepted           KILLED
+mo: json constants accepted                KILLED
+mo: json scan skipped                      KILLED
+mo: yaml scan skipped                      KILLED
+mo: empty file accepted                    KILLED
+mo: json extension ignored                 KILLED
+ck: undeclared topic ignored               KILLED
+ck: unrecorded topic ignored               KILLED
+ck: type mismatch ignored                  KILLED
+ck: type mismatch without recorded type    KILLED
+ck: type mismatch needs one type only      KILLED
+ck: field requirement dropped              KILLED
+ck: topic requirement dropped              KILLED
+ck: rate needs a field                     KILLED
+ck: value range needs no field             KILLED
+ck: deadline reasons duplicated            KILLED
+ck: deadline response ignored              KILLED
+ck: redundancy binding check dropped       KILLED
+ck: redundancy needs all members recorded  KILLED
+ck: window lower bound exclusive           KILLED
+ck: window upper bound exclusive           KILLED
+ck: no window means outside                KILLED
+ck: digest mismatch ignored                KILLED
+ck: missing file ignored                   KILLED
+ck: severity of notes                      KILLED
+ck: findings unordered                     KILLED
+ck: order ignores subject                  KILLED
+ck: channels not merged                    KILLED
+ck: types not collected                    KILLED
+ck: window dropped                         KILLED
+ck: finding cap                            KILLED
+ck: truncation flag                        KILLED
+ck: total not kept                         KILLED
+ck: recording marker lost                  KILLED
+ck: declared marker lost                   KILLED
+ck: json not sorted                        KILLED
+ck: limits dropped from text               KILLED
+ck: text hides context                     KILLED
+ck: topics not listed in text              KILLED
+ck: exit code from inventory ignored       KILLED
+ck: failed inspection not fatal            KILLED
+ck: invalid model exit code                KILLED
+ck: problems not truncated note            KILLED
+ck: dependency read error exit             KILLED
+ck: dependency digest of wrong bytes       KILLED
+cli: stdin accepted                        KILLED
+cli: missing evidence accepted             KILLED
+cli: json flag ignored                     KILLED
+cli: exit code dropped                     KILLED
+cli: problems not printed                  KILLED
+cli: problems on stdout                    KILLED
+
+112 killed, 5 not killed or invalid of 117

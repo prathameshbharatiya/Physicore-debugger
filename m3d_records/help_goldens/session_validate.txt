@@ -1,0 +1,23 @@
+                                                                                                    
+ Usage: physicore-collector session validate [OPTIONS] {recording}                                  
+                                                                                                    
+ Validate a recording against a profile and report session status.                                  
+                                                                                                    
+ Exit codes: 0 = complete, 1 = partial or failed, 2 = input/usage error.                            
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    recording      <path>  Path to an .mcap file, a rosbag2 bag directory, or a capture session │
+│                             directory.                                                           │
+│                             [required]                                                           │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --profile         <path>  Robot profile to validate against. [required]                       │
+│    --trigger         <path>  Optional trigger JSON file.                                         │
+│    --metadata        <path>  Optional metadata JSON file (also searched for required metadata    │
+│                              keys).                                                              │
+│    --health          <path>  Capture-health sidecar (capture_health.json) for a bag directory.   │
+│                              Found automatically when a capture session directory is given.      │
+│    --json                    Machine-readable JSON output.                                       │
+│    --help                    Show this message and exit.                                         │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

@@ -1,0 +1,8 @@
+anomaly_config_version: 1
+limits:
+  max_retained_observations: 5
+  max_text_bytes: 64
+  max_findings_per_detector: 100
+detectors:
+  tierA.ros_log: {enabled: true}
+  tierA.diagnostics: {enabled: true}

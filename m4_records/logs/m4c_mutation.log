@@ -1,0 +1,73 @@
+CONTROL (unmodified)                       PASS
+ev: min share off                          KILLED
+ev: min share strict                       KILLED
+ev: margin off                             KILLED
+ev: margin strict                          KILLED
+ev: blocker ignored                        KILLED
+ev: blocker only components                KILLED
+ev: leader may be unsupported              SURVIVED
+ev: contradicted may lead                  KILLED
+ev: unsupported set not unresolved         KILLED
+ev: empty set status                       KILLED
+ev: order ignores contradiction            KILLED
+ev: order ignores share                    KILLED
+ev: order ignores open                     KILLED
+ev: order share ascending                  KILLED
+ev: open order descending                  KILLED
+ev: tier contradicted lost                 KILLED
+ev: not assessed lost                      KILLED
+ev: supported needs nothing                KILLED
+ev: restated counted direct                KILLED
+ev: own topics not restated                KILLED
+ev: absent satisfied by silence            KILLED
+ev: absent hit not contradiction           KILLED
+ev: present miss counted as contradiction  KILLED
+ev: unbound slot not missing               KILLED
+ev: link label ignored                     KILLED
+ev: bad labels ignored                     KILLED
+ev: window label not bad                   KILLED
+ev: link direction swapped                 KILLED
+ev: upstream direction swapped             KILLED
+ev: down flag wrong                        KILLED
+ev: link path only downstream              KILLED
+ev: violated check not support             KILLED
+ev: satisfied check not contradiction      KILLED
+ev: open outcomes as support               KILLED
+ev: binding reason lost                    KILLED
+ev: m3d symptom evidence lost              KILLED
+ev: missing evidence only absent           SURVIVED
+ev: missing evidence from contradicted     KILLED
+ev: assumptions not recorded               KILLED
+ev: order numbers missing                  KILLED
+ev: share text wrong                       KILLED
+ev: leader flag missing in score input     KILLED
+ev: unresolved member missing              KILLED
+ev: sensitivity skips edges                KILLED
+ev: sensitivity always robust              KILLED
+ev: sensitivity changed units empty        KILLED
+ev: sensitivity model not dropped          KILLED
+ev: signature ignores leader               KILLED
+ck: m3d symptom not violation              KILLED
+ck: silence read as pass                   KILLED
+ck: unbound check runnable                 KILLED
+ck: range min lost                         KILLED
+ck: range max lost                         KILLED
+ck: constraint topic unchecked             KILLED
+ck: field optional                         KILLED
+ck: contract unsorted                      KILLED
+ck: contract hash dropped                  KILLED
+ck: digest check off                       KILLED
+ck: digest empty accepted                  KILLED
+ck: digest order sensitive                 KILLED
+ck: violated not dominant                  KILLED
+ck: all-satisfied loose                    KILLED
+ck: status map no divergence               KILLED
+ck: status map divergence                  KILLED
+ck: incomparable mapped wrong              KILLED
+ck: no recording reason                    KILLED
+ck: pending not-run lost                   KILLED
+ck: unknown expectation as pass            KILLED
+ck: event kind unsupported                 KILLED
+ck: range without model runnable           KILLED
+
+68 killed, 2 not killed or invalid of 70

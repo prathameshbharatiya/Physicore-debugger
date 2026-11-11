@@ -1,0 +1,37 @@
+{
+  "contract_schema_version": "1.0",
+  "contract_id": "m3a-cdr-example",
+  "description": "Typed-signal expectations over CDR messages (synthetic).",
+  "expectations": [
+    {
+      "expectation_id": "ELBOW-LIMIT",
+      "description": "The elbow joint position must not exceed 1.0 rad.",
+      "topic": "/joint_states",
+      "signal": "position[name=elbow]",
+      "clock_domain": "mcap_log_time",
+      "check": {
+        "kind": "range",
+        "max": 1.0
+      },
+      "source": {
+        "kind": "specification",
+        "reference": "EXAMPLE-SPEC-1 (synthetic)"
+      }
+    },
+    {
+      "expectation_id": "BATTERY-NOT-LOW",
+      "description": "Battery voltage (float32 on the wire) must stay at or above 12.0 V.",
+      "topic": "/battery",
+      "signal": "voltage",
+      "clock_domain": "mcap_log_time",
+      "check": {
+        "kind": "range",
+        "min": 12.0
+      },
+      "source": {
+        "kind": "operator_supplied",
+        "reference": "EXAMPLE-TICKET-2 (synthetic)"
+      }
+    }
+  ]
+}

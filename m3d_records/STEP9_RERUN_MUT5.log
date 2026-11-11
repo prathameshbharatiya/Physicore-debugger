@@ -1,0 +1,69 @@
+CONTROL (unmodified)                               PASS
+lanes: lane scope ignored                          KILLED
+lanes: lane scope not checked against known lanes  KILLED
+lanes: detector blocker hits every lane            KILLED
+lanes: detector blocker misses log lane            KILLED
+lanes: stamp lanes for every detector              KILLED
+lanes: stamp lanes never                           KILLED
+lanes: unscoped blocker hits no lane               KILLED
+by_lane: ids not de-duplicated                     KILLED
+by_lane: ids unsorted                              KILLED
+inv: inspection state ignored                      KILLED
+inv: integrity ignored                             KILLED
+inv: standing gap codes block                      KILLED
+inv: unreadable segment gap ignored                KILLED
+inv: gap artifact digest dropped                   KILLED
+inv: exit_code fallback removed                    KILLED
+inv: fallback fires on clean evidence              KILLED
+det: blind_spot status ignored                     KILLED
+det: not_applicable blind reasons block            KILLED
+det: insufficient evidence ignored                 KILLED
+det: undecodable count from wrong field            KILLED
+det: undecodable blocker dropped                   KILLED
+det: unparseable count lost                        KILLED
+det: unparseable blocker dropped                   KILLED
+det: truncation count off by one                   KILLED
+det: truncation ignored                            KILLED
+det: not_configured becomes a blocker              KILLED
+det: not_configured caveat dropped                 KILLED
+det: not_applicable caveat dropped                 KILLED
+det: baseline caveats for every detector           KILLED
+det: capture-loss caveat for every detector        KILLED
+det: capture-loss caveat without a run             KILLED
+det: boundary caveat dropped                       KILLED
+det: source kind of undecodable wrong              KILLED
+det: blind-spot artifacts dropped                  KILLED
+sym: truncated observations ignored                KILLED
+sym: observation refs dropped                      KILLED
+sym: incomplete coverage ignored                   KILLED
+sym: coverage blocker carries observations         KILLED
+m2: not-evaluated statuses ignored                 KILLED
+m2: incomparable not a blocker                     KILLED
+m2: blind spot ignored                             KILLED
+m2: unplaced blind spot ignored                    KILLED
+m2: blind spot count wrong                         KILLED
+m2: observation index wrong                        KILLED
+m2: unresolvable observation invented              KILLED
+m2: lane scope lost                                KILLED
+m2: incompleteness ignored                         KILLED
+m2: obs id parse wrong split                       KILLED
+cap: symptom cap blocker dropped                   KILLED
+cap: fires at zero                                 KILLED
+cap: count wrong                                   KILLED
+caveat: validation-outstanding caveat dropped      KILLED
+caveat: receipt-order caveat dropped               KILLED
+build: duplicates kept by id                       KILLED
+build: blockers unsorted                           KILLED
+id: count not in identity                          KILLED
+id: scope not in identity                          KILLED
+id: source not in identity                         KILLED
+model: free-text detail accepted                   KILLED
+model: negative count accepted                     KILLED
+model: blocker code vocabulary open                KILLED
+model: source kind vocabulary open                 KILLED
+model: caveat free text accepted                   KILLED
+model: caveat vocabulary open                      KILLED
+make: artifacts not sorted                         KILLED
+make: observations not de-duplicated               KILLED
+
+66 killed, 0 not killed/invalid

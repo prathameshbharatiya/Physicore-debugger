@@ -1,0 +1,27 @@
+# Complete example of a schema-1.1 profile with a `capture:` section (used by `capture run`).
+# Everything under `capture:` maps one-to-one onto a documented `ros2 bag record` option;
+# PhysiCore does not record messages itself. Replace the topics with your robot's.
+profile_schema_version: "1.1"        # "capture:" requires 1.1; 1.0 profiles keep working unchanged
+profile_id: example-arm-capture-v1
+robot_name: Example Arm
+log_time_basis: system_time          # what YOUR recorder's log_time represents (not verified by the tool)
+required_metadata_keys: []           # keys that must appear in MCAP metadata records or --metadata
+topics:
+  - name: /joint_states
+    required: true
+    expected_hz: 50                  # cadence threshold = gap_factor / expected_hz (default factor 2.0)
+  - name: /camera/image
+    max_gap_seconds: 0.5
+  - name: /diagnostics
+    required: false
+capture:
+  storage_id: mcap                   # the only storage format the Collector can read
+  # topics: [/joint_states, /camera/image]   # default: every topic listed above
+  max_bag_size_bytes: 268435456      # ros2 bag record --max-bag-size  (split into ~256 MiB segments)
+  max_bag_duration_seconds: 300      # ros2 bag record --max-bag-duration
+  stop_timeout_seconds: 15           # graceful stop is requested; the recorder is killed after this
+  min_free_disk_bytes: 5368709120    # refuse to start with less than 5 GiB free in --out
+  identity:                          # free-form labels, copied into capture_health.json as given
+    robot_id: arm-07
+    run_id: run-2026-10-12-a
+    test_id: pick-and-place

@@ -1,0 +1,25 @@
+System model: example mobile robot  (declared by example author (invented, not a real robot))
+  file sha256   3f7e2ae731a1428c6a8e04bccddea52c00062264897b5e11239e5531fbfd3ac8
+  model digest  2a08986502d6181dae0f8f7d63f34bf66c7f36623c3365065a2bebc39fc9866f
+  declared: 3 components, 3 bindings, 2 versions, 2 constraints, 1 interventions, 1 edges
+  operating context (declared): Indoor warehouse, flat floor, one shift per day. The lidar is mounted at the front.
+
+Recording facts (from the recording, state complete): 2 topics
+  /diagnostics  diagnostic_msgs/msg/DiagnosticArray  1 messages
+  /rosout  rcl_interfaces/msg/Log  1 messages
+
+Findings: 4
+  [warning] declared_topic_not_recorded: /lidar/scan
+      A topic that the model uses is not in the recording.
+  [warning] constraint_cannot_be_evaluated: lidar_range  (constraint_kind=value_range reason=topic_not_recorded)
+      A declared constraint cannot be evaluated against this recording.
+  [warning] constraint_cannot_be_evaluated: lidar_rate  (constraint_kind=rate reason=topic_not_recorded)
+      A declared constraint cannot be evaluated against this recording.
+  [warning] intervention_outside_recording: base_restart  (at_ns=5 max_log_time_ns=1700000000003000000 min_log_time_ns=1700000000001000000)
+      A declared intervention lies outside the time window of the recording.
+
+Limits:
+  - Everything in the model section was declared by the people named in it. This tool cannot verify it and never infers or corrects it.
+  - The recording section lists only what the recording's own metadata states: topics, message types and message counts. Quality-of-service settings are not exposed.
+  - A finding means that the model and the recording differ. It does not say which of the two is right.
+  - Real-recording validation of the readers and decoder licensing clearance are still outstanding.

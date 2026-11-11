@@ -1,0 +1,5 @@
+{
+  "trigger_id": "trg-unattested",
+  "timestamp_ns": 1700000001000000000,
+  "timestamp_basis": "system_time"
+}

@@ -1,0 +1,64 @@
+CONTROL (unmodified)                           PASS
+iv: report unreadable code                     KILLED
+iv: report invalid code                        KILLED
+iv: dependency digest unchecked                KILLED
+iv: dependency without report digest accepted  SURVIVED
+iv: dependency problems ignored                SURVIVED
+iv: missing dependency note lost               KILLED
+iv: model invalid accepted                     KILLED
+iv: catalogue invalid accepted                 SURVIVED
+iv: rival error swallowed                      KILLED
+iv: evidence path unchecked                    KILLED
+iv: verify without evidence allowed            KILLED
+iv: mismatch not exit 1                        KILLED
+iv: not-run digest note lost                   SURVIVED
+iv: not-run code lost                          SURVIVED
+iv: baseline not loaded                        KILLED
+iv: leaders miscounted                         SURVIVED
+iv: review counts wrong                        KILLED
+iv: dependencies supplied flag                 KILLED
+iv: evidence supplied flag                     KILLED
+iv: self-check skipped                         SURVIVED
+iv: unknown format accepted                    KILLED
+iv: error text kept                            KILLED
+iv: edges src dst swapped                      KILLED
+iv: binding nodes ignored                      KILLED
+iv: non-topic nodes kept                       KILLED
+sc: version unchecked                          KILLED
+sc: exit code range                            KILLED
+sc: bool exit code                             KILLED
+sc: set status unchecked                       KILLED
+sc: leader membership unchecked                KILLED
+sc: tier unchecked                             SURVIVED
+sc: level range                                KILLED
+sc: fixed sentence unchecked                   SURVIVED
+sc: cap order unchecked                        SURVIVED
+sc: contradicted level unchecked               KILLED
+sc: leader support unchecked                   KILLED
+sc: ledger kind unchecked                      KILLED
+sc: ledger stance unchecked                    SURVIVED
+sc: forbidden keys unchecked                   SURVIVED
+sc: sentences unchecked                        KILLED
+sc: claim sentence gate level                  SURVIVED
+sc: unit keys not strict                       SURVIVED
+sc: top keys not strict                        KILLED
+vw: markdown data not escaped                  KILLED
+vw: html data not escaped                      KILLED
+vw: data not truncated                         KILLED
+vw: fixed truncated                            KILLED
+vw: html fixed truncated                       KILLED
+vw: security policy dropped                    KILLED
+vw: badge level class                          KILLED
+vw: unit heading count                         KILLED
+vw: ledger table dropped                       KILLED
+vw: caps dropped                               KILLED
+vw: would raise dropped                        KILLED
+vw: limits dropped                             KILLED
+vw: sensitivity text                           KILLED
+vw: empty sentence dropped                     KILLED
+vw: asks only when present                     KILLED
+vw: assumptions dropped                        SURVIVED
+vw: notes dropped                              KILLED
+vw: verification line dropped                  SURVIVED
+
+45 killed, 16 not killed or invalid of 61

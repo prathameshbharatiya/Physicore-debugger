@@ -1,0 +1,28 @@
+                                                                                                    
+ Usage: physicore-collector evidence investigate [OPTIONS] {path}                                   
+                                                                                                    
+ Compare explicitly expected behaviour with the evidence at PATH and report the earliest defensible 
+ divergence. Read-only.                                                                             
+                                                                                                    
+ The expectations come only from the contract: nothing is inferred from the recording. 'No          
+ divergence observed' means no                                                                      
+ mismatch was established in what was evaluated, not that the system is correct. The first          
+ divergence is not a root cause.                                                                    
+ Nothing is written into PATH (no investigation record is added to the package).                    
+                                                                                                    
+ Exit codes: 0 = no divergence observed in the covered window; 1 = divergence found; 2 =            
+ inconclusive (insufficient evidence                                                                
+ or incomparable timebases); 3 = the expectation contract is invalid.                               
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    path      <path>  Evidence to investigate: anything `evidence inventory` accepts.           │
+│                        [required]                                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --expectations  -e      <path>  Explicit expectation contract (JSON or YAML, schema 1.0).     │
+│                                    [required]                                                    │
+│    --json                          Machine-readable, versioned JSON (stdout) instead of the      │
+│                                    readable report.                                              │
+│    --help                          Show this message and exit.                                   │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

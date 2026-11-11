@@ -1,0 +1,22 @@
+                                                                                                    
+ Usage: physicore-collector [OPTIONS] COMMAND [ARGS]...                                             
+                                                                                                    
+ Local-first robotics evidence acquisition and packaging: offline MCAP / rosbag2 inspection,        
+ supervised rosbag2 capture, portable verified evidence packages.                                   
+                                                                                                    
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --version          Show version and exit.                                                        │
+│ --help             Show this message and exit.                                                   │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
+│ export    Export a portable evidence package. Never overwrites an existing target.               │
+│ profile   Robot profile commands.                                                                │
+│ session   Inspect and validate existing recordings (an .mcap file or a rosbag2 bag directory).   │
+│ capture   Supervise a rosbag2 recording (requires ROS 2 at runtime).                             │
+│ package   Work with exported evidence packages (offline).                                        │
+│ incident  Prepare, list and inspect investigation-ready incident packages from a capture or an   │
+│           existing recording (offline).                                                          │
+│ evidence  Read-only, machine-readable evidence inventory for a separate consumer (offline        │
+│           inspection; no diagnosis).                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

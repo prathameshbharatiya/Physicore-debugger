@@ -1,0 +1,64 @@
+                                                                                                    
+ Usage: physicore-collector incident prepare [OPTIONS] {source}                                     
+                                                                                                    
+ Prepare an investigation-ready incident package from a capture or an EXISTING recording.           
+                                                                                                    
+ Finds every segment and the metadata itself, orders the segments, runs the existing validation and 
+ integrity checks, and writes <incident>/package/ (the verified export package), incident.json      
+ (machine-readable                                                                                  
+ result) and INCIDENT_SUMMARY.md. The package is a SELF-CONTAINED COPY: free space is checked       
+ before copying.                                                                                    
+ The source is only read. An existing target is never overwritten; repeating the command on an      
+ unchanged source                                                                                   
+ is safe (it reports 'already prepared' after re-verifying). A failed attempt publishes nothing:    
+ just retry.                                                                                        
+                                                                                                    
+ Four separate statements are reported: artifact integrity, capture health, evidence coverage,      
+ preparation.                                                                                       
+ A valid checksum does not show nothing was lost; a missing capture-health record is UNKNOWN, not   
+ healthy.                                                                                           
+                                                                                                    
+ Scheduling: it will not compete with a recording. If a capture is active in a guarded directory    
+ (or the recorder of                                                                                
+ this session may still be writing), nothing is done and the exit code is 3 (deferred). While       
+ running it stops cleanly                                                                           
+ (staging removed) if a capture starts. Override on purpose with --allow-while-recording.           
+                                                                                                    
+ Exit codes: 0 = prepared, evidence not known to be adverse (success); 1 = prepared and verified    
+ but the evidence is                                                                                
+ partial/failed/interrupted/changed (degraded); 2 = nothing was prepared (failure: bad input,       
+ capture still                                                                                      
+ running, not enough space, checksum mismatch, target exists, ...); 3 = deferred so as not to       
+ compete with a recording.                                                                          
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    source      <path>  An .mcap file, a rosbag2 directory, or a capture session directory. A   │
+│                          segment listed by a neighbouring metadata.yaml prepares its whole bag.  │
+│                          [required]                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --profile                      <path>   Robot profile to judge the recording against. Optional   │
+│                                         for a capture session directory (its own copy is used).  │
+│ --out                          <path>   NEW incident directory (must not exist). Default for a   │
+│                                         capture session directory: <session>/incident.           │
+│ --metadata                     <path>   Optional metadata JSON file.                             │
+│ --trigger                      <path>   Optional trigger JSON file.                              │
+│ --health                       <path>   Capture-health sidecar for a bag directory (automatic    │
+│                                         for a capture session).                                  │
+│ --dry-run                               Discover and check; report what would be copied and the  │
+│                                         space needed. Writes nothing.                            │
+│ --guard-dir                    <path>   Also treat an active capture in this directory as a      │
+│                                         reason to defer (repeatable; $PHYSICORE_GUARD_DIRS is    │
+│                                         added). List every capture output directory that shares  │
+│                                         storage with the target.                                 │
+│ --allow-while-recording                 Prepare even if a capture is active in a guarded         │
+│                                         directory (it WILL compete with that recording for       │
+│                                         storage).                                                │
+│ --max-mib-per-sec              <float>  Throttle PhysiCore's own hash/copy loops to this average │
+│                                         rate (default: $PHYSICORE_PREPARE_MAX_MIB_PER_SEC, else  │
+│                                         unthrottled). Reduces contention; does not guarantee a   │
+│                                         concurrent recording is safe.                            │
+│ --json                                  Machine-readable JSON output.                            │
+│ --help                                  Show this message and exit.                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

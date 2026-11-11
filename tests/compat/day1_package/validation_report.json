@@ -1,0 +1,113 @@
+{
+  "report_schema_version": "0.1",
+  "status": "complete",
+  "status_reasons": [
+    "all required checks passed on a fully readable recording"
+  ],
+  "artifact_readability": "readable",
+  "checks": [
+    {
+      "check_id": "readability",
+      "category": "readability",
+      "outcome": "pass",
+      "required": true,
+      "message": "recording is fully readable (framing, CRCs and record parsing verified)",
+      "observed": {},
+      "unknowns": [
+        "summary-section contents are not cross-validated"
+      ]
+    },
+    {
+      "check_id": "topic_present:/joint_states",
+      "category": "required_topic",
+      "outcome": "pass",
+      "required": true,
+      "message": "topic /joint_states present with 100 message(s)",
+      "observed": {
+        "message_count": 100
+      },
+      "unknowns": []
+    },
+    {
+      "check_id": "cadence:/joint_states",
+      "category": "cadence",
+      "outcome": "pass",
+      "required": true,
+      "message": "/joint_states: no log_time gap exceeded 0.04 s over 100 message(s) (largest 0.02 s). This does not show that no messages were lost.",
+      "observed": {
+        "threshold_seconds": 0.04,
+        "message_count": 100,
+        "gap_count": 0,
+        "max_observed_gap_seconds": 0.02,
+        "findings_recorded": 0
+      },
+      "unknowns": [
+        "silence before the first / after the last message is not evaluated"
+      ]
+    },
+    {
+      "check_id": "topic_present:/camera/image",
+      "category": "required_topic",
+      "outcome": "pass",
+      "required": true,
+      "message": "topic /camera/image present with 20 message(s)",
+      "observed": {
+        "message_count": 20
+      },
+      "unknowns": []
+    },
+    {
+      "check_id": "cadence:/camera/image",
+      "category": "cadence",
+      "outcome": "pass",
+      "required": true,
+      "message": "/camera/image: no log_time gap exceeded 0.5 s over 20 message(s) (largest 0.1 s). This does not show that no messages were lost.",
+      "observed": {
+        "threshold_seconds": 0.5,
+        "message_count": 20,
+        "gap_count": 0,
+        "max_observed_gap_seconds": 0.1,
+        "findings_recorded": 0
+      },
+      "unknowns": [
+        "silence before the first / after the last message is not evaluated"
+      ]
+    },
+    {
+      "check_id": "topic_present:/diagnostics",
+      "category": "required_topic",
+      "outcome": "pass",
+      "required": false,
+      "message": "topic /diagnostics present with 3 message(s)",
+      "observed": {
+        "message_count": 3
+      },
+      "unknowns": []
+    },
+    {
+      "check_id": "metadata:operator",
+      "category": "metadata",
+      "outcome": "pass",
+      "required": true,
+      "message": "required metadata key 'operator' found in MCAP metadata record 'session'",
+      "observed": {
+        "source": "MCAP metadata record 'session'"
+      },
+      "unknowns": []
+    },
+    {
+      "check_id": "metadata:session_label",
+      "category": "metadata",
+      "outcome": "pass",
+      "required": true,
+      "message": "required metadata key 'session_label' found in MCAP metadata record 'session'",
+      "observed": {
+        "source": "MCAP metadata record 'session'"
+      },
+      "unknowns": []
+    }
+  ],
+  "cadence_findings": [],
+  "trigger_comparison": null,
+  "read_errors": []
+}

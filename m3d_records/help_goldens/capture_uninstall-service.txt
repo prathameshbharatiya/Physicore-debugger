@@ -1,0 +1,15 @@
+                                                                                                    
+ Usage: physicore-collector capture uninstall-service [OPTIONS]                                     
+                                                                                                    
+ Stop (gracefully), disable and remove a service installed by `install-service`.                    
+                                                                                                    
+ Only a unit carrying this tool's marker is removed. Recordings are never touched.                  
+ Exit codes: 0 = removed, 2 = refused / not installed.                                              
+                                                                                                    
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --name                <str>   [required]                                                      │
+│    --dest-dir            <path>  [default: /etc/systemd/system]                                  │
+│    --no-systemctl                                                                                │
+│    --help                        Show this message and exit.                                     │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

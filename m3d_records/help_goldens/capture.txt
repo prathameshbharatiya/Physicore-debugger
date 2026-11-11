@@ -1,0 +1,25 @@
+                                                                                                    
+ Usage: physicore-collector capture [OPTIONS] COMMAND [ARGS]...                                     
+                                                                                                    
+ Supervise a rosbag2 recording (requires ROS 2 at runtime).                                         
+                                                                                                    
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --help          Show this message and exit.                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
+│ run                Record with rosbag2 (`ros2 bag record`) under supervision, in the FOREGROUND. │
+│ start              Start a capture DETACHED from this terminal and return once it is recording.  │
+│ status             Show the state of a capture. Read-only: it never changes the record or        │
+│                    touches the recording.                                                        │
+│ stop               Ask a running capture to stop gracefully and wait for the outcome.            │
+│ recover            Settle sessions whose supervisor vanished (killed, crashed, power loss,       │
+│                    reboot).                                                                      │
+│ list               List capture sessions under an output directory with their assessed state.    │
+│                    Read-only.                                                                    │
+│ service-run        What the systemd unit runs: reconcile, then record until told to stop.        │
+│ install-service    Install the systemd service for unattended capture. Needs root for            │
+│                    /etc/systemd/system.                                                          │
+│ uninstall-service  Stop (gracefully), disable and remove a service installed by                  │
+│                    `install-service`.                                                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

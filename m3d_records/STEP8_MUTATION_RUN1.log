@@ -1,0 +1,64 @@
+CONTROL (unmodified)                      PASS
+svc: config problems ignored              KILLED
+svc: expectations problems ignored        KILLED
+svc: dependency problems ignored          KILLED
+svc: invalid input exit code 2            KILLED
+svc: invalid input continues to analysis  KILLED
+svc: not inspectable exit 1               KILLED
+svc: not inspectable falls through        KILLED
+svc: partial evidence exits 0             KILLED
+svc: only inventory code counts           KILLED
+svc: only anomaly code counts             KILLED
+svc: partial reason missing               KILLED
+svc: reasons not in precedence order      KILLED
+svc: completed reason always              KILLED
+svc: digest binding ignored               KILLED
+svc: deselected detectors silent          KILLED
+svc: limits can be raised                 KILLED
+svc: dependencies not loaded              KILLED
+svc: expectations not run                 KILLED
+svc: detector ids not forwarded           KILLED
+svc: log lane dropped                     KILLED
+cli: json flag inverted                   KILLED
+cli: exit code swallowed                  KILLED
+cli: unknown detector accepted            KILLED
+cli: stdin accepted                       KILLED
+cli: dependencies not forwarded           KILLED
+cli: detector not forwarded               KILLED
+out: exit code range open                 KILLED
+out: empty reasons allowed                KILLED
+out: unknown reason allowed               KILLED
+out: disclaimer unchecked                 KILLED
+out: limitations unchecked                KILLED
+out: total status unchecked               SURVIVED
+out: estimate allowed as total            KILLED
+out: exit 3 without problems allowed      KILLED
+out: forbidden key guard off              KILLED
+out: problem source open                  KILLED
+out: dependencies state open              KILLED
+out: limitation dropped                   KILLED
+wrd: control characters kept              KILLED
+wrd: double quotes kept                   KILLED
+wrd: no truncation                        KILLED
+wrd: truncation too long                  KILLED
+wrd: data not quoted                      KILLED
+wrd: limit constant changed               KILLED
+wrd: severity line dropped                KILLED
+wrd: scope line dropped                   SURVIVED
+wrd: limitations dropped                  KILLED
+wrd: no-dependencies statement dropped    KILLED
+wrd: link count wrong                     KILLED
+wrd: chain count wrong                    KILLED
+wrd: blocker count wrong                  KILLED
+wrd: symptoms not listed                  KILLED
+wrd: chains not listed                    KILLED
+wrd: identities not rendered inert        KILLED
+wrd: topic not rendered inert             KILLED
+wrd: problems not shown                   KILLED
+wrd: earliest sentence dropped            KILLED
+wrd: cross-lane statement dropped         KILLED
+wrd: unmatched lines not detected         KILLED
+wrd: template regex too loose             KILLED
+wrd: exact total lost                     KILLED
+
+59 killed, 2 not killed/invalid

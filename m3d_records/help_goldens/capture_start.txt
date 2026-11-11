@@ -1,0 +1,34 @@
+                                                                                                    
+ Usage: physicore-collector capture start [OPTIONS] {profile}                                       
+                                                                                                    
+ Start a capture DETACHED from this terminal and return once it is recording.                       
+                                                                                                    
+ The supervisor runs in its own session with no controlling terminal, so closing the terminal       
+ or SSH connection does not stop it (but a host that kills all of a user's processes at logout,     
+ e.g. systemd-logind with KillUserProcesses=yes, still can: use the systemd service for             
+ unattended recording). Stop it with `capture stop`; inspect it with `capture status`.              
+                                                                                                    
+ When the capture ends, the detached supervisor prepares an incident package in <session>/incident  
+ after releasing its locks (`capture stop` returns before that finishes; see `incident list`).      
+ Disable with --no-auto-prepare.                                                                    
+                                                                                                    
+ Exit codes: 0 = recording, 1 = prepared but the supervisor did not take over within --wait,        
+ 2 = could not start (invalid profile/settings, ros2 missing, another capture active, ...).         
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    profile      <path>  Profile (schema 1.0 to 1.2). [required]                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --out                    <path>   EXISTING directory in which the new capture session         │
+│                                      directory is created.                                       │
+│                                      [required]                                                  │
+│    --duration               <float>  Stop automatically after this many seconds.                 │
+│    --session-id             <str>    Session directory name (default: UTC timestamp + random     │
+│                                      suffix).                                                    │
+│    --wait                   <float>  Seconds to wait for the detached supervisor to take over    │
+│                                      and start the recorder.                                     │
+│                                      [default: 15.0]                                             │
+│    --no-auto-prepare                 Do NOT prepare an incident package when the capture ends.   │
+│    --help                            Show this message and exit.                                 │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

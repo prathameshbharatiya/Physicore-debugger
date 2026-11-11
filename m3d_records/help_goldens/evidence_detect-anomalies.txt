@@ -1,0 +1,32 @@
+                                                                                                    
+ Usage: physicore-collector evidence detect-anomalies [OPTIONS] {path}                              
+                                                                                                    
+ Report explicit failure indicators and signal/timing anomalies observed in the evidence at PATH.   
+ Read-only.                                                                                         
+                                                                                                    
+ Findings describe what was observed in the recorded stream, where, and under which parameters;     
+ they are not diagnoses and never state a                                                           
+ cause. Detectors run only when enabled in the configuration; nothing is inferred or defaulted.     
+ Nothing is written into PATH.                                                                      
+                                                                                                    
+ Exit codes: 0 = completed (findings do not change the exit code by default); 1 = findings with     
+ --fail-on-findings, or the evidence is                                                             
+ partial / failed integrity (the report is still produced); 2 = the evidence could not be inspected 
+ (or a usage error); 3 = the anomaly                                                                
+ configuration is invalid (nothing is analysed).                                                    
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    path      <path>  Evidence to analyse: anything `evidence inventory` accepts. [required]    │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --anomaly-config          <path>  Explicit anomaly detection configuration (YAML or JSON,     │
+│                                      schema 1).                                                  │
+│                                      [required]                                                  │
+│    --detector                <str>   Run only this detector id (repeatable); default: every      │
+│                                      detector enabled in the configuration.                      │
+│    --json                            Machine-readable JSON report (stdout) instead of the        │
+│                                      readable report.                                            │
+│    --fail-on-findings                Exit 1 when at least one finding is reported.               │
+│    --help                            Show this message and exit.                                 │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

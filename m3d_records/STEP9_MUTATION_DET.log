@@ -1,0 +1,34 @@
+CONTROL (unmodified)                  PASS
+det: canonical key without id         KILLED
+det: canonical key without upper      KILLED
+det: cap keeps input order            KILLED
+det: placements unsorted in id        KILLED
+det: layer sort key drops id          SURVIVED
+det: layer members unsorted           KILLED
+det: layers unordered                 KILLED
+det: lanes unsorted                   KILLED
+det: blocker ids unsorted in lane     KILLED
+det: json keys unsorted               KILLED
+det: canonical json keys unsorted     KILLED
+det: params hash keys unsorted        KILLED
+det: detector ids order kept          KILLED
+det: symptoms listed unsorted         KILLED
+det: out-edges unsorted               KILLED
+det: out-edges not sorted by dst      KILLED
+det: edges not sorted in content      KILLED
+det: nodes not sorted in content      KILLED
+det: semantic hash keys unsorted      KILLED
+det: semantic hash bindings unsorted  KILLED
+det: endpoints unsorted               KILLED
+det: ancestors unsorted               KILLED
+det: blocker artifacts unsorted       KILLED
+det: blocker set order                KILLED
+det: caveat set order                 KILLED
+det: lanes of blocker unsorted        KILLED
+det: readable identities unsorted     KILLED
+det: link targets unsorted            KILLED
+det: bearing nodes unsorted           KILLED
+det: lane order of links unsorted     KILLED
+det: blockers of analysis unsorted    KILLED
+
+30 killed, 1 not killed/invalid

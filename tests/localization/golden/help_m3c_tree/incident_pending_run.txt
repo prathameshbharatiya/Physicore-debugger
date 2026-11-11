@@ -1,0 +1,44 @@
+                                                                                                    
+ Usage: physicore-collector incident pending run [OPTIONS] {out_dirs}...                            
+                                                                                                    
+ Prepare pending incidents, oldest session first, ONLY while no capture is active. Run it when the  
+ machine is idle.                                                                                   
+                                                                                                    
+ This is a command, not a daemon: nothing runs it for you. Use it by hand, from cron, or from a     
+ systemd timer                                                                                      
+ (docs/OPERATIONS.md has an example). A capture that starts while it runs makes it stop cleanly;    
+ the session being                                                                                  
+ prepared is recorded as DEFERRED and nothing is published for it. Source recordings are never      
+ modified or deleted.                                                                               
+                                                                                                    
+ Exit codes: 0 = nothing pending or everything pending was prepared (an interrupted or degraded     
+ capture still yields a                                                                             
+ DEGRADED incident: that is a result, not an error); 2 = at least one failure or a session that     
+ needs an operator;                                                                                 
+ 3 = something was deferred (a capture is active or a recorder may still be writing): retry when    
+ idle.                                                                                              
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    out_dirs      <path>  Capture output directory (or several) holding the session             │
+│                            directories.                                                          │
+│                            [required]                                                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --recover            --no-recover             Reconcile stale `running` sessions first with the  │
+│                                               existing `capture recover` logic (idempotent).     │
+│                                               Default: on.                                       │
+│                                               [default: recover]                                 │
+│ --stop-orphan                                 If a stale session's recorder is still running,    │
+│                                               stop it gracefully via `capture recover` (only a   │
+│                                               process whose recorded identity still matches is   │
+│                                               signalled).                                        │
+│ --max                                <int>    Prepare at most this many sessions in this run.    │
+│ --guard-dir                          <path>   Also check this directory for an active capture    │
+│                                               (repeatable).                                      │
+│ --max-mib-per-sec                    <float>  Throttle PhysiCore's own hash/copy loops (default: │
+│                                               $PHYSICORE_PREPARE_MAX_MIB_PER_SEC, else           │
+│                                               unthrottled).                                      │
+│ --json                                        Machine-readable JSON output.                      │
+│ --help                                        Show this message and exit.                        │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

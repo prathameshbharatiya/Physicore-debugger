@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "physicore-collector"
+version = "0.1.0"
+description = "Local-first robotics evidence acquisition and packaging tool (offline MCAP/rosbag2 pipeline, supervised rosbag2 capture)."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "typer>=0.24,<1",
+    "pydantic>=2.6,<3",
+    "mcap>=1.2.2,<2",
+    "pyyaml>=6,<7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+# Optional: decode CDR payloads of rosbag2 MCAP files from the schemas embedded in the file (no ROS 2 install). See docs/M3A_DECODING.md.
+ros2 = ["mcap-ros2-support>=0.6.0,<0.7"]
+# Test-only: an independent second decoder used to cross-check the first on identical bytes. Not needed to run or use PhysiCore.
+xcheck = ["rosbags>=0.11.9,<0.12"]
+
+[project.scripts]
+physicore-collector = "physicore_collector.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+    "ros2_integration: needs a sourced ROS 2 + rosbag2_storage_mcap; skipped otherwise (see tests/ros2_integration)",
+]

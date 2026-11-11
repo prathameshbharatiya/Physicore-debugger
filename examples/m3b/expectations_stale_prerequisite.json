@@ -1,0 +1,101 @@
+{
+  "contract_schema_version": "1.0",
+  "contract_id": "m3b-example-stale-prerequisite",
+  "description": "SYNTHETIC e-stop, gripper and lift timing expectations",
+  "expectations": [
+    {
+      "expectation_id": "ER-ESTOP",
+      "description": "While in AUTO mode (mode report no older than the limit), cmd_vel stops within 200 ms of the e-stop being pressed",
+      "topic": "/estop",
+      "signal": "data",
+      "clock_domain": "mcap_log_time",
+      "check": {
+        "kind": "event_response",
+        "trigger_op": "eq",
+        "trigger_value": true,
+        "response": {
+          "topic": "/cmd_vel",
+          "signal": "linear.x",
+          "op": "eq",
+          "value": 0
+        },
+        "deadline_ns": 200000000
+      },
+      "source": {
+        "kind": "test_fixture",
+        "reference": "tests/make_m3b_example.py"
+      },
+      "applies_when": [
+        {
+          "topic": "/mode",
+          "signal": "data",
+          "op": "eq",
+          "value": "AUTO",
+          "max_age_ns": 400000000
+        }
+      ]
+    },
+    {
+      "expectation_id": "ER-GRIPPER",
+      "description": "The gripper reaches at least 0.8 within 500 ms of the CLOSE command",
+      "topic": "/gripper/command",
+      "signal": "data",
+      "clock_domain": "mcap_log_time",
+      "check": {
+        "kind": "event_response",
+        "trigger_op": "eq",
+        "trigger_value": "CLOSE",
+        "response": {
+          "topic": "/joint_states",
+          "signal": "position[name=gripper]",
+          "op": "ge",
+          "value": 0.8
+        },
+        "deadline_ns": 500000000
+      },
+      "source": {
+        "kind": "test_fixture",
+        "reference": "tests/make_m3b_example.py"
+      }
+    },
+    {
+      "expectation_id": "ER-LIFT",
+      "description": "Odometry reports zero speed within 300 ms of the lift passing 0.5 (both received times)",
+      "topic": "/joint_states",
+      "signal": "position[name=lift]",
+      "clock_domain": "mcap_log_time",
+      "check": {
+        "kind": "event_response",
+        "trigger_op": "gt",
+        "trigger_value": 0.5,
+        "response": {
+          "topic": "/odom",
+          "signal": "twist.twist.linear.x",
+          "op": "le",
+          "value": 0
+        },
+        "deadline_ns": 300000000
+      },
+      "source": {
+        "kind": "test_fixture",
+        "reference": "tests/make_m3b_example.py"
+      }
+    },
+    {
+      "expectation_id": "HS-LIFT-LIMIT",
+      "description": "By the publisher's own header.stamp, the lift position never exceeds 0.7 (a single-signal check on a payload clock)",
+      "topic": "/joint_states",
+      "signal": "position[name=lift]",
+      "clock_domain": "payload_stamp:/joint_states:header.stamp",
+      "check": {
+        "kind": "range",
+        "max": 0.7
+      },
+      "source": {
+        "kind": "test_fixture",
+        "reference": "tests/make_m3b_example.py"
+      },
+      "time_source": "header_stamp"
+    }
+  ]
+}

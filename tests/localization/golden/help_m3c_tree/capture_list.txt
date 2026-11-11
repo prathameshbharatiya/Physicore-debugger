@@ -1,0 +1,13 @@
+                                                                                                    
+ Usage: physicore-collector capture list [OPTIONS] {out}                                            
+                                                                                                    
+ List capture sessions under an output directory with their assessed state. Read-only.              
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    out      <path>  Output directory holding capture sessions. [required]                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --json          Machine-readable JSON output.                                                    │
+│ --help          Show this message and exit.                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

@@ -1,0 +1,9 @@
+{
+  "trigger_id": "trg-attested-within",
+  "timestamp_ns": 1700000001000000000,
+  "timestamp_basis": "system_time",
+  "basis_compatibility": {
+    "compatible_with_log_time": true,
+    "established_by": "Synthetic fixture: trigger and recording log_time stamped from one simulated clock"
+  }
+}

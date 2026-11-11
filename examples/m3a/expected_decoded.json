@@ -1,0 +1,2181 @@
+{
+  "recording": "cdr_example.mcap",
+  "recording_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+  "note": "decoded leaf values per topic; numbers are exact decimal text, `ros_type` is the wire type",
+  "topics": {
+    "/joint_states": {
+      "schema_name": "sensor_msgs/msg/JointState",
+      "schema_encoding": "ros2msg",
+      "schema_sha256": "21767503b62d0bc29b2f4e4e9532f6e59e064b2331b9b3cb9802e923040108d8",
+      "message_encoding": "cdr",
+      "status": "ok",
+      "messages": [
+        {
+          "message_index": 0,
+          "observation_prefix": "obs:cdr_example.mcap#0",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000000000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "header.stamp.sec",
+              "ros_type": "int32",
+              "value_type": "number",
+              "value": "1700000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.stamp.nanosec",
+              "ros_type": "uint32",
+              "value_type": "number",
+              "value": "0",
+              "quality": "ok"
+            },
+            {
+              "path": "header.frame_id",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "base",
+              "quality": "ok"
+            },
+            {
+              "path": "name.0",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "shoulder",
+              "quality": "ok"
+            },
+            {
+              "path": "name.1",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "elbow",
+              "quality": "ok"
+            },
+            {
+              "path": "position.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "position.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "velocity.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "velocity.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.25",
+              "quality": "ok"
+            },
+            {
+              "path": "effort.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "1.5",
+              "quality": "ok"
+            },
+            {
+              "path": "effort.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "2.5",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        },
+        {
+          "message_index": 8,
+          "observation_prefix": "obs:cdr_example.mcap#8",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000100000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "header.stamp.sec",
+              "ros_type": "int32",
+              "value_type": "number",
+              "value": "1700000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.stamp.nanosec",
+              "ros_type": "uint32",
+              "value_type": "number",
+              "value": "100000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.frame_id",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "base",
+              "quality": "ok"
+            },
+            {
+              "path": "name.0",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "shoulder",
+              "quality": "ok"
+            },
+            {
+              "path": "name.1",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "elbow",
+              "quality": "ok"
+            },
+            {
+              "path": "position.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.1",
+              "quality": "ok"
+            },
+            {
+              "path": "position.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.5",
+              "quality": "ok"
+            },
+            {
+              "path": "velocity.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "velocity.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.25",
+              "quality": "ok"
+            },
+            {
+              "path": "effort.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "1.5",
+              "quality": "ok"
+            },
+            {
+              "path": "effort.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "2.5",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        },
+        {
+          "message_index": 13,
+          "observation_prefix": "obs:cdr_example.mcap#13",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000200000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "header.stamp.sec",
+              "ros_type": "int32",
+              "value_type": "number",
+              "value": "1700000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.stamp.nanosec",
+              "ros_type": "uint32",
+              "value_type": "number",
+              "value": "200000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.frame_id",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "base",
+              "quality": "ok"
+            },
+            {
+              "path": "name.0",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "shoulder",
+              "quality": "ok"
+            },
+            {
+              "path": "name.1",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "elbow",
+              "quality": "ok"
+            },
+            {
+              "path": "position.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.2",
+              "quality": "ok"
+            },
+            {
+              "path": "position.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "1.0",
+              "quality": "ok"
+            },
+            {
+              "path": "velocity.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "velocity.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.25",
+              "quality": "ok"
+            },
+            {
+              "path": "effort.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "1.5",
+              "quality": "ok"
+            },
+            {
+              "path": "effort.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "2.5",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        },
+        {
+          "message_index": 18,
+          "observation_prefix": "obs:cdr_example.mcap#18",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000300000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "header.stamp.sec",
+              "ros_type": "int32",
+              "value_type": "number",
+              "value": "1700000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.stamp.nanosec",
+              "ros_type": "uint32",
+              "value_type": "number",
+              "value": "300000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.frame_id",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "base",
+              "quality": "ok"
+            },
+            {
+              "path": "name.0",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "shoulder",
+              "quality": "ok"
+            },
+            {
+              "path": "name.1",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "elbow",
+              "quality": "ok"
+            },
+            {
+              "path": "position.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.30000000000000004",
+              "quality": "ok"
+            },
+            {
+              "path": "position.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "1.5",
+              "quality": "ok"
+            },
+            {
+              "path": "velocity.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "velocity.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.25",
+              "quality": "ok"
+            },
+            {
+              "path": "effort.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "1.5",
+              "quality": "ok"
+            },
+            {
+              "path": "effort.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "2.5",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        },
+        {
+          "message_index": 20,
+          "observation_prefix": "obs:cdr_example.mcap#20",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000400000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "header.stamp.sec",
+              "ros_type": "int32",
+              "value_type": "number",
+              "value": "1700000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.stamp.nanosec",
+              "ros_type": "uint32",
+              "value_type": "number",
+              "value": "400000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.frame_id",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "base",
+              "quality": "ok"
+            },
+            {
+              "path": "name.0",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "shoulder",
+              "quality": "ok"
+            },
+            {
+              "path": "name.1",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "elbow",
+              "quality": "ok"
+            },
+            {
+              "path": "position.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.4",
+              "quality": "ok"
+            },
+            {
+              "path": "position.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "2.0",
+              "quality": "ok"
+            },
+            {
+              "path": "velocity.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "velocity.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.25",
+              "quality": "ok"
+            },
+            {
+              "path": "effort.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "1.5",
+              "quality": "ok"
+            },
+            {
+              "path": "effort.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "2.5",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        }
+      ]
+    },
+    "/odom": {
+      "schema_name": "nav_msgs/msg/Odometry",
+      "schema_encoding": "ros2msg",
+      "schema_sha256": "8729a79e3117201b6f053e0fb5a2ccd3be851fd8b00080a5f217dcf9ad46cee2",
+      "message_encoding": "cdr",
+      "status": "ok",
+      "messages": [
+        {
+          "message_index": 1,
+          "observation_prefix": "obs:cdr_example.mcap#1",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000000000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "header.stamp.sec",
+              "ros_type": "int32",
+              "value_type": "number",
+              "value": "1700000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.stamp.nanosec",
+              "ros_type": "uint32",
+              "value_type": "number",
+              "value": "0",
+              "quality": "ok"
+            },
+            {
+              "path": "header.frame_id",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "odom",
+              "quality": "ok"
+            },
+            {
+              "path": "child_frame_id",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "base_link",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.position.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.position.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.position.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.orientation.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.orientation.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.orientation.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.orientation.w",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "1.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "1.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.2",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "2.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.3",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "3.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.4",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "4.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.5",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "5.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.6",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "6.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.7",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "7.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.8",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "8.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.9",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "9.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.10",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "10.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.11",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "11.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.12",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "12.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.13",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "13.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.14",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "14.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.15",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "15.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.linear.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.5",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.linear.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.linear.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.angular.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.angular.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.angular.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.125",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.2",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.3",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.4",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.5",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.6",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.7",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.8",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.9",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.10",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.11",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.12",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.13",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.14",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.15",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": [
+            "pose.covariance (36 elements)",
+            "twist.covariance (36 elements)"
+          ]
+        },
+        {
+          "message_index": 9,
+          "observation_prefix": "obs:cdr_example.mcap#9",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000100000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "header.stamp.sec",
+              "ros_type": "int32",
+              "value_type": "number",
+              "value": "1700000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.stamp.nanosec",
+              "ros_type": "uint32",
+              "value_type": "number",
+              "value": "100000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.frame_id",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "odom",
+              "quality": "ok"
+            },
+            {
+              "path": "child_frame_id",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "base_link",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.position.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.5",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.position.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.25",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.position.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.orientation.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.orientation.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.orientation.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.orientation.w",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "1.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "1.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.2",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "2.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.3",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "3.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.4",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "4.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.5",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "5.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.6",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "6.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.7",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "7.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.8",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "8.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.9",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "9.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.10",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "10.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.11",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "11.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.12",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "12.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.13",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "13.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.14",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "14.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.15",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "15.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.linear.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.5",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.linear.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.linear.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.angular.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.angular.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.angular.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.125",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.2",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.3",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.4",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.5",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.6",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.7",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.8",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.9",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.10",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.11",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.12",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.13",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.14",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.15",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": [
+            "pose.covariance (36 elements)",
+            "twist.covariance (36 elements)"
+          ]
+        },
+        {
+          "message_index": 14,
+          "observation_prefix": "obs:cdr_example.mcap#14",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000200000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "header.stamp.sec",
+              "ros_type": "int32",
+              "value_type": "number",
+              "value": "1700000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.stamp.nanosec",
+              "ros_type": "uint32",
+              "value_type": "number",
+              "value": "200000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.frame_id",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "odom",
+              "quality": "ok"
+            },
+            {
+              "path": "child_frame_id",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "base_link",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.position.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "1.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.position.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.5",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.position.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.orientation.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.orientation.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.orientation.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.pose.orientation.w",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "1.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "1.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.2",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "2.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.3",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "3.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.4",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "4.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.5",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "5.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.6",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "6.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.7",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "7.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.8",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "8.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.9",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "9.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.10",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "10.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.11",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "11.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.12",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "12.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.13",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "13.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.14",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "14.0",
+              "quality": "ok"
+            },
+            {
+              "path": "pose.covariance.15",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "15.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.linear.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.5",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.linear.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.linear.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.angular.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.angular.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.twist.angular.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.125",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.0",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.1",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.2",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.3",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.4",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.5",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.6",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.7",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.8",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.9",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.10",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.11",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.12",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.13",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.14",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "twist.covariance.15",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": [
+            "pose.covariance (36 elements)",
+            "twist.covariance (36 elements)"
+          ]
+        }
+      ]
+    },
+    "/cmd_vel": {
+      "schema_name": "geometry_msgs/msg/Twist",
+      "schema_encoding": "ros2msg",
+      "schema_sha256": "21151d3479511adb5d9893f6468b5cabc7d37838fc90f07362899ef204646c27",
+      "message_encoding": "cdr",
+      "status": "ok",
+      "messages": [
+        {
+          "message_index": 2,
+          "observation_prefix": "obs:cdr_example.mcap#2",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000000000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "linear.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.5",
+              "quality": "ok"
+            },
+            {
+              "path": "linear.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "linear.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "angular.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "angular.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "angular.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        },
+        {
+          "message_index": 10,
+          "observation_prefix": "obs:cdr_example.mcap#10",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000100000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "linear.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.5",
+              "quality": "ok"
+            },
+            {
+              "path": "linear.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "linear.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "angular.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "angular.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "angular.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.125",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        },
+        {
+          "message_index": 15,
+          "observation_prefix": "obs:cdr_example.mcap#15",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000200000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "linear.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.5",
+              "quality": "ok"
+            },
+            {
+              "path": "linear.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "linear.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "angular.x",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "angular.y",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.0",
+              "quality": "ok"
+            },
+            {
+              "path": "angular.z",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.25",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        }
+      ]
+    },
+    "/status/mode": {
+      "schema_name": "std_msgs/msg/String",
+      "schema_encoding": "ros2msg",
+      "schema_sha256": "8d7bb56baf93c614a97f38518ec46615ad1265c4ee5f4e84173d86fcf4130b6e",
+      "message_encoding": "cdr",
+      "status": "ok",
+      "messages": [
+        {
+          "message_index": 3,
+          "observation_prefix": "obs:cdr_example.mcap#3",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000000000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "data",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "IDLE",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        },
+        {
+          "message_index": 16,
+          "observation_prefix": "obs:cdr_example.mcap#16",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000200000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "data",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "RUNNING",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        }
+      ]
+    },
+    "/status/count": {
+      "schema_name": "std_msgs/msg/Int32",
+      "schema_encoding": "ros2msg",
+      "schema_sha256": "5c83541f45dbf6e688b3f3ad0b2b8cc7e5670f36b5c81eabbbf795ef216445e6",
+      "message_encoding": "cdr",
+      "status": "ok",
+      "messages": [
+        {
+          "message_index": 4,
+          "observation_prefix": "obs:cdr_example.mcap#4",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000000000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "data",
+              "ros_type": "int32",
+              "value_type": "number",
+              "value": "-7",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        },
+        {
+          "message_index": 11,
+          "observation_prefix": "obs:cdr_example.mcap#11",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000100000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "data",
+              "ros_type": "int32",
+              "value_type": "number",
+              "value": "2147483647",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        }
+      ]
+    },
+    "/status/estop": {
+      "schema_name": "std_msgs/msg/Bool",
+      "schema_encoding": "ros2msg",
+      "schema_sha256": "1089f9876860f559ede6f3d8dc49b3feeb8b846593b3f7cb91dddd8c90cbc241",
+      "message_encoding": "cdr",
+      "status": "ok",
+      "messages": [
+        {
+          "message_index": 5,
+          "observation_prefix": "obs:cdr_example.mcap#5",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000000000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "data",
+              "ros_type": "bool",
+              "value_type": "boolean",
+              "value": false,
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        },
+        {
+          "message_index": 19,
+          "observation_prefix": "obs:cdr_example.mcap#19",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000300000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "data",
+              "ros_type": "bool",
+              "value_type": "boolean",
+              "value": true,
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        }
+      ]
+    },
+    "/temperature": {
+      "schema_name": "std_msgs/msg/Float64",
+      "schema_encoding": "ros2msg",
+      "schema_sha256": "847f41c3298b2ceba56c86fa57dfedf370f743d0fdd0300e83b3088e62269593",
+      "message_encoding": "cdr",
+      "status": "ok",
+      "messages": [
+        {
+          "message_index": 6,
+          "observation_prefix": "obs:cdr_example.mcap#6",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000000000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "data",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "21.5",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        },
+        {
+          "message_index": 12,
+          "observation_prefix": "obs:cdr_example.mcap#12",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000100000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "data",
+              "ros_type": "float64",
+              "value_type": "number",
+              "value": "0.30000000000000004",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        }
+      ]
+    },
+    "/battery": {
+      "schema_name": "sensor_msgs/msg/BatteryState",
+      "schema_encoding": "ros2msg",
+      "schema_sha256": "a71c557c9b28f6d66ba630de219b9d25644200d1da2d5678192f763a2263d772",
+      "message_encoding": "cdr",
+      "status": "ok",
+      "messages": [
+        {
+          "message_index": 7,
+          "observation_prefix": "obs:cdr_example.mcap#7",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000000000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "header.stamp.sec",
+              "ros_type": "int32",
+              "value_type": "number",
+              "value": "1700000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.stamp.nanosec",
+              "ros_type": "uint32",
+              "value_type": "number",
+              "value": "0",
+              "quality": "ok"
+            },
+            {
+              "path": "header.frame_id",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "battery",
+              "quality": "ok"
+            },
+            {
+              "path": "voltage",
+              "ros_type": "float32",
+              "value_type": "number",
+              "value": "12.3",
+              "quality": "ok"
+            },
+            {
+              "path": "temperature",
+              "ros_type": "float32",
+              "value_type": "none",
+              "value": null,
+              "quality": "non_finite"
+            },
+            {
+              "path": "current",
+              "ros_type": "float32",
+              "value_type": "number",
+              "value": "-1.5",
+              "quality": "ok"
+            },
+            {
+              "path": "charge",
+              "ros_type": "float32",
+              "value_type": "none",
+              "value": null,
+              "quality": "non_finite"
+            },
+            {
+              "path": "capacity",
+              "ros_type": "float32",
+              "value_type": "none",
+              "value": null,
+              "quality": "non_finite"
+            },
+            {
+              "path": "design_capacity",
+              "ros_type": "float32",
+              "value_type": "none",
+              "value": null,
+              "quality": "non_finite"
+            },
+            {
+              "path": "percentage",
+              "ros_type": "float32",
+              "value_type": "number",
+              "value": "0.87",
+              "quality": "ok"
+            },
+            {
+              "path": "power_supply_status",
+              "ros_type": "uint8",
+              "value_type": "number",
+              "value": "2",
+              "quality": "ok"
+            },
+            {
+              "path": "power_supply_health",
+              "ros_type": "uint8",
+              "value_type": "number",
+              "value": "1",
+              "quality": "ok"
+            },
+            {
+              "path": "power_supply_technology",
+              "ros_type": "uint8",
+              "value_type": "number",
+              "value": "3",
+              "quality": "ok"
+            },
+            {
+              "path": "present",
+              "ros_type": "bool",
+              "value_type": "boolean",
+              "value": true,
+              "quality": "ok"
+            },
+            {
+              "path": "location",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "slot0",
+              "quality": "ok"
+            },
+            {
+              "path": "serial_number",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "SN-7",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        },
+        {
+          "message_index": 17,
+          "observation_prefix": "obs:cdr_example.mcap#17",
+          "artifact_ref": "artifact:cdr_example.mcap",
+          "artifact_sha256": "a69e9d6a1ee5863df3df1a8c09a0bd21fb2a1a705a5de5bb31eb6e63acd04144",
+          "log_time_ns": 1700000000200000000,
+          "clock_domain": "mcap_log_time",
+          "status": "ok",
+          "detail": null,
+          "leaves": [
+            {
+              "path": "header.stamp.sec",
+              "ros_type": "int32",
+              "value_type": "number",
+              "value": "1700000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.stamp.nanosec",
+              "ros_type": "uint32",
+              "value_type": "number",
+              "value": "200000000",
+              "quality": "ok"
+            },
+            {
+              "path": "header.frame_id",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "battery",
+              "quality": "ok"
+            },
+            {
+              "path": "voltage",
+              "ros_type": "float32",
+              "value_type": "number",
+              "value": "12.1",
+              "quality": "ok"
+            },
+            {
+              "path": "temperature",
+              "ros_type": "float32",
+              "value_type": "none",
+              "value": null,
+              "quality": "non_finite"
+            },
+            {
+              "path": "current",
+              "ros_type": "float32",
+              "value_type": "number",
+              "value": "-1.5",
+              "quality": "ok"
+            },
+            {
+              "path": "charge",
+              "ros_type": "float32",
+              "value_type": "none",
+              "value": null,
+              "quality": "non_finite"
+            },
+            {
+              "path": "capacity",
+              "ros_type": "float32",
+              "value_type": "none",
+              "value": null,
+              "quality": "non_finite"
+            },
+            {
+              "path": "design_capacity",
+              "ros_type": "float32",
+              "value_type": "none",
+              "value": null,
+              "quality": "non_finite"
+            },
+            {
+              "path": "percentage",
+              "ros_type": "float32",
+              "value_type": "number",
+              "value": "0.85",
+              "quality": "ok"
+            },
+            {
+              "path": "power_supply_status",
+              "ros_type": "uint8",
+              "value_type": "number",
+              "value": "2",
+              "quality": "ok"
+            },
+            {
+              "path": "power_supply_health",
+              "ros_type": "uint8",
+              "value_type": "number",
+              "value": "1",
+              "quality": "ok"
+            },
+            {
+              "path": "power_supply_technology",
+              "ros_type": "uint8",
+              "value_type": "number",
+              "value": "3",
+              "quality": "ok"
+            },
+            {
+              "path": "present",
+              "ros_type": "bool",
+              "value_type": "boolean",
+              "value": false,
+              "quality": "ok"
+            },
+            {
+              "path": "location",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "slot0",
+              "quality": "ok"
+            },
+            {
+              "path": "serial_number",
+              "ros_type": "string",
+              "value_type": "string",
+              "value": "SN-7",
+              "quality": "ok"
+            }
+          ],
+          "truncated_arrays": []
+        }
+      ]
+    }
+  }
+}

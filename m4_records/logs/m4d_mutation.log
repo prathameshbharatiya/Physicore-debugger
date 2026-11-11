@@ -1,0 +1,71 @@
+CONTROL (unmodified)                  PASS
+ladder: max reachable 5               KILLED
+ladder: level 4 sentence stronger     KILLED
+ladder: level 2 sentence stronger     KILLED
+ladder: release from level 0          KILLED
+ladder: release nothing               KILLED
+ladder: release from level 2          KILLED
+gate: stronger words ignored          KILLED
+gate: level equal counted stronger    KILLED
+gate: forbidden screen dropped        KILLED
+gate: release applies at any level    KILLED
+gate: stronger table level 3 dropped  KILLED
+gate: stronger table level 4 dropped  KILLED
+gate: stronger table level 2 dropped  KILLED
+gate: stronger table level 5 dropped  KILLED
+cmp: detector digest ignored          KILLED
+cmp: dependency digest ignored        KILLED
+cmp: parameters ignored               KILLED
+cmp: comparable flag wrong            KILLED
+cmp: name wrong                       KILLED
+contrast: empty pairs accepted        KILLED
+contrast: any overlap tolerated       KILLED
+contrast: category ignored            KILLED
+iv: before treated as after           KILLED
+iv: any symptom after counts          KILLED
+iv: no times accepted                 KILLED
+iv: model ignored                     KILLED
+lvl: link not required for level 1    KILLED
+lvl: unmet prediction ignored         KILLED
+lvl: tier not required                KILLED
+lvl: share not required               KILLED
+lvl: share strict                     KILLED
+lvl: rivals optional                  KILLED
+lvl: absent rival counts excluded     KILLED
+lvl: rival not contradicted counts    KILLED
+lvl: baseline comparability ignored   KILLED
+lvl: baseline contrast ignored        KILLED
+lvl: intervention ignored             KILLED
+lvl: level 4 without level 3          KILLED
+cap: contradicted cap lost            KILLED
+cap: blocker cap lost                 KILLED
+cap: blocker only components          KILLED
+cap: check cap lost                   KILLED
+cap: caps at 2                        KILLED
+cap: caps ignored                     KILLED
+cap: baseline note lost               KILLED
+cap: baseline note at level 2         KILLED
+cap: contradictions list empty        KILLED
+asg: raise sentence of next level     KILLED
+asg: contrast kind wrong              KILLED
+asg: requests for leaders             KILLED
+asg: requests only leaders            KILLED
+asg: contradicted get requests        KILLED
+asg: present tokens requested         KILLED
+asg: requests unsorted                KILLED
+asg: rivals unsorted                  SURVIVED
+asg: input mutated                    KILLED
+asg: level 5 reachable in table       KILLED
+asg: reachable flag wrong             SURVIVED
+prop: covered check lost              KILLED
+prop: downstream count ignored        KILLED
+prop: both-have reading lost          KILLED
+prop: not covered reading lost        KILLED
+prop: unrelated edges included        KILLED
+prop: only from end                   KILLED
+prop: unsorted                        KILLED
+snt: set sentence level               KILLED
+snt: claim sentence level             KILLED
+snt: cap sentences dropped            KILLED
+
+66 killed, 2 not killed or invalid of 68

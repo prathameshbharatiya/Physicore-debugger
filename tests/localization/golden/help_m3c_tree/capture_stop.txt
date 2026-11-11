@@ -1,0 +1,23 @@
+                                                                                                    
+ Usage: physicore-collector capture stop [OPTIONS] {session}                                        
+                                                                                                    
+ Ask a running capture to stop gracefully and wait for the outcome.                                 
+                                                                                                    
+ The request is a file (<session>/stop_request.json) that the supervisor polls, so it works         
+ for foreground, detached and service-managed captures alike, needs no signal, and cannot hit       
+ an unrelated process. Repeating the command is safe. If the supervisor is gone, nothing is         
+ signalled: use `capture recover`.                                                                  
+                                                                                                    
+ Exit codes: 0 = stopped cleanly, 1 = stopped unclean / still running after --wait / not running,   
+ 2 = no capture record.                                                                             
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    session      <path>  Capture session directory. [required]                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --wait          <float>  Seconds to wait for the capture to finish after the request.            │
+│                          [default: 30.0]                                                         │
+│ --reason        <str>    Recorded as the stop reason. [default: capture stop]                    │
+│ --help                   Show this message and exit.                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

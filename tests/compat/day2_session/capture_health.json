@@ -1,0 +1,143 @@
+{
+  "capture_health_schema_version": "1.0",
+  "session_id": "day2sess",
+  "state": "stopped_clean",
+  "supervisor": {
+    "pid": 254,
+    "tool_name": "physicore-collector",
+    "tool_version": "0.1.0",
+    "platform": "linux"
+  },
+  "requested": {
+    "profile_id": "cap-test",
+    "profile_sha256": "d035c2e165c0d309670d819f26507230dd6d2c72cd4e17e9af4d566434ed9ea5",
+    "storage_id": "mcap",
+    "topics": [
+      "/joint_states",
+      "/camera/image",
+      "/diagnostics"
+    ],
+    "max_bag_size_bytes": 1000000,
+    "max_bag_duration_seconds": 30,
+    "stop_timeout_seconds": 5.0,
+    "min_free_disk_bytes": null,
+    "planned_duration_seconds": 1.0,
+    "identity": {
+      "robot_id": "r1",
+      "run_id": "run-7",
+      "test_id": null,
+      "incident_id": null
+    }
+  },
+  "recorder": {
+    "adapter": "rosbag2-cli",
+    "command": [
+      "ros2",
+      "bag",
+      "record",
+      "--output",
+      "{SESSION_DIR}/bag",
+      "--storage",
+      "mcap",
+      "--max-bag-size",
+      "1000000",
+      "--max-bag-duration",
+      "30",
+      "/joint_states",
+      "/camera/image",
+      "/diagnostics"
+    ],
+    "pid": 255,
+    "exit_code": 0,
+    "terminated_by_signal": null,
+    "stderr_tail": [
+      "fake ros2 started",
+      "finalized"
+    ],
+    "reported_loss_lines": []
+  },
+  "timing": {
+    "wall_clock_basis": "supervisor_host_system_clock",
+    "clock_compatible_with_log_time": "not_established",
+    "start_unix_ns": 1791834344617659338,
+    "stop_requested_unix_ns": 1791834345634079459,
+    "end_unix_ns": 1791834345665962235,
+    "monotonic_duration_seconds": 1.048280021
+  },
+  "events": [
+    {
+      "seq": 0,
+      "kind": "capture_started",
+      "wall_clock_unix_ns": 1791834344617683977,
+      "monotonic_ns": 239454093228,
+      "detail": "session day2sess"
+    },
+    {
+      "seq": 1,
+      "kind": "recorder_started",
+      "wall_clock_unix_ns": 1791834344620080350,
+      "monotonic_ns": 239456490495,
+      "detail": "pid 255"
+    },
+    {
+      "seq": 2,
+      "kind": "stop_requested",
+      "wall_clock_unix_ns": 1791834345634160048,
+      "monotonic_ns": 240470569596,
+      "detail": "planned duration of 1 s elapsed"
+    },
+    {
+      "seq": 3,
+      "kind": "recorder_exited",
+      "wall_clock_unix_ns": 1791834345665911481,
+      "monotonic_ns": 240502321876,
+      "detail": "status 0"
+    },
+    {
+      "seq": 4,
+      "kind": "output_inspected",
+      "wall_clock_unix_ns": 1791834345670519071,
+      "monotonic_ns": 240506929189,
+      "detail": "readable, 1 segment(s)"
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "interruptions": [],
+  "recorder_statistics": {
+    "available": false,
+    "reason": "the rosbag2 command-line recorder exposes no machine-readable statistics, and writes no drop counters to metadata.yaml. It prints a human-readable warning when its cache drops messages; any such lines seen are kept verbatim in recorder.reported_loss_lines. Their absence does NOT show that nothing was lost"
+  },
+  "bag_finalization": {
+    "appears_finalized": true,
+    "basis": "clean stop, recorder exit status 0, metadata.yaml present and consistent with the files, every segment fully readable"
+  },
+  "output": {
+    "bag_directory_present": true,
+    "inspected": true,
+    "readability": "readable",
+    "metadata_present": true,
+    "segment_count": 1,
+    "files": [
+      {
+        "relative_path": "metadata.yaml",
+        "size_bytes": 1125,
+        "sha256": "2a26d99a57486e9eff8eafd38227eb331a994691bd7984d8528b5d5daa1cfcbd"
+      },
+      {
+        "relative_path": "bag_0.mcap",
+        "size_bytes": 8819,
+        "sha256": "89924379f142ccc519ed37172e2e7fd765d828dcc50c6d3c417aa80bc0f09288"
+      }
+    ],
+    "problems": []
+  },
+  "environment": {},
+  "unknown_fields": [
+    "machine-readable recorder statistics (rosbag2 exposes none through the CLI)",
+    "messages dropped between publisher and recorder (DDS level)",
+    "whether the recorder's loss warnings (if none were seen) were simply not emitted",
+    "sensor health",
+    "relation between supervisor wall-clock time and MCAP log_time"
+  ]
+}

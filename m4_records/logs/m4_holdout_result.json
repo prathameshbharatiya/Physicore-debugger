@@ -1,0 +1,255 @@
+{
+ "aggregate": {
+  "confident_wrong_leader": {
+   "of": 20,
+   "yes": 0
+  },
+  "correct_abstention": {
+   "of": 6,
+   "yes": 6
+  },
+  "families": [
+   "F01",
+   "F02",
+   "F03",
+   "F04",
+   "F05",
+   "F06",
+   "F07",
+   "F08",
+   "F09",
+   "F10"
+  ],
+  "forbidden_link_violations": 0,
+  "missing_evidence_named": {
+   "of": 18,
+   "yes": 18
+  },
+  "scenarios": 20,
+  "truth_in_set": {
+   "of": 14,
+   "yes": 14
+  },
+  "wording_violations": 0
+ },
+ "per_scenario": [
+  {
+   "abstention": null,
+   "family": "F01",
+   "levels": [
+    0
+   ],
+   "scenario": "F01-s101",
+   "truth_in_set": true,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": null,
+   "family": "F01",
+   "levels": [
+    0
+   ],
+   "scenario": "F01-s102",
+   "truth_in_set": true,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": null,
+   "family": "F02",
+   "levels": [
+    0
+   ],
+   "scenario": "F02-s101",
+   "truth_in_set": true,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": null,
+   "family": "F02",
+   "levels": [
+    0
+   ],
+   "scenario": "F02-s102",
+   "truth_in_set": true,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": null,
+   "family": "F03",
+   "levels": [
+    0,
+    2
+   ],
+   "scenario": "F03-s101",
+   "truth_in_set": true,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": null,
+   "family": "F03",
+   "levels": [
+    0,
+    2
+   ],
+   "scenario": "F03-s102",
+   "truth_in_set": true,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": null,
+   "family": "F04",
+   "levels": [
+    0
+   ],
+   "scenario": "F04-s101",
+   "truth_in_set": true,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": null,
+   "family": "F04",
+   "levels": [
+    0
+   ],
+   "scenario": "F04-s102",
+   "truth_in_set": true,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": null,
+   "family": "F05",
+   "levels": [
+    0
+   ],
+   "scenario": "F05-s101",
+   "truth_in_set": true,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": null,
+   "family": "F05",
+   "levels": [
+    0
+   ],
+   "scenario": "F05-s102",
+   "truth_in_set": true,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": null,
+   "family": "F06",
+   "levels": [
+    0
+   ],
+   "scenario": "F06-s101",
+   "truth_in_set": true,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": null,
+   "family": "F06",
+   "levels": [
+    0
+   ],
+   "scenario": "F06-s102",
+   "truth_in_set": true,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": null,
+   "family": "F07",
+   "levels": [
+    0
+   ],
+   "scenario": "F07-s101",
+   "truth_in_set": true,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": null,
+   "family": "F07",
+   "levels": [
+    0
+   ],
+   "scenario": "F07-s102",
+   "truth_in_set": true,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": true,
+   "family": "F08",
+   "levels": [
+    0
+   ],
+   "scenario": "F08-s101",
+   "truth_in_set": null,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": true,
+   "family": "F08",
+   "levels": [
+    0
+   ],
+   "scenario": "F08-s102",
+   "truth_in_set": null,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": true,
+   "family": "F09",
+   "levels": [],
+   "scenario": "F09-s101",
+   "truth_in_set": null,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": true,
+   "family": "F09",
+   "levels": [],
+   "scenario": "F09-s102",
+   "truth_in_set": null,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": true,
+   "family": "F10",
+   "levels": [
+    0
+   ],
+   "scenario": "F10-s101",
+   "truth_in_set": null,
+   "wording": 0,
+   "wrong_leader": false
+  },
+  {
+   "abstention": true,
+   "family": "F10",
+   "levels": [
+    0
+   ],
+   "scenario": "F10-s102",
+   "truth_in_set": null,
+   "wording": 0,
+   "wrong_leader": false
+  }
+ ]
+}

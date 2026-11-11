@@ -1,0 +1,19 @@
+exit=0
+                                                                                                    
+ Usage: physicore-collector evidence [OPTIONS] COMMAND [ARGS]...                                    
+                                                                                                    
+ Read-only, machine-readable evidence inventory for a separate consumer (offline inspection; no     
+ diagnosis).                                                                                        
+                                                                                                    
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --help          Show this message and exit.                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
+│ inventory    Inventory the evidence at PATH: artifacts, integrity, topics, clock domains,        │
+│              capture health, gaps. Read-only.                                                    │
+│ investigate  Compare explicitly expected behaviour with the evidence at PATH and report the      │
+│              earliest defensible divergence. Read-only.                                          │
+│ decode       Show the decoded leaf values of the first messages of TOPIC, with artifact, message │
+│              index, log_time and clock domain. Read-only.                                        │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

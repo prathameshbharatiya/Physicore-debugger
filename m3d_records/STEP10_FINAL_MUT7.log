@@ -1,0 +1,79 @@
+CONTROL (unmodified)                            PASS
+dag: all labels join                            KILLED
+dag: outside window joins                       KILLED
+dag: cycle guard removed                        KILLED
+dag: cycle guard too weak                       KILLED
+dag: redundant via arc kept                     KILLED
+dag: via arc dropped always                     KILLED
+dag: via arc dropped on one side only           KILLED
+dag: parallel links not merged                  KILLED
+dag: successor order by id only                 KILLED
+dag: topological key uses lower bound           KILLED
+dag: sources include non-roots                  KILLED
+dag: vertex order by id                         KILLED
+dp: sink counts zero                            KILLED
+dp: max instead of sum                          KILLED
+dp: counts all vertices not sources             KILLED
+dp: forward order                               KILLED
+cnt: size test off by one                       KILLED
+cnt: edges not counted                          KILLED
+cnt: total always computed                      KILLED
+enum: report limit off by one                   KILLED
+enum: peek removed (truncation never detected)  KILLED
+enum: work stop not reported                    KILLED
+enum: DP mismatch check removed                 KILLED
+iter: head visit free                           KILLED
+iter: successor visit free                      KILLED
+iter: head not marked done                      KILLED
+iter: every head marked done                    SURVIVED
+iter: non-sink yields                           KILLED
+iter: stops after first successor               KILLED
+blk: truncation blocker dropped                 KILLED
+blk: work blocker dropped                       KILLED
+blk: suppressed count off by one                KILLED
+blk: suppressed count estimated when unknown    KILLED
+blk: unaffected components downgraded           KILLED
+blk: affected components not downgraded         KILLED
+blk: truncation blocker id not on component     KILLED
+blk: links incomplete ignored                   KILLED
+blk: chain-level blockers not listed            KILLED
+blk: chain defence ignores component            KILLED
+hyp: link status all consistent                 KILLED
+hyp: inconsistent not excluded                  KILLED
+hyp: undetermined excluded                      KILLED
+hyp: template 2 may be excluded                 KILLED
+hyp: free statement accepted                    KILLED
+hyp: template facts unchecked                   KILLED
+hyp: evidence vocabulary unchecked              KILLED
+hyp: chain accepts any template                 KILLED
+hyp: hypotheses unordered                       KILLED
+hyp: order not validated                        KILLED
+hyp: chain nodes are ancestors too              KILLED
+hyp: ancestors of every node not the head       KILLED
+hyp: before-head test <=                        KILLED
+hyp: coverage always covered                    KILLED
+hyp: coverage evidence ask dropped              KILLED
+hyp: missing-segments ask always                KILLED
+hyp: narrower-interval ask always               KILLED
+hyp: narrower-interval never                    KILLED
+hyp: ancestor list bound ignored                KILLED
+hyp: ancestor bound validation removed          KILLED
+hyp: caveat codes dropped                       KILLED
+hyp: link status relation unchecked             KILLED
+ana: total present although unknown             KILLED
+ana: lower bound not validated                  KILLED
+ana: total below reported accepted              KILLED
+ana: status always exact                        KILLED
+ana: lower bound not the enumerated count       KILLED
+chain: head not validated                       KILLED
+chain: steps not validated                      KILLED
+chain: defended with blockers accepted          KILLED
+loc: locus is the last layer                    KILLED
+loc: frontier is the first layer                KILLED
+loc: unlocalized lists every symptom            KILLED
+loc: unlocalized without graph                  KILLED
+loc: topic layers merge topics                  KILLED
+loc: components not localized                   KILLED
+vocab: template-2 name no longer allowed        KILLED
+
+75 killed, 1 not killed/invalid

@@ -1,0 +1,32 @@
+# Example system model (schema 1) for the bag in examples/localization/example_bag.
+# Everything here is DECLARED by the people who run the robot (here: an invented example). The tool never verifies or corrects it.
+system_model_schema_version: 1
+declared_by: "example author (invented, not a real robot)"
+system_name: example mobile robot
+operating_context: |
+  Indoor warehouse, flat floor, one shift per day.
+  The lidar is mounted at the front.
+
+components:
+  - {id: lidar, role: sensor, description: "front lidar"}
+  - {id: health_monitor, role: middleware, description: "publishes diagnostics"}
+  - {id: base, role: actuator}
+
+bindings:
+  - {component: lidar, role: scan, topic: /lidar/scan, field: ranges, type: sensor_msgs/msg/LaserScan}
+  - {component: health_monitor, role: status, topic: /diagnostics, type: diagnostic_msgs/msg/DiagnosticArray}
+  - {component: base, role: log, topic: /rosout, type: rcl_interfaces/msg/Log}
+
+versions:
+  - {component: lidar, kind: hardware, name: "lidar unit", version: "rev B"}
+  - {component: base, kind: software, name: "base driver", version: "2.1.0"}
+
+constraints:
+  - {id: lidar_rate, kind: rate, component: lidar, role: scan, min_hz: 8, max_hz: 12}
+  - {id: lidar_range, kind: value_range, component: lidar, role: scan, min: 0, max: 12.5, unit: m}
+
+interventions:
+  - {id: base_restart, kind: restart, component: base, at_ns: 5, clock_domain: mcap_log_time, declared_by: "operator on duty (invented)"}
+
+edges:
+  - {id: lidar_to_monitor, from: lidar, to: health_monitor, relation: data_flow, window_ns: 1000000000}

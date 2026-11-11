@@ -1,0 +1,29 @@
+exit=0
+                                                                                                    
+ Usage: physicore-collector evidence inventory [OPTIONS] {path}                                     
+                                                                                                    
+ Inventory the evidence at PATH: artifacts, integrity, topics, clock domains, capture health, gaps. 
+ Read-only.                                                                                         
+                                                                                                    
+ Nothing is written, moved or locked inside PATH. An incident or package is re-hashed NOW against   
+ its manifest; a raw                                                                                
+ recording has no recorded digests, so its integrity is reported as not applicable and it is not    
+ validated against a                                                                                
+ profile. This is offline inspection of files: it does not show that a live ROS 2 capture works. No 
+ diagnosis is made.                                                                                 
+                                                                                                    
+ Exit codes: 0 = inspected and nothing known to be wrong with the evidence; 1 = inspected, but      
+ integrity failed or could                                                                          
+ not be checked, the evidence is partial/failed, or the inventory is partial; 2 = the input could   
+ not be inspected.                                                                                  
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    path      <path>  An incident directory, an export package directory, a rosbag2 directory   │
+│                        (or capture session directory), or a single .mcap file.                   │
+│                        [required]                                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --json          Machine-readable, versioned JSON (stdout) instead of the readable report.        │
+│ --help          Show this message and exit.                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

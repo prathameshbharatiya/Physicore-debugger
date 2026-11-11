@@ -1,0 +1,68 @@
+CONTROL (unmodified)                            PASS
+cls: window boundary < instead of <=            KILLED
+cls: window compared with max separation        KILLED
+cls: no window never outside                    KILLED
+cls: reversed order consistent                  KILLED
+cls: reversed order undetermined                KILLED
+cls: overlap consistent                         KILLED
+cls: separations swapped                        KILLED
+cls: touching counts as ordered                 KILLED
+win: sum becomes max                            KILLED
+win: missing window skipped instead of none     KILLED
+win: first edge only                            KILLED
+model: label not validated                      KILLED
+model: path kind unchecked                      KILLED
+model: declared statements unchecked            KILLED
+model: observed statements unchecked            KILLED
+model: window check unchecked                   KILLED
+model: unverified note optional                 KILLED
+model: order statement unchecked                KILLED
+link: inconsistent order statement not swapped  KILLED
+link: unobserved note never added               KILLED
+link: intermediate between ignores upper check  KILLED
+link: between starts at lower bound             KILLED
+link: between not sorted                        KILLED
+link: intermediate coverage assumed covered     KILLED
+link: intermediates list dropped                KILLED
+link: path kind always via_nodes                KILLED
+ana: cross-lane pairs linked                    SURVIVED
+ana: link cap ignored                           KILLED
+ana: cap off by one                             KILLED
+ana: suppressed count wrong                     KILLED
+ana: total counts only first lane               KILLED
+ana: undeclared pairs linked via every pair     KILLED
+ana: ambiguous binding resolved                 KILLED
+ana: paths per pair ignored                     KILLED
+ana: depth ignored                              KILLED
+ana: work budget unshared                       KILLED
+ana: partial pair used                          KILLED
+ana: pair cap blocker dropped                   KILLED
+ana: depth blocker dropped                      KILLED
+ana: work blocker dropped                       KILLED
+ana: work blocker count wrong                   KILLED
+ana: link cap blocker dropped                   KILLED
+ana: status ignores bounded paths               KILLED
+ana: no-declared counts same-node pairs         KILLED
+ana: no-declared ignores relatedness            KILLED
+ana: cross-lane counter zero                    KILLED
+ana: group lane test inverted                   KILLED
+ana: edge coverage always has symptoms          KILLED
+ana: edge coverage either endpoint              KILLED
+ana: blockers lack dependency digest            KILLED
+cov: blind detectors cover                      KILLED
+cov: any topic suffices                         KILLED
+cov: empty node is covered                      KILLED
+cov: bound topics ignored                       KILLED
+comp: all labels join                           KILLED
+comp: outside window joins                      KILLED
+comp: no union                                  KILLED
+comp: truncated member ignored                  KILLED
+comp: incomplete links ignored                  KILLED
+comp: blockers ignored                          KILLED
+comp: blocker ids dropped                       KILLED
+comp: lanes ignored for blockers                KILLED
+comp: unsorted output                           KILLED
+comp: model allows empty                        KILLED
+blk: chain-level blocker downgrades lanes       KILLED
+
+64 killed, 1 not killed/invalid

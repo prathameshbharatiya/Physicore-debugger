@@ -1,0 +1,14 @@
+                                                                                                    
+ Usage: physicore-collector profile validate [OPTIONS] {profile}                                    
+                                                                                                    
+ Validate a versioned robot profile (YAML or JSON).                                                 
+                                                                                                    
+ Exit codes: 0 = valid, 2 = missing/unreadable/malformed/invalid profile.                           
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    profile      <path>  Path to a robot profile (YAML or JSON). [required]                     │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --help          Show this message and exit.                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

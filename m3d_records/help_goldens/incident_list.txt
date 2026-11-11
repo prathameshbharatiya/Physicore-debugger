@@ -1,0 +1,33 @@
+                                                                                                    
+ Usage: physicore-collector incident list [OPTIONS] {root}                                          
+                                                                                                    
+ List incidents, and capture sessions that have none yet. Read-only.                                
+                                                                                                    
+ A package row is PREVIOUSLY PREPARED unless --verify is given: that is the stored result of the    
+ day it was prepared,                                                                               
+ NOT evidence the package is intact now. The package state (PREVIOUSLY PREPARED / VERIFIED NOW /    
+ TAMPERED /                                                                                         
+ UNVERIFIABLE) is independent of the evidence outcome (SUCCESS / DEGRADED): a verified package can  
+ hold degraded evidence.                                                                            
+ Sessions without a package are NOT PREPARED, DEFERRED (on purpose; not an error) or FAILED.        
+                                                                                                    
+ Exit code: 0 = listed, 2 = not a directory.                                                        
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    root      <path>  A directory holding capture sessions and/or incident directories (or one  │
+│                        incident).                                                                │
+│                        [required]                                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --verify                               Re-hash every listed package NOW (reads every package     │
+│                                        byte; slow for large ones). Rows become VERIFIED NOW,     │
+│                                        TAMPERED or UNVERIFIABLE.                                 │
+│ --allow-while-recording                With --verify: verify even if a capture is active (the    │
+│                                        re-hash WILL compete with it; by default it is skipped    │
+│                                        and the row is UNVERIFIABLE).                             │
+│ --guard-dir                    <path>  With --verify: also check this directory for an active    │
+│                                        capture.                                                  │
+│ --json                                 Machine-readable JSON output.                             │
+│ --help                                 Show this message and exit.                               │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

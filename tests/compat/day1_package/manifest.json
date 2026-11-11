@@ -1,0 +1,271 @@
+{
+  "manifest_schema_version": "0.1",
+  "tool": {
+    "name": "physicore-collector",
+    "version": "0.1.0"
+  },
+  "created_at_utc": "2026-10-11T15:10:35Z",
+  "session_status": "complete",
+  "profile": {
+    "profile_schema_version": "1.0",
+    "profile_id": "synthetic-fixture-v1",
+    "robot_name": "Synthetic Fixture Robot",
+    "log_time_basis": "system_time",
+    "required_metadata_keys": [
+      "operator",
+      "session_label"
+    ],
+    "topics": [
+      {
+        "name": "/joint_states",
+        "required": true,
+        "expected_hz": 50.0,
+        "max_gap_seconds": null,
+        "gap_factor": 2.0
+      },
+      {
+        "name": "/camera/image",
+        "required": true,
+        "expected_hz": null,
+        "max_gap_seconds": 0.5,
+        "gap_factor": 2.0
+      },
+      {
+        "name": "/diagnostics",
+        "required": false,
+        "expected_hz": null,
+        "max_gap_seconds": null,
+        "gap_factor": 2.0
+      }
+    ]
+  },
+  "profile_sha256": "5afea8ea50f618f66d765becd5b100d8e2fffe8a1f00fa404604af919bfbe6ac",
+  "artifacts": [
+    {
+      "relative_path": "recording/valid.mcap",
+      "role": "recording",
+      "size_bytes": 8819,
+      "sha256": "89924379f142ccc519ed37172e2e7fd765d828dcc50c6d3c417aa80bc0f09288"
+    },
+    {
+      "relative_path": "profile/synthetic_fixture.profile.yaml",
+      "role": "profile",
+      "size_bytes": 664,
+      "sha256": "5afea8ea50f618f66d765becd5b100d8e2fffe8a1f00fa404604af919bfbe6ac"
+    },
+    {
+      "relative_path": "metadata/metadata.json",
+      "role": "metadata",
+      "size_bytes": 107,
+      "sha256": "3d76aa0f6bf43649f550017aa9f3671d39041108af7a31c9ff5b88bf38c08f05"
+    },
+    {
+      "relative_path": "validation_report.json",
+      "role": "validation_report",
+      "size_bytes": 3306,
+      "sha256": "7a6ba9c8a72e9a2a4ee17f13089708b7610d9818ad6efcdccbf57d59c304d9de"
+    }
+  ],
+  "recording_window": {
+    "min_log_time_ns": 1700000000000000000,
+    "max_log_time_ns": 1700000002000000000
+  },
+  "topics": [
+    {
+      "channel_id": 2,
+      "topic": "/camera/image",
+      "schema_name": "synthetic/Sample",
+      "message_encoding": "json",
+      "message_count": 20,
+      "first_log_time_ns": 1700000000000000000,
+      "last_log_time_ns": 1700000001900000000
+    },
+    {
+      "channel_id": 3,
+      "topic": "/diagnostics",
+      "schema_name": "synthetic/Sample",
+      "message_encoding": "json",
+      "message_count": 3,
+      "first_log_time_ns": 1700000000000000000,
+      "last_log_time_ns": 1700000002000000000
+    },
+    {
+      "channel_id": 1,
+      "topic": "/joint_states",
+      "schema_name": "synthetic/Sample",
+      "message_encoding": "json",
+      "message_count": 100,
+      "first_log_time_ns": 1700000000000000000,
+      "last_log_time_ns": 1700000001980000000
+    }
+  ],
+  "metadata": {
+    "supplied": {
+      "operator": "alice",
+      "session_label": "synthetic-supplied",
+      "note": "synthetic fixture metadata"
+    },
+    "mcap_records": [
+      {
+        "name": "session",
+        "values": {
+          "operator": "alice",
+          "session_label": "synthetic-valid"
+        }
+      }
+    ]
+  },
+  "trigger": null,
+  "validation": {
+    "report_schema_version": "0.1",
+    "status": "complete",
+    "status_reasons": [
+      "all required checks passed on a fully readable recording"
+    ],
+    "artifact_readability": "readable",
+    "checks": [
+      {
+        "check_id": "readability",
+        "category": "readability",
+        "outcome": "pass",
+        "required": true,
+        "message": "recording is fully readable (framing, CRCs and record parsing verified)",
+        "observed": {},
+        "unknowns": [
+          "summary-section contents are not cross-validated"
+        ]
+      },
+      {
+        "check_id": "topic_present:/joint_states",
+        "category": "required_topic",
+        "outcome": "pass",
+        "required": true,
+        "message": "topic /joint_states present with 100 message(s)",
+        "observed": {
+          "message_count": 100
+        },
+        "unknowns": []
+      },
+      {
+        "check_id": "cadence:/joint_states",
+        "category": "cadence",
+        "outcome": "pass",
+        "required": true,
+        "message": "/joint_states: no log_time gap exceeded 0.04 s over 100 message(s) (largest 0.02 s). This does not show that no messages were lost.",
+        "observed": {
+          "threshold_seconds": 0.04,
+          "message_count": 100,
+          "gap_count": 0,
+          "max_observed_gap_seconds": 0.02,
+          "findings_recorded": 0
+        },
+        "unknowns": [
+          "silence before the first / after the last message is not evaluated"
+        ]
+      },
+      {
+        "check_id": "topic_present:/camera/image",
+        "category": "required_topic",
+        "outcome": "pass",
+        "required": true,
+        "message": "topic /camera/image present with 20 message(s)",
+        "observed": {
+          "message_count": 20
+        },
+        "unknowns": []
+      },
+      {
+        "check_id": "cadence:/camera/image",
+        "category": "cadence",
+        "outcome": "pass",
+        "required": true,
+        "message": "/camera/image: no log_time gap exceeded 0.5 s over 20 message(s) (largest 0.1 s). This does not show that no messages were lost.",
+        "observed": {
+          "threshold_seconds": 0.5,
+          "message_count": 20,
+          "gap_count": 0,
+          "max_observed_gap_seconds": 0.1,
+          "findings_recorded": 0
+        },
+        "unknowns": [
+          "silence before the first / after the last message is not evaluated"
+        ]
+      },
+      {
+        "check_id": "topic_present:/diagnostics",
+        "category": "required_topic",
+        "outcome": "pass",
+        "required": false,
+        "message": "topic /diagnostics present with 3 message(s)",
+        "observed": {
+          "message_count": 3
+        },
+        "unknowns": []
+      },
+      {
+        "check_id": "metadata:operator",
+        "category": "metadata",
+        "outcome": "pass",
+        "required": true,
+        "message": "required metadata key 'operator' found in MCAP metadata record 'session'",
+        "observed": {
+          "source": "MCAP metadata record 'session'"
+        },
+        "unknowns": []
+      },
+      {
+        "check_id": "metadata:session_label",
+        "category": "metadata",
+        "outcome": "pass",
+        "required": true,
+        "message": "required metadata key 'session_label' found in MCAP metadata record 'session'",
+        "observed": {
+          "source": "MCAP metadata record 'session'"
+        },
+        "unknowns": []
+      }
+    ],
+    "cadence_findings": [],
+    "trigger_comparison": null,
+    "read_errors": []
+  },
+  "known_gaps": [
+    {
+      "code": "no_sequence_or_dds_loss_analysis",
+      "description": "Message sequence counters and DDS-level delivery were not analysed; losses between publisher and recorder cannot be detected from this artifact."
+    },
+    {
+      "code": "cadence_is_timing_evidence_only",
+      "description": "Cadence findings describe spacing in recorded log_time. They are not proof of message loss, and passing cadence checks does not show that no messages were lost."
+    },
+    {
+      "code": "cadence_edges_not_evaluated",
+      "description": "Silence before the first and after the last message of each topic is not evaluated."
+    },
+    {
+      "code": "summary_section_not_verified",
+      "description": "Summary-section contents (chunk indexes, message indexes, summary offsets) are parsed but not cross-validated.; Records are validated sequentially; the scan is not hardened against adversarial or malicious files.; Message payloads are not decoded or interpreted."
+    },
+    {
+      "code": "log_time_basis_declared_not_verified",
+      "description": "The profile declares log_time_basis 'system_time'; this tool cannot verify that declaration from the file."
+    },
+    {
+      "code": "topics_without_cadence_rules",
+      "description": "No cadence rule exists for: ['/diagnostics']."
+    }
+  ],
+  "loss_detection_coverage": {
+    "no_loss_claim_permitted": false,
+    "sequence_counter_analysis": "not_performed",
+    "dds_level_loss_detection": "not_performed",
+    "cadence_checked_topics": [
+      "/camera/image",
+      "/joint_states"
+    ],
+    "topics_without_cadence_rules": [
+      "/diagnostics"
+    ],
+    "statement": "No sequence-counter or DDS-level loss detection was performed. Where configured, cadence checks observe spacing between recorded log_time values only. The absence of detected gaps is NOT evidence that no data was lost."
+  }
+}

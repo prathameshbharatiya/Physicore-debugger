@@ -1,0 +1,73 @@
+CONTROL (unmodified)                  PASS
+unknown top key accepted              KILLED
+unknown edge key accepted             KILLED
+unknown node key accepted             KILLED
+unknown binding key accepted          KILLED
+unknown identity key accepted         KILLED
+schema version not enforced           KILLED
+declared_by may be blank              KILLED
+declared_by not required              KILLED
+duplicate edge id allowed             KILLED
+self-loop allowed                     KILLED
+undeclared node endpoint allowed      KILLED
+relation vocabulary open              KILLED
+window zero allowed                   KILLED
+window bool/float accepted            KILLED
+empty edge list allowed               KILLED
+edge count limit off by one           KILLED
+node count limit off by one           KILLED
+string limit off by one               KILLED
+control characters allowed            KILLED
+only control (Cc) characters refused  KILLED
+node id may start with slash          KILLED
+topic charset open                    KILLED
+duplicate node id allowed             KILLED
+binding to unknown node allowed       KILLED
+duplicate binding allowed             KILLED
+empty identity value allowed          KILLED
+size limit not enforced               KILLED
+size limit off by one                 KILLED
+NUL allowed                           KILLED
+yaml anchors allowed                  KILLED
+yaml tags allowed                     KILLED
+yaml merge keys allowed               KILLED
+yaml duplicate keys allowed           KILLED
+yaml nesting unlimited                KILLED
+yaml nesting limit off by a lot       KILLED
+json nesting unchecked                KILLED
+json brackets in strings counted      KILLED
+json duplicate keys allowed           KILLED
+json NaN allowed                      KILLED
+symlink followed                      KILLED
+non-regular file opened               KILLED
+empty file accepted as valid          KILLED
+problems unbounded                    KILLED
+problem total not counted             KILLED
+semantic hash includes edge order     KILLED
+semantic hash ignores declared_by     KILLED
+semantic hash ignores windows         KILLED
+semantic hash ignores relation        KILLED
+semantic hash ignores direction       KILLED
+semantic hash ignores bindings        KILLED
+file digest of text not bytes         KILLED
+node_for fuzzy match                  KILLED
+node_for ignores topic                KILLED
+node_for any-key instead of all       KILLED
+ambiguous picks first                 KILLED
+name kind limited to logger           KILLED
+ancestors misses indirect             KILLED
+paths: depth bound ignored            KILLED
+paths: depth bound off by one         KILLED
+paths: pair cap ignored               KILLED
+paths: pair cap off by one            KILLED
+paths: budget ignored                 KILLED
+paths: cycles revisit nodes           KILLED
+paths: no reachability pruning        KILLED
+paths: unsorted edge order            KILLED
+paths: depth cut not flagged          KILLED
+paths: complete claimed after cap     KILLED
+paths: exact total despite depth cut  KILLED
+budget: never exhausts                KILLED
+budget: take ignores the limit        KILLED
+
+70 killed, 0 not killed/invalid

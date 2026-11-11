@@ -1,0 +1,506 @@
+{
+  "blockers": [],
+  "caveats": [
+    {
+      "code": "detector_not_configured",
+      "detail": "A detector was not configured; nothing is said about what it would have seen.",
+      "scope": {
+        "detector": "tierA.battery"
+      }
+    },
+    {
+      "code": "detector_not_configured",
+      "detail": "A detector was not configured; nothing is said about what it would have seen.",
+      "scope": {
+        "detector": "tierA.goal_status"
+      }
+    },
+    {
+      "code": "detector_not_configured",
+      "detail": "A detector was not configured; nothing is said about what it would have seen.",
+      "scope": {
+        "detector": "tierB.array_length"
+      }
+    },
+    {
+      "code": "detector_not_configured",
+      "detail": "A detector was not configured; nothing is said about what it would have seen.",
+      "scope": {
+        "detector": "tierB.non_finite"
+      }
+    },
+    {
+      "code": "detector_not_configured",
+      "detail": "A detector was not configured; nothing is said about what it would have seen.",
+      "scope": {
+        "detector": "tierB.publishing_gap"
+      }
+    },
+    {
+      "code": "detector_not_configured",
+      "detail": "A detector was not configured; nothing is said about what it would have seen.",
+      "scope": {
+        "detector": "tierB.rate_change"
+      }
+    },
+    {
+      "code": "detector_not_configured",
+      "detail": "A detector was not configured; nothing is said about what it would have seen.",
+      "scope": {
+        "detector": "tierB.stamp_order"
+      }
+    },
+    {
+      "code": "real_recording_validation_outstanding",
+      "detail": "Validation against real robot recordings is outstanding.",
+      "scope": {}
+    },
+    {
+      "code": "receipt_order_not_occurrence_order",
+      "detail": "Recorder log time is receipt order, not occurrence order.",
+      "scope": {}
+    }
+  ],
+  "chains": [
+    {
+      "blocker_ids": [],
+      "chain_id": "ch-a504204354b92e69",
+      "component_id": "c-8c302e6e642646ee",
+      "defence": "defended_structure",
+      "head": "s-c872a01752e24777",
+      "hypotheses": [
+        {
+          "common_ancestors": {
+            "ancestors": [],
+            "ancestors_total": 0
+          },
+          "discriminating_evidence_needed": [
+            "an intervention or a repeat recording",
+            "a declared edge for the ancestor"
+          ],
+          "statement": "A common or independent source of these symptoms is not excluded by the declared dependencies or the observations.",
+          "status": "not_excluded",
+          "template": "common_or_independent_origin_not_excluded"
+        },
+        {
+          "artifact_facts": {
+            "caveat_codes": [
+              "receipt_order_not_occurrence_order"
+            ],
+            "recording_blocker_ids": []
+          },
+          "discriminating_evidence_needed": [
+            "an intervention or a repeat recording",
+            "recorder-side drop counters (not available in this format)"
+          ],
+          "statement": "An artifact of observation or timing is not excluded: recorder receipt time is not occurrence time, and the recording may be incomplete.",
+          "status": "not_excluded",
+          "template": "observation_or_timing_artifact_not_excluded"
+        }
+      ],
+      "lane": "mcap_log_time",
+      "nodes": [
+        "/rosout",
+        "/diagnostics"
+      ],
+      "steps": [
+        {
+          "from_symptom": "s-c872a01752e24777",
+          "link_ids": [
+            "l-3e86390a65b78bbe"
+          ],
+          "to_symptom": "s-4bd2015939fdeda6"
+        }
+      ],
+      "symptom_ids": [
+        "s-c872a01752e24777",
+        "s-4bd2015939fdeda6"
+      ]
+    }
+  ],
+  "chains_total": 1,
+  "chains_total_status": "exact",
+  "components": [
+    {
+      "blocker_ids": [],
+      "component_id": "c-8c302e6e642646ee",
+      "defence": "defended_structure",
+      "lanes": [
+        "mcap_log_time"
+      ],
+      "link_ids": [
+        "l-3e86390a65b78bbe"
+      ],
+      "symptom_ids": [
+        "s-4bd2015939fdeda6",
+        "s-c872a01752e24777"
+      ]
+    }
+  ],
+  "coverage": {
+    "chains_lower_bound": 1,
+    "chains_reported": 1,
+    "cross_lane_pairs_not_compared": 0,
+    "dependencies": "declared",
+    "detectors": [
+      {
+        "detector_id": "tierA.battery",
+        "status": "not_configured"
+      },
+      {
+        "detector_id": "tierA.diagnostics",
+        "status": "findings_reported"
+      },
+      {
+        "detector_id": "tierA.goal_status",
+        "status": "not_configured"
+      },
+      {
+        "detector_id": "tierA.ros_log",
+        "status": "findings_reported"
+      },
+      {
+        "detector_id": "tierB.array_length",
+        "status": "not_configured"
+      },
+      {
+        "detector_id": "tierB.non_finite",
+        "status": "not_configured"
+      },
+      {
+        "detector_id": "tierB.publishing_gap",
+        "status": "not_configured"
+      },
+      {
+        "detector_id": "tierB.rate_change",
+        "status": "not_configured"
+      },
+      {
+        "detector_id": "tierB.stamp_order",
+        "status": "not_configured"
+      }
+    ],
+    "edge_coverage": [
+      {
+        "edge_id": "e1",
+        "from_coverage": "covered",
+        "from_node": "/rosout",
+        "from_symptom_count": 1,
+        "status": "endpoints_have_symptoms",
+        "to_coverage": "covered",
+        "to_node": "/diagnostics",
+        "to_symptom_count": 1
+      }
+    ],
+    "links_status": "complete",
+    "links_suppressed": 0,
+    "links_total": 1,
+    "no_declared_relation_count": 0,
+    "path_pairs_examined": 1,
+    "path_pairs_not_examined": 0,
+    "path_pairs_related": 1,
+    "symptoms_suppressed": 0
+  },
+  "evidence": [
+    {
+      "artifact_ref": "artifact:bag_0.mcap",
+      "sha256": "c23b385766e8df16197cd124777c81a2b07f8ca18c3e78b9d65110b645b676ea"
+    }
+  ],
+  "exit_code": 0,
+  "exit_reasons": [
+    "completed"
+  ],
+  "hypotheses": [
+    {
+      "edge_ids": [
+        "e1"
+      ],
+      "from_onset": {
+        "domain": "mcap_log_time",
+        "lower_ns": 1700000000001000000,
+        "upper_ns": 1700000000001000000
+      },
+      "label": "consistent_with_propagation",
+      "link_id": "l-3e86390a65b78bbe",
+      "statement": "The order of these two symptoms is consistent with the declared edge.",
+      "status": "consistent_with",
+      "template": "propagation_along_declared_edge",
+      "to_onset": {
+        "domain": "mcap_log_time",
+        "lower_ns": 1700000000003000000,
+        "upper_ns": 1700000000003000000
+      },
+      "window_ns": 10000000
+    }
+  ],
+  "inputs": {
+    "anomaly_config_hash": "071df63bfe6bc19c3684692b2f523f0d3153871d68eaf03d3157386ef2551fe3",
+    "dependencies": {
+      "edge_count": 1,
+      "semantic_hash": "9841db513ec37bde3b01d9a0029c1fe7ffcc77f2b14ab3cf69ad9aa5e01a9e0d",
+      "sha256": "54b257df81ce76dc8201d91d6f2459910c17934dacfd2ab15671ee29292cc255"
+    }
+  },
+  "lanes": [
+    {
+      "domain": "mcap_log_time",
+      "earliest": {
+        "blocker_ids": [],
+        "defence": "defended",
+        "statement": "This is the earliest symptom observed by the detectors that ran, under their configured parameters, using recorder receipt time. It is not a statement about which event occurred first in the robot.",
+        "symptom_ids": [
+          "s-c872a01752e24777"
+        ]
+      },
+      "layers": [
+        [
+          "s-c872a01752e24777"
+        ],
+        [
+          "s-4bd2015939fdeda6"
+        ]
+      ],
+      "symptom_count": 2
+    }
+  ],
+  "limitations": [
+    "Receipt order is not occurrence order; transport, QoS and recorder queueing are invisible.",
+    "A chain is a structure in the observed symptoms plus the user's declarations; the declarations cannot be verified by this tool.",
+    "The detectors determine what can be a symptom; a fault that no enabled detector reports does not appear here.",
+    "Gap and rate symptoms cannot tell capture loss from silence; mode baselines come from the recording itself.",
+    "Validation so far is on synthetic recordings; validation on real robot recordings and the decoder licensing review are outstanding.",
+    "Mixed or unrelated clocks give several earliest symptoms; this tool does not relate them.",
+    "The memory and performance statements of the anomaly detection step are unchanged; its measured overhead exceeds its stated budget."
+  ],
+  "limits": {
+    "chains_reported": 1000,
+    "count_work_limit": 2000000,
+    "dependency_edges": 5000,
+    "dependency_file_bytes": 1048576,
+    "dependency_nodes": 5000,
+    "dependency_string_chars": 256,
+    "links": 200000,
+    "path_depth": 32,
+    "path_work_limit": 1000000,
+    "paths_per_pair": 10000,
+    "symptoms": 100000
+  },
+  "links": [
+    {
+      "declared": [
+        {
+          "declared_by": "example: navigation team (illustration only)",
+          "dependencies_sha256": "54b257df81ce76dc8201d91d6f2459910c17934dacfd2ab15671ee29292cc255",
+          "edge_id": "e1",
+          "kind": "declared",
+          "semantic_hash": "9841db513ec37bde3b01d9a0029c1fe7ffcc77f2b14ab3cf69ad9aa5e01a9e0d"
+        }
+      ],
+      "edge_ids": [
+        "e1"
+      ],
+      "from_node": "/rosout",
+      "from_onset": {
+        "domain": "mcap_log_time",
+        "lower_ns": 1700000000001000000,
+        "upper_ns": 1700000000001000000
+      },
+      "from_symptom": "s-c872a01752e24777",
+      "intermediates": [],
+      "label": "consistent_with_propagation",
+      "lane": "mcap_log_time",
+      "link_id": "l-3e86390a65b78bbe",
+      "notes": [
+        "declared_edge_unverified"
+      ],
+      "observed": [
+        {
+          "kind": "observed",
+          "source_id": "s-c872a01752e24777",
+          "source_kind": "m3c_finding"
+        },
+        {
+          "kind": "observed",
+          "source_id": "s-4bd2015939fdeda6",
+          "source_kind": "m3c_finding"
+        }
+      ],
+      "order": {
+        "earlier": {
+          "domain": "mcap_log_time",
+          "lower_ns": 1700000000001000000,
+          "upper_ns": 1700000000001000000
+        },
+        "kind": "derived_order",
+        "later": {
+          "domain": "mcap_log_time",
+          "lower_ns": 1700000000003000000,
+          "upper_ns": 1700000000003000000
+        },
+        "relation": "before",
+        "rule_id": "interval_order.strict_precedence"
+      },
+      "path_kind": "direct",
+      "sep_max_ns": 2000000,
+      "sep_min_ns": 2000000,
+      "to_node": "/diagnostics",
+      "to_onset": {
+        "domain": "mcap_log_time",
+        "lower_ns": 1700000000003000000,
+        "upper_ns": 1700000000003000000
+      },
+      "to_symptom": "s-4bd2015939fdeda6",
+      "window_check": {
+        "result": "within",
+        "rule_id": "edge_consistency.declared_window",
+        "sep_min_ns": 2000000,
+        "window_ns": 10000000
+      },
+      "window_ns": 10000000
+    }
+  ],
+  "localization": {
+    "components": [
+      {
+        "component_id": "c-8c302e6e642646ee",
+        "lanes": [
+          {
+            "frontier_nodes": [
+              "/diagnostics"
+            ],
+            "lane": "mcap_log_time",
+            "locus_nodes": [
+              "/rosout"
+            ]
+          }
+        ]
+      }
+    ],
+    "statement": "Where symptoms were observed; not where a fault is.",
+    "topic_layers": [
+      {
+        "lane": "mcap_log_time",
+        "layer": 1,
+        "symptom_ids": [
+          "s-4bd2015939fdeda6"
+        ],
+        "topic": "/diagnostics"
+      },
+      {
+        "lane": "mcap_log_time",
+        "layer": 0,
+        "symptom_ids": [
+          "s-c872a01752e24777"
+        ],
+        "topic": "/rosout"
+      }
+    ],
+    "unlocalized": []
+  },
+  "localization_schema_version": "1.0",
+  "parameters_hash": "8f7de5375d6284389d32e712f8cdc7c12e4777f223acd6714c1b8a3a1e3adefe",
+  "severity_disclaimer": "Severity labels are copied from the source findings. They are not used for ordering, grouping or aggregation and carry no statement of impact.",
+  "symptoms": [
+    {
+      "category": "diagnostic_status",
+      "detector_or_rule": "tierA.diagnostics",
+      "evidence": [
+        {
+          "artifact_ref": "artifact:bag_0.mcap",
+          "clock_domain": "mcap_log_time",
+          "message_index": 1,
+          "sha256": "c23b385766e8df16197cd124777c81a2b07f8ca18c3e78b9d65110b645b676ea",
+          "time_ns": 1700000000003000000,
+          "topic": "/diagnostics"
+        }
+      ],
+      "extent": {
+        "domain": "mcap_log_time",
+        "lower_ns": 1700000000003000000,
+        "upper_ns": 1700000000003000000
+      },
+      "identities": {
+        "diagnostic_name": "motor_driver",
+        "hardware_id": "hw1"
+      },
+      "node": "/diagnostics",
+      "notes": [],
+      "onset": {
+        "domain": "mcap_log_time",
+        "lower_ns": 1700000000003000000,
+        "upper_ns": 1700000000003000000
+      },
+      "onset_basis": "received_message",
+      "secondary_onsets": [],
+      "severity": "error",
+      "severity_basis": "source_declared_level",
+      "source": "m3c_finding",
+      "source_coverage": {
+        "incomplete_reasons": [],
+        "messages_examined": 1,
+        "messages_undecodable": 0,
+        "topic_coverage": "complete"
+      },
+      "source_id": "f-b9b47557bd207e08",
+      "source_uncertainty": [
+        {
+          "code": "constants_from_builtin_table"
+        }
+      ],
+      "symptom_id": "s-4bd2015939fdeda6",
+      "topic": "/diagnostics",
+      "truncated": false
+    },
+    {
+      "category": "log_severity",
+      "detector_or_rule": "tierA.ros_log",
+      "evidence": [
+        {
+          "artifact_ref": "artifact:bag_0.mcap",
+          "clock_domain": "mcap_log_time",
+          "message_index": 0,
+          "sha256": "c23b385766e8df16197cd124777c81a2b07f8ca18c3e78b9d65110b645b676ea",
+          "time_ns": 1700000000001000000,
+          "topic": "/rosout"
+        }
+      ],
+      "extent": {
+        "domain": "mcap_log_time",
+        "lower_ns": 1700000000001000000,
+        "upper_ns": 1700000000001000000
+      },
+      "identities": {
+        "logger_name": "navigation"
+      },
+      "node": "/rosout",
+      "notes": [],
+      "onset": {
+        "domain": "mcap_log_time",
+        "lower_ns": 1700000000001000000,
+        "upper_ns": 1700000000001000000
+      },
+      "onset_basis": "received_message",
+      "secondary_onsets": [],
+      "severity": "error",
+      "severity_basis": "source_declared_level",
+      "source": "m3c_finding",
+      "source_coverage": {
+        "incomplete_reasons": [],
+        "messages_examined": 1,
+        "messages_undecodable": 0,
+        "topic_coverage": "complete"
+      },
+      "source_id": "f-11a3eb6ae69d80fd",
+      "source_uncertainty": [
+        {
+          "code": "constants_from_builtin_table"
+        }
+      ],
+      "symptom_id": "s-c872a01752e24777",
+      "topic": "/rosout",
+      "truncated": false
+    }
+  ],
+  "tool_version": "0.1.0"
+}

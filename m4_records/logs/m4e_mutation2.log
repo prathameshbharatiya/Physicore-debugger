@@ -1,0 +1,19 @@
+CONTROL (unmodified)                           PASS
+iv: dependency without report digest accepted  KILLED
+iv: dependency problems ignored                KILLED
+iv: catalogue invalid accepted                 SURVIVED
+iv: not-run digest note lost                   KILLED
+iv: not-run code lost                          KILLED
+iv: leaders miscounted                         KILLED
+iv: self-check skipped                         KILLED
+sc: tier unchecked                             KILLED
+sc: fixed sentence unchecked                   KILLED
+sc: cap order unchecked                        KILLED
+sc: ledger stance unchecked                    KILLED
+sc: forbidden keys unchecked                   KILLED
+sc: claim sentence gate level                  KILLED
+sc: unit keys not strict                       KILLED
+vw: assumptions dropped                        KILLED
+vw: verification line dropped                  KILLED
+
+15 killed, 1 not killed or invalid of 16

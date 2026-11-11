@@ -1,0 +1,498 @@
+{
+  "investigation_schema_version": "1.0",
+  "status": "divergence_found",
+  "status_reason_code": "earliest_divergence_defended",
+  "status_reason": "the earliest established mismatch is expectation ER-GRIPPER at 1700000002500000000 ns (mcap_log_time): the trigger was received at 1700000002000000000 ns; the first matching response in the recorded stream was received at 1700000003000000000 ns, 1000000000 ns later, which exceeds the deadline 500000000 ns by 500000000 ns",
+  "first_divergence": {
+    "finding_id": "FND-ee6abfda540d272e",
+    "expectation_id": "ER-GRIPPER",
+    "expectation_kind": "event_response",
+    "description": "The gripper reaches at least 0.8 within 500 ms of the CLOSE command",
+    "rule": {
+      "check_kind": "event_response",
+      "comparison": "after a trigger sample is observed entering its condition, a response sample satisfying its condition must be received strictly later and no later than the deadline; receipt times only, not event times",
+      "parameters": {
+        "trigger": "/gripper/command.data eq 'CLOSE' (entry observed)",
+        "response": "/joint_states.position[name=gripper] ge 0.8",
+        "deadline_ns": "500000000",
+        "clock": "mcap_log_time (recorder receipt time) for both trigger and response"
+      },
+      "tolerance_used": null
+    },
+    "expected": "/joint_states.position[name=gripper] ge 0.8 within 500000000 ns after /gripper/command.data eq 'CLOSE' was entered",
+    "observed": "/gripper/command.data = 'CLOSE' at 1700000002000000000 ns (mcap_log_time)",
+    "discrepancy": "the trigger was received at 1700000002000000000 ns; the first matching response in the recorded stream was received at 1700000003000000000 ns, 1000000000 ns later, which exceeds the deadline 500000000 ns by 500000000 ns",
+    "time": {
+      "ns": 1700000002500000000,
+      "clock_domain": "mcap_log_time",
+      "timestamp_basis": "mcap_log_time",
+      "kind": "deadline_expiry"
+    },
+    "sources": [
+      {
+        "artifact_ref": "artifact:m3b_example.mcap",
+        "relative_path": "m3b_example.mcap",
+        "artifact_sha256": "39039ab76f707c70ade5e2165335f5701e72a9cce73dd56cc4b776cda2f0079f",
+        "topic": "/gripper/command",
+        "channel_id": 4,
+        "observation_id": "obs:m3b_example.mcap#25",
+        "role": "trigger_event"
+      },
+      {
+        "artifact_ref": "artifact:m3b_example.mcap",
+        "relative_path": "m3b_example.mcap",
+        "artifact_sha256": "39039ab76f707c70ade5e2165335f5701e72a9cce73dd56cc4b776cda2f0079f",
+        "topic": "/joint_states",
+        "channel_id": 5,
+        "observation_id": "obs:m3b_example.mcap#35",
+        "role": "late_response"
+      }
+    ],
+    "observations": [
+      {
+        "observation_id": "obs:m3b_example.mcap#25",
+        "artifact_ref": "artifact:m3b_example.mcap",
+        "topic": "/gripper/command",
+        "channel_id": 4,
+        "message_index": 25,
+        "signal": "data",
+        "value": "CLOSE",
+        "value_type": "string",
+        "timestamp_ns": 1700000002000000000,
+        "timestamp_basis": "mcap_log_time",
+        "clock_domain": "mcap_log_time",
+        "quality": "ok",
+        "parser_status": "readable",
+        "ros_type": "string"
+      },
+      {
+        "observation_id": "obs:m3b_example.mcap#35",
+        "artifact_ref": "artifact:m3b_example.mcap",
+        "topic": "/joint_states",
+        "channel_id": 5,
+        "message_index": 35,
+        "signal": "position[name=gripper]",
+        "value": "0.85",
+        "value_type": "number",
+        "timestamp_ns": 1700000003000000000,
+        "timestamp_basis": "mcap_log_time",
+        "clock_domain": "mcap_log_time",
+        "quality": "ok",
+        "parser_status": "readable",
+        "ros_type": "float64"
+      }
+    ],
+    "explanation": "Expectation ER-GRIPPER requires that /joint_states.position[name=gripper] ge 0.8 within 500000000 ns after /gripper/command.data eq 'CLOSE' was entered. the trigger event contradicts it: the trigger was received at 1700000002000000000 ns; the first matching response in the recorded stream was received at 1700000003000000000 ns, 1000000000 ns later, which exceeds the deadline 500000000 ns by 500000000 ns. This is the first mismatch of this expectation in the evidence evaluated; it is not a statement about cause.",
+    "uncertainty": [
+      "both times are mcap log_time, the recorder's RECEIPT times: they show the order in which the recorder received the messages, not when the events physically occurred, and receipt order can differ from event order"
+    ],
+    "ordering": "earliest_defended"
+  },
+  "candidates": [
+    {
+      "finding_id": "FND-ee6abfda540d272e",
+      "expectation_id": "ER-GRIPPER",
+      "expectation_kind": "event_response",
+      "description": "The gripper reaches at least 0.8 within 500 ms of the CLOSE command",
+      "rule": {
+        "check_kind": "event_response",
+        "comparison": "after a trigger sample is observed entering its condition, a response sample satisfying its condition must be received strictly later and no later than the deadline; receipt times only, not event times",
+        "parameters": {
+          "trigger": "/gripper/command.data eq 'CLOSE' (entry observed)",
+          "response": "/joint_states.position[name=gripper] ge 0.8",
+          "deadline_ns": "500000000",
+          "clock": "mcap_log_time (recorder receipt time) for both trigger and response"
+        },
+        "tolerance_used": null
+      },
+      "expected": "/joint_states.position[name=gripper] ge 0.8 within 500000000 ns after /gripper/command.data eq 'CLOSE' was entered",
+      "observed": "/gripper/command.data = 'CLOSE' at 1700000002000000000 ns (mcap_log_time)",
+      "discrepancy": "the trigger was received at 1700000002000000000 ns; the first matching response in the recorded stream was received at 1700000003000000000 ns, 1000000000 ns later, which exceeds the deadline 500000000 ns by 500000000 ns",
+      "time": {
+        "ns": 1700000002500000000,
+        "clock_domain": "mcap_log_time",
+        "timestamp_basis": "mcap_log_time",
+        "kind": "deadline_expiry"
+      },
+      "sources": [
+        {
+          "artifact_ref": "artifact:m3b_example.mcap",
+          "relative_path": "m3b_example.mcap",
+          "artifact_sha256": "39039ab76f707c70ade5e2165335f5701e72a9cce73dd56cc4b776cda2f0079f",
+          "topic": "/gripper/command",
+          "channel_id": 4,
+          "observation_id": "obs:m3b_example.mcap#25",
+          "role": "trigger_event"
+        },
+        {
+          "artifact_ref": "artifact:m3b_example.mcap",
+          "relative_path": "m3b_example.mcap",
+          "artifact_sha256": "39039ab76f707c70ade5e2165335f5701e72a9cce73dd56cc4b776cda2f0079f",
+          "topic": "/joint_states",
+          "channel_id": 5,
+          "observation_id": "obs:m3b_example.mcap#35",
+          "role": "late_response"
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "obs:m3b_example.mcap#25",
+          "artifact_ref": "artifact:m3b_example.mcap",
+          "topic": "/gripper/command",
+          "channel_id": 4,
+          "message_index": 25,
+          "signal": "data",
+          "value": "CLOSE",
+          "value_type": "string",
+          "timestamp_ns": 1700000002000000000,
+          "timestamp_basis": "mcap_log_time",
+          "clock_domain": "mcap_log_time",
+          "quality": "ok",
+          "parser_status": "readable",
+          "ros_type": "string"
+        },
+        {
+          "observation_id": "obs:m3b_example.mcap#35",
+          "artifact_ref": "artifact:m3b_example.mcap",
+          "topic": "/joint_states",
+          "channel_id": 5,
+          "message_index": 35,
+          "signal": "position[name=gripper]",
+          "value": "0.85",
+          "value_type": "number",
+          "timestamp_ns": 1700000003000000000,
+          "timestamp_basis": "mcap_log_time",
+          "clock_domain": "mcap_log_time",
+          "quality": "ok",
+          "parser_status": "readable",
+          "ros_type": "float64"
+        }
+      ],
+      "explanation": "Expectation ER-GRIPPER requires that /joint_states.position[name=gripper] ge 0.8 within 500000000 ns after /gripper/command.data eq 'CLOSE' was entered. the trigger event contradicts it: the trigger was received at 1700000002000000000 ns; the first matching response in the recorded stream was received at 1700000003000000000 ns, 1000000000 ns later, which exceeds the deadline 500000000 ns by 500000000 ns. This is the first mismatch of this expectation in the evidence evaluated; it is not a statement about cause.",
+      "uncertainty": [
+        "both times are mcap log_time, the recorder's RECEIPT times: they show the order in which the recorder received the messages, not when the events physically occurred, and receipt order can differ from event order"
+      ],
+      "ordering": "earliest_defended"
+    }
+  ],
+  "expectation_results": [
+    {
+      "expectation_id": "ER-ESTOP",
+      "status": "no_divergence_observed_in_covered_window",
+      "reason_code": "no_mismatch_in_covered_window",
+      "reason": "3 sample(s) were evaluated in 1700000000000000000..1700000004000000000 ns (mcap_log_time); none contradicted the expectation. This does not show the behaviour was correct outside what was evaluated.",
+      "clock_domain": "mcap_log_time",
+      "declared_window_domain": "mcap_log_time",
+      "covered_window": {
+        "clock_domain": "mcap_log_time",
+        "start_ns": 1700000000000000000,
+        "end_ns": 1700000004000000000
+      },
+      "evaluated_observation_count": 3,
+      "not_applicable_count": 0,
+      "blind_spot_count": 0,
+      "blind_spots": [],
+      "first_blind_spot_ns": null,
+      "blind_spot_unplaced": false,
+      "missing_evidence": [],
+      "evidence_complete": true,
+      "finding": null,
+      "trigger_event_count": 1,
+      "response_matched_count": 1
+    },
+    {
+      "expectation_id": "ER-GRIPPER",
+      "status": "divergence_found",
+      "reason_code": "mismatch_established",
+      "reason": "the trigger was received at 1700000002000000000 ns; the first matching response in the recorded stream was received at 1700000003000000000 ns, 1000000000 ns later, which exceeds the deadline 500000000 ns by 500000000 ns",
+      "clock_domain": "mcap_log_time",
+      "declared_window_domain": "mcap_log_time",
+      "covered_window": {
+        "clock_domain": "mcap_log_time",
+        "start_ns": 1700000000000000000,
+        "end_ns": 1700000004000000000
+      },
+      "evaluated_observation_count": 3,
+      "not_applicable_count": 0,
+      "blind_spot_count": 0,
+      "blind_spots": [],
+      "first_blind_spot_ns": null,
+      "blind_spot_unplaced": false,
+      "missing_evidence": [],
+      "evidence_complete": true,
+      "finding": {
+        "finding_id": "FND-ee6abfda540d272e",
+        "expectation_id": "ER-GRIPPER",
+        "expectation_kind": "event_response",
+        "description": "The gripper reaches at least 0.8 within 500 ms of the CLOSE command",
+        "rule": {
+          "check_kind": "event_response",
+          "comparison": "after a trigger sample is observed entering its condition, a response sample satisfying its condition must be received strictly later and no later than the deadline; receipt times only, not event times",
+          "parameters": {
+            "trigger": "/gripper/command.data eq 'CLOSE' (entry observed)",
+            "response": "/joint_states.position[name=gripper] ge 0.8",
+            "deadline_ns": "500000000",
+            "clock": "mcap_log_time (recorder receipt time) for both trigger and response"
+          },
+          "tolerance_used": null
+        },
+        "expected": "/joint_states.position[name=gripper] ge 0.8 within 500000000 ns after /gripper/command.data eq 'CLOSE' was entered",
+        "observed": "/gripper/command.data = 'CLOSE' at 1700000002000000000 ns (mcap_log_time)",
+        "discrepancy": "the trigger was received at 1700000002000000000 ns; the first matching response in the recorded stream was received at 1700000003000000000 ns, 1000000000 ns later, which exceeds the deadline 500000000 ns by 500000000 ns",
+        "time": {
+          "ns": 1700000002500000000,
+          "clock_domain": "mcap_log_time",
+          "timestamp_basis": "mcap_log_time",
+          "kind": "deadline_expiry"
+        },
+        "sources": [
+          {
+            "artifact_ref": "artifact:m3b_example.mcap",
+            "relative_path": "m3b_example.mcap",
+            "artifact_sha256": "39039ab76f707c70ade5e2165335f5701e72a9cce73dd56cc4b776cda2f0079f",
+            "topic": "/gripper/command",
+            "channel_id": 4,
+            "observation_id": "obs:m3b_example.mcap#25",
+            "role": "trigger_event"
+          },
+          {
+            "artifact_ref": "artifact:m3b_example.mcap",
+            "relative_path": "m3b_example.mcap",
+            "artifact_sha256": "39039ab76f707c70ade5e2165335f5701e72a9cce73dd56cc4b776cda2f0079f",
+            "topic": "/joint_states",
+            "channel_id": 5,
+            "observation_id": "obs:m3b_example.mcap#35",
+            "role": "late_response"
+          }
+        ],
+        "observations": [
+          {
+            "observation_id": "obs:m3b_example.mcap#25",
+            "artifact_ref": "artifact:m3b_example.mcap",
+            "topic": "/gripper/command",
+            "channel_id": 4,
+            "message_index": 25,
+            "signal": "data",
+            "value": "CLOSE",
+            "value_type": "string",
+            "timestamp_ns": 1700000002000000000,
+            "timestamp_basis": "mcap_log_time",
+            "clock_domain": "mcap_log_time",
+            "quality": "ok",
+            "parser_status": "readable",
+            "ros_type": "string"
+          },
+          {
+            "observation_id": "obs:m3b_example.mcap#35",
+            "artifact_ref": "artifact:m3b_example.mcap",
+            "topic": "/joint_states",
+            "channel_id": 5,
+            "message_index": 35,
+            "signal": "position[name=gripper]",
+            "value": "0.85",
+            "value_type": "number",
+            "timestamp_ns": 1700000003000000000,
+            "timestamp_basis": "mcap_log_time",
+            "clock_domain": "mcap_log_time",
+            "quality": "ok",
+            "parser_status": "readable",
+            "ros_type": "float64"
+          }
+        ],
+        "explanation": "Expectation ER-GRIPPER requires that /joint_states.position[name=gripper] ge 0.8 within 500000000 ns after /gripper/command.data eq 'CLOSE' was entered. the trigger event contradicts it: the trigger was received at 1700000002000000000 ns; the first matching response in the recorded stream was received at 1700000003000000000 ns, 1000000000 ns later, which exceeds the deadline 500000000 ns by 500000000 ns. This is the first mismatch of this expectation in the evidence evaluated; it is not a statement about cause.",
+        "uncertainty": [
+          "both times are mcap log_time, the recorder's RECEIPT times: they show the order in which the recorder received the messages, not when the events physically occurred, and receipt order can differ from event order"
+        ],
+        "ordering": "earliest_defended"
+      },
+      "trigger_event_count": 1,
+      "response_matched_count": 0
+    },
+    {
+      "expectation_id": "ER-LIFT",
+      "status": "no_divergence_observed_in_covered_window",
+      "reason_code": "no_mismatch_in_covered_window",
+      "reason": "17 sample(s) were evaluated in 1700000000000000000..1700000004000000000 ns (mcap_log_time); none contradicted the expectation. This does not show the behaviour was correct outside what was evaluated.",
+      "clock_domain": "mcap_log_time",
+      "declared_window_domain": "mcap_log_time",
+      "covered_window": {
+        "clock_domain": "mcap_log_time",
+        "start_ns": 1700000000000000000,
+        "end_ns": 1700000004000000000
+      },
+      "evaluated_observation_count": 17,
+      "not_applicable_count": 0,
+      "blind_spot_count": 0,
+      "blind_spots": [],
+      "first_blind_spot_ns": null,
+      "blind_spot_unplaced": false,
+      "missing_evidence": [],
+      "evidence_complete": true,
+      "finding": null,
+      "trigger_event_count": 1,
+      "response_matched_count": 1
+    },
+    {
+      "expectation_id": "HS-LIFT-LIMIT",
+      "status": "no_divergence_observed_in_covered_window",
+      "reason_code": "no_mismatch_in_covered_window",
+      "reason": "17 sample(s) were evaluated in 4999980000000..5003980000000 ns (payload_stamp:/joint_states:header.stamp); none contradicted the expectation. This does not show the behaviour was correct outside what was evaluated.",
+      "clock_domain": "payload_stamp:/joint_states:header.stamp",
+      "declared_window_domain": "payload_stamp:/joint_states:header.stamp",
+      "covered_window": {
+        "clock_domain": "payload_stamp:/joint_states:header.stamp",
+        "start_ns": 4999980000000,
+        "end_ns": 5003980000000
+      },
+      "evaluated_observation_count": 17,
+      "not_applicable_count": 0,
+      "blind_spot_count": 0,
+      "blind_spots": [],
+      "first_blind_spot_ns": null,
+      "blind_spot_unplaced": false,
+      "missing_evidence": [],
+      "evidence_complete": true,
+      "finding": null,
+      "stamp_type_check": "schema_verified: the embedded schema declares 'header.stamp' as builtin_interfaces/msg/Time"
+    }
+  ],
+  "contract": {
+    "contract_id": "m3b-example",
+    "schema_version": "1.0",
+    "sha256": "934102760c774087b69b416e4cd967ac1d392463e5ec41e544c791ad560d4165",
+    "expectation_count": 4
+  },
+  "contract_problems": [],
+  "evidence": {
+    "input_kind": "raw_mcap",
+    "input_name": "m3b_example.mcap",
+    "inventory_schema_version": "1.0",
+    "inspection_state": "complete",
+    "integrity_state": "not_applicable",
+    "content_basis": "scanned_now",
+    "log_time_basis": "unknown",
+    "recording_readability": "readable",
+    "evidence_complete": true,
+    "log_time_coverage": {
+      "clock_domain": "mcap_log_time",
+      "start_ns": 1700000000000000000,
+      "end_ns": 1700000004000000000
+    },
+    "segments": [
+      {
+        "artifact_ref": "artifact:m3b_example.mcap",
+        "relative_path": "m3b_example.mcap",
+        "state": "usable_complete",
+        "reason": null,
+        "sha256": "39039ab76f707c70ade5e2165335f5701e72a9cce73dd56cc4b776cda2f0079f",
+        "messages_read": 47
+      }
+    ],
+    "incomplete_reasons": [],
+    "blocked": null,
+    "payload_decoding": {
+      "decoder": {
+        "name": "mcap-ros2-support",
+        "available": true,
+        "version": "0.6.0",
+        "reason": null
+      },
+      "topics": [
+        {
+          "topic": "/cmd_vel",
+          "message_encoding": "cdr",
+          "schema_name": "geometry_msgs/msg/Twist",
+          "schema_encoding": "ros2msg",
+          "schema_sha256": "21151d3479511adb5d9893f6468b5cabc7d37838fc90f07362899ef204646c27",
+          "status": "ok",
+          "detail": null,
+          "messages_attempted": 5,
+          "messages_decoded": 5,
+          "failures": {}
+        },
+        {
+          "topic": "/estop",
+          "message_encoding": "cdr",
+          "schema_name": "std_msgs/msg/Bool",
+          "schema_encoding": "ros2msg",
+          "schema_sha256": "1089f9876860f559ede6f3d8dc49b3feeb8b846593b3f7cb91dddd8c90cbc241",
+          "status": "ok",
+          "detail": null,
+          "messages_attempted": 3,
+          "messages_decoded": 3,
+          "failures": {}
+        },
+        {
+          "topic": "/gripper/command",
+          "message_encoding": "cdr",
+          "schema_name": "std_msgs/msg/String",
+          "schema_encoding": "ros2msg",
+          "schema_sha256": "8d7bb56baf93c614a97f38518ec46615ad1265c4ee5f4e84173d86fcf4130b6e",
+          "status": "ok",
+          "detail": null,
+          "messages_attempted": 5,
+          "messages_decoded": 5,
+          "failures": {}
+        },
+        {
+          "topic": "/joint_states",
+          "message_encoding": "cdr",
+          "schema_name": "sensor_msgs/msg/JointState",
+          "schema_encoding": "ros2msg",
+          "schema_sha256": "21767503b62d0bc29b2f4e4e9532f6e59e064b2331b9b3cb9802e923040108d8",
+          "status": "ok",
+          "detail": null,
+          "messages_attempted": 17,
+          "messages_decoded": 17,
+          "failures": {}
+        },
+        {
+          "topic": "/mode",
+          "message_encoding": "cdr",
+          "schema_name": "std_msgs/msg/String",
+          "schema_encoding": "ros2msg",
+          "schema_sha256": "8d7bb56baf93c614a97f38518ec46615ad1265c4ee5f4e84173d86fcf4130b6e",
+          "status": "ok",
+          "detail": null,
+          "messages_attempted": 5,
+          "messages_decoded": 5,
+          "failures": {}
+        },
+        {
+          "topic": "/odom",
+          "message_encoding": "cdr",
+          "schema_name": "nav_msgs/msg/Odometry",
+          "schema_encoding": "ros2msg",
+          "schema_sha256": "8729a79e3117201b6f053e0fb5a2ccd3be851fd8b00080a5f217dcf9ad46cee2",
+          "status": "ok",
+          "detail": null,
+          "messages_attempted": 17,
+          "messages_decoded": 17,
+          "failures": {}
+        }
+      ]
+    }
+  },
+  "not_evaluated": [],
+  "not_established": [
+    "A first divergence is the earliest established mismatch with an expectation. It is not a root cause; no causal relationship is asserted.",
+    "'No divergence observed' means no mismatch was established in the expectations and evidence actually evaluated. It does not show the system behaved correctly.",
+    "Expectations are exactly those supplied in the contract; none was derived from the recording.",
+    "JSON payloads, and CDR payloads that carry an embedded ros2msg schema (with the optional decoder installed), are decoded; other encodings and schema formats are not interpreted.",
+    "Clock domains are never merged or converted. The relation of MCAP log_time (declared basis: 'unknown') to wall-clock time or any other clock is not established.",
+    "Evidence integrity is as established by the inventory and by re-hashing each segment at investigation time; it is not a statement about truthfulness.",
+    "Live ROS 2 capture is not verified.",
+    "An event_response result compares mcap log_time, the recorder's receipt time, for both trigger and response. It is not the time an event physically occurred, and receipt order is not event order; the result says what the recorder received, not what the robot did.",
+    "A response is a later matching sample. It is not shown to be caused by the trigger. A response absent from the recording is not shown to have been unpublished: a silent publisher and a message that was published but not captured look the same in a recording.",
+    "A payload stamp (header.stamp) is the publisher's own claim about when something happened. Each payload clock is its own domain and is never compared with another clock or with log_time; no offset is inferred. For JSON payloads the ROS type of a stamp field cannot be verified, only its sec/nanosec structure; a stamp of zero is read as zero (it may be a simulation time or an unset stamp)."
+  ],
+  "provenance": {
+    "tool": {
+      "name": "physicore-collector",
+      "version": "0.1.0"
+    },
+    "read_only": true,
+    "root_cause_claimed": false,
+    "live_ros2_capture_verified": false
+  }
+}

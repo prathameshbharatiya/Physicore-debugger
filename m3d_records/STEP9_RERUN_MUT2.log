@@ -1,0 +1,54 @@
+CONTROL (unmodified)                                                   PASS
+gap onset uses only the later message                                  KILLED
+gap onset uses only the earlier message                                KILLED
+gap basis mislabelled                                                  KILLED
+rate onset ignores the window end                                      KILLED
+rate onset spans the whole run                                         KILLED
+rate extent ignores the run length                                     KILLED
+rate window start taken from last window                               KILLED
+point onset uses last time                                             KILLED
+point extent collapses to a point                                      KILLED
+point basis mislabelled                                                KILLED
+log-time domain check dropped for point categories                     KILLED
+stamp regression takes the first retained observation as the offender  KILLED
+stamp log lane placed with one observation                             KILLED
+stamp payload lane uses log time                                       KILLED
+stamp secondary lane dropped                                           KILLED
+stamp lanes merged (payload lane gets log basis)                       KILLED
+M2 deadline onset is a point at the deadline                           KILLED
+M2 deadline start takes the late response                              KILLED
+M2 deadline start uses max not min                                     KILLED
+M2 observation kind treated as window                                  KILLED
+M2 clock domain check dropped                                          KILLED
+M2 observation basis mislabelled                                       KILLED
+M2 duplicate candidates not collapsed                                  KILLED
+identities kept when text truncated                                    KILLED
+identities kept when unknown                                           KILLED
+empty identity kept                                                    KILLED
+logger name read from the message                                      KILLED
+hardware id dropped                                                    KILLED
+goal id key wrong                                                      KILLED
+battery location dropped                                               KILLED
+severity copied wrongly                                                KILLED
+severity basis copied wrongly                                          KILLED
+truncated flag dropped                                                 KILLED
+evidence limited to the first reference                                KILLED
+evidence time taken from the wrong field                               KILLED
+source notes dropped                                                   KILLED
+coverage copied wrongly                                                KILLED
+interval width note never added                                        KILLED
+width note always added                                                KILLED
+symptom id ignores source id                                           KILLED
+symptom id ignores placements                                          KILLED
+cap keeps the wrong end                                                KILLED
+cap suppressed count off by one                                        KILLED
+cap sorts by id only                                                   KILLED
+unplaceable finding silently dropped without a problem                 KILLED
+multiple placements in one lane allowed                                KILLED
+evidence not required                                                  KILLED
+source vocabulary open                                                 KILLED
+placement lane mismatch allowed                                        KILLED
+M2 severity pretends a value                                           KILLED
+M2 coverage always complete                                            KILLED
+
+51 killed, 0 not killed/invalid

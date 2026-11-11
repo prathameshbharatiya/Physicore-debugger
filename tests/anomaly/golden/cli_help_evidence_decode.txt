@@ -1,0 +1,24 @@
+exit=0
+                                                                                                    
+ Usage: physicore-collector evidence decode [OPTIONS] {path}                                        
+                                                                                                    
+ Show the decoded leaf values of the first messages of TOPIC, with artifact, message index,         
+ log_time and clock domain. Read-only.                                                              
+                                                                                                    
+ JSON payloads and CDR payloads with an embedded ros2msg schema (needs the optional extra: pip      
+ install physicore-collector)                                                                       
+ are decoded. Nothing is interpreted or diagnosed. Exit codes: 0 = decoded; 1 = decoded but some    
+ message failed or the evidence is                                                                  
+ incomplete; 2 = the topic could not be decoded or found.                                           
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    path      <path>  Evidence to read: anything `evidence inventory` accepts. [required]       │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --topic  -t      <str>                     Topic whose messages to decode. [required]         │
+│    --limit  -n      <int range> [1<=x<=1000]  How many messages (earliest log_time first).       │
+│                                               [default: 5]                                       │
+│    --json                                     Machine-readable, versioned JSON (stdout).         │
+│    --help                                     Show this message and exit.                        │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

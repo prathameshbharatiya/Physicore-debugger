@@ -1,0 +1,21 @@
+                                                                                                    
+ Usage: physicore-collector capture status [OPTIONS] {session}                                      
+                                                                                                    
+ Show the state of a capture. Read-only: it never changes the record or touches the recording.      
+                                                                                                    
+ Three things are reported separately: the supervisor (is one attached?), the recorder (is the      
+ recorded process still running?) and the capture (healthy / degraded / interrupted /               
+ finalized / failed). A record that says 'running' without an attached supervisor is                
+ INTERRUPTED, never 'running' or 'complete'. Status does not validate the recording.                
+                                                                                                    
+ Exit codes: 0 = healthy, or finalized; 1 = degraded, interrupted, failed or ended unclean;         
+ 2 = no record.                                                                                     
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    session      <path>  Capture session directory (or its capture_health.json). [required]     │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --json          Machine-readable JSON output.                                                    │
+│ --help          Show this message and exit.                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

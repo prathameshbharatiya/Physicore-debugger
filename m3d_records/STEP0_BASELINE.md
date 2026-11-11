@@ -1,0 +1,16 @@
+# M3d Step 0 — baseline record (actual results)
+
+Working copy: `/home/claude/work/m3d/work`, created by `git clone` of the M3c work repo, remote removed (`git remote -v` empty), branch `m3d-baseline`.
+M3c commit `b7bf26044b4930775d434b556d82b50d83a5fd18`, tree `f3f51e7cc7a4d0640f1da86cd22830d8e6150c61` (identical to the source repo's HEAD; working tree clean at creation).
+Tree check: `diff -rq <extracted physicore-collector-m3c.zip> work -x .git -x __pycache__ ...` -> empty (work tree == delivered M3c ZIP).
+Deliverable pins: `sha256sum -c M3C_DELIVERABLES.sha256` -> 6/6 OK (zip, patch, example, 3 docs). M3b rev2 zip fc2117bb…, patch 5b67b333…, M3a zip d4c955d1… recomputed and equal to recorded pins. `cli.py` sha256 dde8db39…c2da; tracked-file manifest `M3D_BASE_FILES.sha256` (218 files; sha256 of manifest 3eeef358…dc776).
+Venvs (shared, read-only use; M3d tree selected with `PYTHONPATH=work/src`, verified to import from the M3d tree): venv_ros2 (mcap-ros2-support 0.6.0, rosbags 0.11.9), venv_plain (neither). Python 3.13, pytest 8.4.2, pydantic 2.14.2, typer 0.27.3, PyYAML 6.0.3.
+Baseline suites (full, sequential, no failures): **ros2 venv 1704 passed, 6 skipped; plain venv 1603 passed, 107 skipped** (counted from the progress lines of `logs/step0_*.log`).
+CLI help goldens: 32 commands/groups captured from the M3c tree (`help_goldens/`, `COLUMNS=100 NO_COLOR=1`), used by PRES-05.
+
+## Feasibility checks (executed; outputs in `feasibility_output.txt`, `feasibility_c_output.txt`)
+(a) **Public accessors — PASS.** All names M3d needs are importable public APIs (listed in output). `run_anomaly_detection` returns only the report (no inventory), so M3d calls `inspect_evidence(path)` itself for completeness/integrity blockers; the two calls are bound by comparing evidence digests (executed on the example: equal). No patching of accepted code is needed.
+(b) **Detector categories/time fields — PASS with items for Step 2.** All ten `CATEGORIES` map to emitting detectors; gap/rate/array-length/stamp-order pass explicit `times=`; the rest use first/last occurrence. The exact field-by-field verification of the onset table is Step 2's first action.
+(c) **M3c and M2 in-process on one inventory — PASS.** On the example recording: M3c 0 findings, M2 `divergence_found` with 2 candidates, digests equal across both. **Finding for Step 2 (G8-relevant):** the M2 `transition` candidate carries `time.kind = deadline_expiry` (not only `event_response`), i.e. DESIGN §4.1's row "M2 transition → point at the divergent sample" does not hold for this kind; Step 2 will define the onset from the actual M2 fields and record the table correction before coding it.
+(d) **YAML/JSON behaviour — PASS with design consequences.** `yaml.safe_load` accepts anchors/aliases, merge keys and duplicate keys silently and raises `RecursionError` at nesting 10,000 (and 0.49 s at 1,000); `json.loads` raises `RecursionError` at 100,000. The loader therefore pre-scans the YAML event stream (iterative: refuses anchors, aliases, tags, merge keys, duplicate keys, depth above a small bound, document size) before constructing anything, and uses `object_pairs_hook` plus a bracket-depth pre-scan for `.json`; `RecursionError` is also caught defensively. These are implementation details inside the approved FR-DEP-03; no contract change.
+Blockers: none.

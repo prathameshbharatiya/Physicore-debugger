@@ -1,0 +1,217 @@
+{
+  "exit_code": 0,
+  "findings": [
+    {
+      "detail": {},
+      "kind": "declared_topic_not_recorded",
+      "message": "A topic that the model uses is not in the recording.",
+      "severity": "warning",
+      "subject": "/lidar/scan"
+    },
+    {
+      "detail": {
+        "constraint_kind": "value_range",
+        "reason": "topic_not_recorded"
+      },
+      "kind": "constraint_cannot_be_evaluated",
+      "message": "A declared constraint cannot be evaluated against this recording.",
+      "severity": "warning",
+      "subject": "lidar_range"
+    },
+    {
+      "detail": {
+        "constraint_kind": "rate",
+        "reason": "topic_not_recorded"
+      },
+      "kind": "constraint_cannot_be_evaluated",
+      "message": "A declared constraint cannot be evaluated against this recording.",
+      "severity": "warning",
+      "subject": "lidar_rate"
+    },
+    {
+      "detail": {
+        "at_ns": 5,
+        "max_log_time_ns": 1700000000003000000,
+        "min_log_time_ns": 1700000000001000000
+      },
+      "kind": "intervention_outside_recording",
+      "message": "A declared intervention lies outside the time window of the recording.",
+      "severity": "warning",
+      "subject": "base_restart"
+    }
+  ],
+  "findings_total": 4,
+  "findings_truncated": false,
+  "limitations": [
+    "Everything in the model section was declared by the people named in it. This tool cannot verify it and never infers or corrects it.",
+    "The recording section lists only what the recording's own metadata states: topics, message types and message counts. Quality-of-service settings are not exposed.",
+    "A finding means that the model and the recording differ. It does not say which of the two is right.",
+    "Real-recording validation of the readers and decoder licensing clearance are still outstanding."
+  ],
+  "model": {
+    "content": {
+      "bindings": [
+        {
+          "component": "base",
+          "declared_by": "example author (invented, not a real robot)",
+          "declared_by_source": "file",
+          "field": null,
+          "role": "log",
+          "topic": "/rosout",
+          "type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "component": "health_monitor",
+          "declared_by": "example author (invented, not a real robot)",
+          "declared_by_source": "file",
+          "field": null,
+          "role": "status",
+          "topic": "/diagnostics",
+          "type": "diagnostic_msgs/msg/DiagnosticArray"
+        },
+        {
+          "component": "lidar",
+          "declared_by": "example author (invented, not a real robot)",
+          "declared_by_source": "file",
+          "field": "ranges",
+          "role": "scan",
+          "topic": "/lidar/scan",
+          "type": "sensor_msgs/msg/LaserScan"
+        }
+      ],
+      "components": [
+        {
+          "declared_by": "example author (invented, not a real robot)",
+          "declared_by_source": "file",
+          "description": null,
+          "id": "base",
+          "role": "actuator"
+        },
+        {
+          "declared_by": "example author (invented, not a real robot)",
+          "declared_by_source": "file",
+          "description": "publishes diagnostics",
+          "id": "health_monitor",
+          "role": "middleware"
+        },
+        {
+          "declared_by": "example author (invented, not a real robot)",
+          "declared_by_source": "file",
+          "description": "front lidar",
+          "id": "lidar",
+          "role": "sensor"
+        }
+      ],
+      "constraints": [
+        {
+          "component": "lidar",
+          "declared_by": "example author (invented, not a real robot)",
+          "declared_by_source": "file",
+          "id": "lidar_range",
+          "kind": "value_range",
+          "max": 12.5,
+          "min": 0,
+          "role": "scan",
+          "unit": "m"
+        },
+        {
+          "component": "lidar",
+          "declared_by": "example author (invented, not a real robot)",
+          "declared_by_source": "file",
+          "id": "lidar_rate",
+          "kind": "rate",
+          "max_hz": 12,
+          "min_hz": 8,
+          "role": "scan"
+        }
+      ],
+      "declared_by": "example author (invented, not a real robot)",
+      "dependency_file_sha256": null,
+      "edges": [
+        {
+          "declared_by": "example author (invented, not a real robot)",
+          "declared_by_source": "file",
+          "from": "lidar",
+          "id": "lidar_to_monitor",
+          "relation": "data_flow",
+          "to": "health_monitor",
+          "window_ns": 1000000000
+        }
+      ],
+      "interventions": [
+        {
+          "at_ns": 5,
+          "clock_domain": "mcap_log_time",
+          "component": "base",
+          "declared_by": "operator on duty (invented)",
+          "declared_by_source": "item",
+          "id": "base_restart",
+          "kind": "restart",
+          "new_value": null,
+          "old_value": null,
+          "parameter": null
+        }
+      ],
+      "operating_context": "Indoor warehouse, flat floor, one shift per day.\nThe lidar is mounted at the front.\n",
+      "system_model_schema_version": 1,
+      "system_name": "example mobile robot",
+      "versions": [
+        {
+          "component": "base",
+          "declared_by": "example author (invented, not a real robot)",
+          "declared_by_source": "file",
+          "digest": null,
+          "kind": "software",
+          "name": "base driver",
+          "version": "2.1.0"
+        },
+        {
+          "component": "lidar",
+          "declared_by": "example author (invented, not a real robot)",
+          "declared_by_source": "file",
+          "digest": null,
+          "kind": "hardware",
+          "name": "lidar unit",
+          "version": "rev B"
+        }
+      ]
+    },
+    "counts": {
+      "bindings": 3,
+      "components": 3,
+      "constraints": 2,
+      "edges": 1,
+      "interventions": 1,
+      "versions": 2
+    },
+    "digest": "2a08986502d6181dae0f8f7d63f34bf66c7f36623c3365065a2bebc39fc9866f",
+    "file_sha256": "3f7e2ae731a1428c6a8e04bccddea52c00062264897b5e11239e5531fbfd3ac8",
+    "schema_version": 1,
+    "source": "declared"
+  },
+  "model_report_version": "1.0",
+  "recording": {
+    "inspection_state": "complete",
+    "source": "from_recording",
+    "topics": [
+      {
+        "message_count": 1,
+        "topic": "/diagnostics",
+        "types": [
+          "diagnostic_msgs/msg/DiagnosticArray"
+        ]
+      },
+      {
+        "message_count": 1,
+        "topic": "/rosout",
+        "types": [
+          "rcl_interfaces/msg/Log"
+        ]
+      }
+    ],
+    "window_ns": {
+      "max_log_time_ns": 1700000000003000000,
+      "min_log_time_ns": 1700000000001000000
+    }
+  }
+}

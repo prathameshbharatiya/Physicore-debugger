@@ -1,0 +1,16 @@
+                                                                                                    
+ Usage: physicore-collector incident pending [OPTIONS] COMMAND [ARGS]...                            
+                                                                                                    
+ Pending incident preparation: sessions that still need a package, and an idle-only command to      
+ drain them.                                                                                        
+                                                                                                    
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --help          Show this message and exit.                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
+│ list  List capture sessions that still need an incident package, whether each can proceed NOW,   │
+│       and what to do if not.                                                                     │
+│ run   Prepare pending incidents, oldest session first, ONLY while no capture is active. Run it   │
+│       when the machine is idle.                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

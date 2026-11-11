@@ -1,0 +1,25 @@
+                                                                                                    
+ Usage: physicore-collector capture recover [OPTIONS] {path}                                        
+                                                                                                    
+ Settle sessions whose supervisor vanished (killed, crashed, power loss, reboot).                   
+                                                                                                    
+ Writes an explicit `interrupted` state into the capture-health record. It never edits, moves       
+ or deletes the recording, never invents an end time, and is idempotent: running it again changes   
+ nothing. A live supervisor is never disturbed.                                                     
+                                                                                                    
+ Exit codes: 0 = everything settled or nothing to do, 1 = a surviving recorder needs attention      
+ (re-run with --stop-orphan), 2 = not a capture session / unusable record.                          
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    path      <path>  A capture session directory, or (with --all) the output directory holding │
+│                        sessions.                                                                 │
+│                        [required]                                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --all                  Settle every stale session directly under PATH.                           │
+│ --stop-orphan          Also stop a recorder that outlived its supervisor (graceful first; killed │
+│                        only if it does not stop in time). Only a process whose recorded identity │
+│                        still matches is ever signalled.                                          │
+│ --help                 Show this message and exit.                                               │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

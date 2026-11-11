@@ -1,0 +1,27 @@
+Investigation: divergence_found
+  the earliest established mismatch is expectation ARM-TEMP-LIMIT at 1700000000900000000 ns (mcap_log_time): 70.01 is above the maximum 70.0 by 0.01
+Contract: example-arm-v1 (schema 1.0, 2 expectation(s), sha256 558ff55c357aef0b...)
+Evidence: raw_mcap 'example_recording.mcap'; inspection complete; integrity not_applicable; complete; log_time basis 'unknown'
+  segment example_recording.mcap: usable_complete
+
+First divergence FND-65741562a09f8c14 (expectation ARM-TEMP-LIMIT, range):
+  expected:    at most 70.0
+  observed:    /arm/temperature.celsius = 70.01 at 1700000000900000000 ns (mcap_log_time)
+  discrepancy: 70.01 is above the maximum 70.0 by 0.01
+  time:        1700000000900000000 ns on mcap_log_time (observation)
+  rule:        value >= min and value <= max (bounds inclusive; exact decimal arithmetic)  {'max': '70.0'}
+  source:      divergent_observation: example_recording.mcap topic /arm/temperature [obs:example_recording.mcap#8]
+  source:      prerequisite: example_recording.mcap topic /arm/mode [obs:example_recording.mcap#0]
+
+Per expectation:
+  ARM-TEMP-LIMIT: divergence_found [mismatch_established]
+  GRIPPER-CLOSES-IN-TIME: divergence_found [mismatch_established]
+
+Not established:
+  - A first divergence is the earliest established mismatch with an expectation. It is not a root cause; no causal relationship is asserted.
+  - 'No divergence observed' means no mismatch was established in the expectations and evidence actually evaluated. It does not show the system behaved correctly.
+  - Expectations are exactly those supplied in the contract; none was derived from the recording.
+  - Only json-encoded message payloads are decoded. Other encodings (for example CDR) are not interpreted.
+  - Clock domains are never merged or converted. The relation of MCAP log_time (declared basis: 'unknown') to wall-clock time or any other clock is not established.
+  - Evidence integrity is as established by the inventory and by re-hashing each segment at investigation time; it is not a statement about truthfulness.
+  - Live ROS 2 capture is not verified.

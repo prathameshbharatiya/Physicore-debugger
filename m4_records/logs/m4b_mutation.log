@@ -1,0 +1,89 @@
+CONTROL (unmodified)                  PASS
+ca: version value unchecked           KILLED
+ca: sentence full stop not required   KILLED
+ca: forbidden wording not screened    KILLED
+ca: empty text accepted               KILLED
+ca: long text accepted                KILLED
+ca: control chars accepted            KILLED
+ca: list length limit off             KILLED
+ca: duplicate enum value accepted     KILLED
+ca: builtin id not restricted         KILLED
+ca: user id prefix not required       KILLED
+ca: version minimum off               KILLED
+ca: version bool accepted             KILLED
+ca: family unchecked                  KILLED
+ca: categories optional               KILLED
+ca: roles unchecked                   KILLED
+ca: duplicate slot accepted           KILLED
+ca: slot selector unchecked           KILLED
+ca: slots optional                    SURVIVED
+ca: check kind unchecked              KILLED
+ca: check slot unchecked              KILLED
+ca: constraint kind unchecked         KILLED
+ca: duplicate check accepted          KILLED
+ca: duplicate prediction accepted     KILLED
+ca: predictions optional              KILLED
+ca: rule op unchecked                 KILLED
+ca: rule slot unchecked               KILLED
+ca: rule check unchecked              KILLED
+ca: rule keys unchecked               KILLED
+ca: rule categories optional          KILLED
+ca: availability unchecked            KILLED
+ca: duplicate token accepted          KILLED
+ca: self rival accepted               KILLED
+ca: duplicate rival accepted          KILLED
+ca: user review accepted              KILLED
+ca: user status not forced            KILLED
+ca: reviewer not required             KILLED
+ca: review date not required          KILLED
+ca: proposed with reviewer accepted   KILLED
+ca: builtin review optional           KILLED
+ca: duplicate entry accepted          KILLED
+ca: empty entries accepted            KILLED
+ca: entries limit off                 KILLED
+ca: builtin completeness unchecked    KILLED
+ca: file size unchecked               KILLED
+ca: NUL accepted                      SURVIVED
+ca: empty file accepted as ok         SURVIVED
+ca: json dup keys not caught          KILLED
+ca: digest not sorted                 KILLED
+ca: entries not sorted                KILLED
+ca: rival existence unchecked (user)  KILLED
+ca: merged drops user                 KILLED
+ca: failed user load merged silently  KILLED
+in: unit categories ignored           KILLED
+in: roles ignored                     KILLED
+in: roles optional match flipped      KILLED
+in: lone symptoms dropped             KILLED
+in: components dropped                KILLED
+in: unit topics not unique            KILLED
+in: upstream from wrong end           KILLED
+in: downstream from wrong end         KILLED
+in: model edges ignored               KILLED
+in: dependency edges ignored          KILLED
+in: upstream includes symptom topics  KILLED
+in: siblings include symptom topics   KILLED
+in: role slot ignores component       KILLED
+in: unbound source label lost         KILLED
+in: component endpoint not expanded   KILLED
+in: check always runnable             KILLED
+in: missing state text changed        KILLED
+in: instance id ignores bindings      KILLED
+in: instance id ignores version       KILLED
+in: instance id ignores unit          KILLED
+in: unresolved member dropped         KILLED
+in: no-mechanism member always added  KILLED
+in: no-mechanism member never added   KILLED
+in: instances unsorted                KILLED
+in: covered topics omit bindings      KILLED
+in: catalogue digest dropped          KILLED
+in: model digest dropped              KILLED
+in: review status hidden              KILLED
+in: supplied_by hidden                KILLED
+in: instance total wrong              KILLED
+rp: reviewer line dropped             KILLED
+rp: count of proposed wrong           KILLED
+rp: rivals not marked                 KILLED
+rp: checks dropped                    KILLED
+
+83 killed, 3 not killed or invalid of 86

@@ -1,0 +1,48 @@
+{
+  "contract_schema_version": "1.0",
+  "contract_id": "example-arm-v1",
+  "description": "Two supplied expectations for a synthetic arm recording.",
+  "expectations": [
+    {
+      "expectation_id": "ARM-TEMP-LIMIT",
+      "description": "While the arm is RUNNING its temperature must not exceed 70.0 C.",
+      "topic": "/arm/temperature",
+      "signal": "celsius",
+      "clock_domain": "mcap_log_time",
+      "applies_when": [
+        {
+          "topic": "/arm/mode",
+          "signal": "state",
+          "op": "eq",
+          "value": "RUNNING"
+        }
+      ],
+      "check": {
+        "kind": "range",
+        "max": 70.0
+      },
+      "source": {
+        "kind": "specification",
+        "reference": "EXAMPLE-SPEC-4.2 (synthetic)",
+        "description": "Thermal limit of the example arm."
+      }
+    },
+    {
+      "expectation_id": "GRIPPER-CLOSES-IN-TIME",
+      "description": "Once the gripper starts CLOSING it must be CLOSED within 500 ms.",
+      "topic": "/gripper/state",
+      "signal": "value",
+      "clock_domain": "mcap_log_time",
+      "check": {
+        "kind": "transition",
+        "from_value": "CLOSING",
+        "to_value": "CLOSED",
+        "deadline_ns": 500000000
+      },
+      "source": {
+        "kind": "operator_supplied",
+        "reference": "EXAMPLE-TICKET-17 (synthetic)"
+      }
+    }
+  ]
+}

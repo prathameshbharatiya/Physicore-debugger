@@ -1,0 +1,13 @@
+profile_schema_version: "1.1"
+profile_id: cap-test
+log_time_basis: system_time
+required_metadata_keys: [operator, session_label]
+topics:
+  - {name: /joint_states, expected_hz: 50}
+  - {name: /camera/image, max_gap_seconds: 0.5}
+  - {name: /diagnostics, required: false}
+capture:
+  max_bag_size_bytes: 1000000
+  max_bag_duration_seconds: 30
+  stop_timeout_seconds: 5
+  identity: {robot_id: r1, run_id: run-7}

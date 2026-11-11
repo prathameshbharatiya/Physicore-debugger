@@ -1,0 +1,47 @@
+# EXAMPLE VALUES, NOT RECOMMENDATIONS.
+# This file only illustrates the syntax of the M3c anomaly configuration. Every number below was chosen to show the format;
+# none is a suggested threshold. Choose your own for your robot and topics. Tier B parameters have no defaults.
+anomaly_config_version: 1
+limits:
+  max_retained_observations: 20
+  max_text_bytes: 512
+  max_findings_per_detector: 1000
+detectors:
+  tierA.ros_log: { enabled: true, topics: auto }
+  tierA.diagnostics: { enabled: true, topics: auto }
+  tierA.goal_status: { enabled: true, topics: auto }
+  tierA.battery:
+    enabled: true
+    topics: auto
+    health_flags: true
+    thresholds:
+      percentage_below: "0.2"
+      percentage_scale: fraction
+  tierB.publishing_gap:
+    enabled: true
+    topics: ["/scan"]
+    min_intervals: 20
+    multiplier: "5"
+    absolute_floor_ns: 50000000
+  tierB.rate_change:
+    enabled: true
+    topics: ["/scan"]
+    window_ns: 1000000000
+    min_windows: 5
+    min_baseline_count: 5
+    trim_start_windows: 1
+    trim_end_windows: 1
+    low_ratio: "0.5"      # OPTIONAL: omit to disable the low direction
+    high_ratio: "2"       # OPTIONAL: omit to disable the high direction (at least one of the two is required)
+  tierB.stamp_order:
+    enabled: true
+    topics: ["/scan"]
+    fields: ["header.stamp"]
+  tierB.array_length:
+    enabled: true
+    rules:
+      - { topic: "/scan", path: "ranges", expected_length: 360 }
+  tierB.non_finite:
+    enabled: true
+    topics: ["/scan"]
+    exclude_paths: []

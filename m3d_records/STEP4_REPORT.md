@@ -1,0 +1,6 @@
+# M3d Step 4 report (actual results)
+Files: `localization/precedence.py` (layer_map O(n log n) via sort + min-heap, `Earliest`, `Lane`, `build_lane(s)`), vocabulary sentences (not_defended / tied / none_observed); tests `tests/localization/{l1.py,oracle.py (oracle_layers),test_pre.py}`; `tools/mutants_step4.py`.
+Tests: test_pre.py 32 (PRE-01..16, UNC-04, plus model/lane tests). PRE-09 compares 600 seeded random instances (n=5/20/60) with an independent relaxation oracle; PRE-16 runs 100,000 symptoms (time guard 20 s; the measured time goes into the Step 9 benchmark) and an oracle comparison on a dense 250-symptom subsample.
+Full suites: **ros2 2054 passed, 6 skipped, 1 failed; plain 1952 passed, 108 skipped, 1 failed** (same open G1 conflict: accepted M3c PRES_09 `...before_step_9`).
+Mutation (MUT-PRE): 38 mutants; 34 killed first, 2 test gaps closed, 2 justified equivalent -> **36 killed, 0 survived, 2 equivalent** (reasons in `mutants_step4.py`).
+Design note (correction of a sentence in DESIGN §4.2): symptoms in one layer are pairwise unordered (if X precedes Y then layer(Y) > layer(X)); the draft sentence "or ordered only through non-adjacent ones" was wrong and is not implemented. Verified by PRE-07.

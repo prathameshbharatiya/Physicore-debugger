@@ -1,0 +1,33 @@
+                                                                                                    
+ Usage: physicore-collector capture service-run [OPTIONS]                                           
+                                                                                                    
+ What the systemd unit runs: reconcile, then record until told to stop.                             
+                                                                                                    
+ 1. takes a per-name lock (a second instance exits at once);                                        
+ 2. builds the ROS environment from --ros-setup scripts (no shell interpolation);                   
+ 3. settles stale sessions in the output directory (`capture recover --all --stop-orphan`:          
+    only recorders whose recorded identity still matches are ever signalled);                       
+ 4. records ONE new session (never resumes or overwrites one) until SIGTERM/SIGINT;                 
+ 5. NEVER prepares an incident itself: a stop or restart must not wait for copying, and a copy      
+ would compete                                                                                      
+    with the next recording. Every ended session is recorded as DEFERRED (service mode) in          
+    <session>/incident_attempt.json; drain them with `incident pending run <out>` when the machine  
+ is idle                                                                                            
+    (cron, a systemd timer, or by hand). Stale sessions found at start are recorded the same way.   
+                                                                                                    
+ Exit codes: 0 = clean stop with a finalized bag; 1 = ended unclean (systemd restarts it, rate      
+ limited); 78 = configuration problem or another capture active (NOT restarted).                    
+                                                                                                    
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --name                   <str>   Service name (as given to install-service). [required]       │
+│ *  --profile                <path>  Profile (schema 1.0 to 1.2). [required]                      │
+│ *  --out                    <path>  EXISTING output directory (one active capture per            │
+│                                     directory).                                                  │
+│                                     [required]                                                   │
+│    --ros-setup              <str>   ROS setup script to source (repeatable, in order).           │
+│    --env                    <str>   KEY=VALUE to forward to the recorder (allow-listed ROS       │
+│                                     variables only).                                             │
+│    --no-auto-prepare                Do NOT prepare an incident package when the capture ends.    │
+│    --help                           Show this message and exit.                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

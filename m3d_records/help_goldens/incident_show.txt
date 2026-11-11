@@ -1,0 +1,34 @@
+                                                                                                    
+ Usage: physicore-collector incident show [OPTIONS] {path}                                          
+                                                                                                    
+ Show one incident: the four separate statements, what is not established, known gaps. Read-only.   
+                                                                                                    
+ Without --verify the STORED result is shown and nothing is re-hashed: it says what was true when   
+ the incident was                                                                                   
+ prepared, not that the package is intact now. --verify re-checks every package file, the manifest  
+ against the digest                                                                                 
+ recorded in incident.json, and that nothing unexpected is present: VERIFIED NOW means the bytes    
+ are what was                                                                                       
+ prepared; it does not show the data is true or the recording complete. With a capture active,      
+ --verify is skipped                                                                                
+ (UNVERIFIABLE) unless --allow-while-recording.                                                     
+                                                                                                    
+ Exit codes: 0 = shown (and verified now, if asked), 1 = --verify found TAMPERED, 2 = not a         
+ readable incident or                                                                               
+ UNVERIFIABLE, 3 = --verify deferred because a capture is active.                                   
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    path      <path>  An incident directory, its incident.json, or a capture session directory. │
+│                        [required]                                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --verify                               Also re-hash the whole package against its manifest       │
+│                                        (offline).                                                │
+│ --allow-while-recording                With --verify: verify even if a capture is active (the    │
+│                                        re-hash WILL compete with it).                            │
+│ --guard-dir                    <path>  With --verify: also check this directory for an active    │
+│                                        capture.                                                  │
+│ --json                                 Machine-readable JSON output.                             │
+│ --help                                 Show this message and exit.                               │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

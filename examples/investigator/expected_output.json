@@ -1,0 +1,452 @@
+{
+  "investigation_schema_version": "1.0",
+  "status": "divergence_found",
+  "status_reason_code": "earliest_divergence_defended",
+  "status_reason": "the earliest established mismatch is expectation ARM-TEMP-LIMIT at 1700000000900000000 ns (mcap_log_time): 70.01 is above the maximum 70.0 by 0.01",
+  "first_divergence": {
+    "finding_id": "FND-65741562a09f8c14",
+    "expectation_id": "ARM-TEMP-LIMIT",
+    "expectation_kind": "range",
+    "description": "While the arm is RUNNING its temperature must not exceed 70.0 C.",
+    "rule": {
+      "check_kind": "range",
+      "comparison": "value >= min and value <= max (bounds inclusive; exact decimal arithmetic)",
+      "parameters": {
+        "max": "70.0"
+      },
+      "tolerance_used": null
+    },
+    "expected": "at most 70.0",
+    "observed": "/arm/temperature.celsius = 70.01 at 1700000000900000000 ns (mcap_log_time)",
+    "discrepancy": "70.01 is above the maximum 70.0 by 0.01",
+    "time": {
+      "ns": 1700000000900000000,
+      "clock_domain": "mcap_log_time",
+      "timestamp_basis": "mcap_log_time",
+      "kind": "observation"
+    },
+    "sources": [
+      {
+        "artifact_ref": "artifact:example_recording.mcap",
+        "relative_path": "example_recording.mcap",
+        "artifact_sha256": "4bad0c7ace9be0e305cb115ddc35ece2c3eaf47c0b5f3a4cc539f28125f674f5",
+        "topic": "/arm/temperature",
+        "channel_id": 2,
+        "observation_id": "obs:example_recording.mcap#8",
+        "role": "divergent_observation"
+      },
+      {
+        "artifact_ref": "artifact:example_recording.mcap",
+        "relative_path": "example_recording.mcap",
+        "artifact_sha256": "4bad0c7ace9be0e305cb115ddc35ece2c3eaf47c0b5f3a4cc539f28125f674f5",
+        "topic": "/arm/mode",
+        "channel_id": 1,
+        "observation_id": "obs:example_recording.mcap#0",
+        "role": "prerequisite"
+      }
+    ],
+    "observations": [
+      {
+        "observation_id": "obs:example_recording.mcap#8",
+        "artifact_ref": "artifact:example_recording.mcap",
+        "topic": "/arm/temperature",
+        "channel_id": 2,
+        "message_index": 8,
+        "signal": "celsius",
+        "value": "70.01",
+        "value_type": "number",
+        "timestamp_ns": 1700000000900000000,
+        "timestamp_basis": "mcap_log_time",
+        "clock_domain": "mcap_log_time",
+        "quality": "ok",
+        "parser_status": "readable"
+      },
+      {
+        "observation_id": "obs:example_recording.mcap#0",
+        "artifact_ref": "artifact:example_recording.mcap",
+        "topic": "/arm/mode",
+        "channel_id": 1,
+        "message_index": 0,
+        "signal": "state",
+        "value": "RUNNING",
+        "value_type": "string",
+        "timestamp_ns": 1700000000000000000,
+        "timestamp_basis": "mcap_log_time",
+        "clock_domain": "mcap_log_time",
+        "quality": "ok",
+        "parser_status": "readable"
+      }
+    ],
+    "explanation": "Expectation ARM-TEMP-LIMIT requires /arm/temperature.celsius to be at most 70.0 while /arm/mode.state eq 'RUNNING'. the observed value contradicts it: 70.01 is above the maximum 70.0 by 0.01. This is the first mismatch of this expectation in the evidence evaluated; it is not a statement about cause.",
+    "uncertainty": [],
+    "ordering": "earliest_defended"
+  },
+  "candidates": [
+    {
+      "finding_id": "FND-65741562a09f8c14",
+      "expectation_id": "ARM-TEMP-LIMIT",
+      "expectation_kind": "range",
+      "description": "While the arm is RUNNING its temperature must not exceed 70.0 C.",
+      "rule": {
+        "check_kind": "range",
+        "comparison": "value >= min and value <= max (bounds inclusive; exact decimal arithmetic)",
+        "parameters": {
+          "max": "70.0"
+        },
+        "tolerance_used": null
+      },
+      "expected": "at most 70.0",
+      "observed": "/arm/temperature.celsius = 70.01 at 1700000000900000000 ns (mcap_log_time)",
+      "discrepancy": "70.01 is above the maximum 70.0 by 0.01",
+      "time": {
+        "ns": 1700000000900000000,
+        "clock_domain": "mcap_log_time",
+        "timestamp_basis": "mcap_log_time",
+        "kind": "observation"
+      },
+      "sources": [
+        {
+          "artifact_ref": "artifact:example_recording.mcap",
+          "relative_path": "example_recording.mcap",
+          "artifact_sha256": "4bad0c7ace9be0e305cb115ddc35ece2c3eaf47c0b5f3a4cc539f28125f674f5",
+          "topic": "/arm/temperature",
+          "channel_id": 2,
+          "observation_id": "obs:example_recording.mcap#8",
+          "role": "divergent_observation"
+        },
+        {
+          "artifact_ref": "artifact:example_recording.mcap",
+          "relative_path": "example_recording.mcap",
+          "artifact_sha256": "4bad0c7ace9be0e305cb115ddc35ece2c3eaf47c0b5f3a4cc539f28125f674f5",
+          "topic": "/arm/mode",
+          "channel_id": 1,
+          "observation_id": "obs:example_recording.mcap#0",
+          "role": "prerequisite"
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "obs:example_recording.mcap#8",
+          "artifact_ref": "artifact:example_recording.mcap",
+          "topic": "/arm/temperature",
+          "channel_id": 2,
+          "message_index": 8,
+          "signal": "celsius",
+          "value": "70.01",
+          "value_type": "number",
+          "timestamp_ns": 1700000000900000000,
+          "timestamp_basis": "mcap_log_time",
+          "clock_domain": "mcap_log_time",
+          "quality": "ok",
+          "parser_status": "readable"
+        },
+        {
+          "observation_id": "obs:example_recording.mcap#0",
+          "artifact_ref": "artifact:example_recording.mcap",
+          "topic": "/arm/mode",
+          "channel_id": 1,
+          "message_index": 0,
+          "signal": "state",
+          "value": "RUNNING",
+          "value_type": "string",
+          "timestamp_ns": 1700000000000000000,
+          "timestamp_basis": "mcap_log_time",
+          "clock_domain": "mcap_log_time",
+          "quality": "ok",
+          "parser_status": "readable"
+        }
+      ],
+      "explanation": "Expectation ARM-TEMP-LIMIT requires /arm/temperature.celsius to be at most 70.0 while /arm/mode.state eq 'RUNNING'. the observed value contradicts it: 70.01 is above the maximum 70.0 by 0.01. This is the first mismatch of this expectation in the evidence evaluated; it is not a statement about cause.",
+      "uncertainty": [],
+      "ordering": "earliest_defended"
+    },
+    {
+      "finding_id": "FND-5660f25760587f46",
+      "expectation_id": "GRIPPER-CLOSES-IN-TIME",
+      "expectation_kind": "transition",
+      "description": "Once the gripper starts CLOSING it must be CLOSED within 500 ms.",
+      "rule": {
+        "check_kind": "transition",
+        "comparison": "after a sample enters from_value, a sample equal to to_value must occur strictly later and no later than the deadline",
+        "parameters": {
+          "from_value": "'CLOSING'",
+          "to_value": "'CLOSED'",
+          "deadline_ns": "500000000"
+        },
+        "tolerance_used": null
+      },
+      "expected": "'CLOSED' within 500000000 ns after entering 'CLOSING'",
+      "observed": "/gripper/state.value = 'CLOSING' at 1700000000500000000 ns (mcap_log_time)",
+      "discrepancy": "'CLOSING' was entered at 1700000000500000000 ns and 'CLOSED' was not observed by 1700000001000000000 ns",
+      "time": {
+        "ns": 1700000001000000000,
+        "clock_domain": "mcap_log_time",
+        "timestamp_basis": "mcap_log_time",
+        "kind": "deadline_expiry"
+      },
+      "sources": [
+        {
+          "artifact_ref": "artifact:example_recording.mcap",
+          "relative_path": "example_recording.mcap",
+          "artifact_sha256": "4bad0c7ace9be0e305cb115ddc35ece2c3eaf47c0b5f3a4cc539f28125f674f5",
+          "topic": "/gripper/state",
+          "channel_id": 3,
+          "observation_id": "obs:example_recording.mcap#5",
+          "role": "transition_entry"
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "obs:example_recording.mcap#5",
+          "artifact_ref": "artifact:example_recording.mcap",
+          "topic": "/gripper/state",
+          "channel_id": 3,
+          "message_index": 5,
+          "signal": "value",
+          "value": "CLOSING",
+          "value_type": "string",
+          "timestamp_ns": 1700000000500000000,
+          "timestamp_basis": "mcap_log_time",
+          "clock_domain": "mcap_log_time",
+          "quality": "ok",
+          "parser_status": "readable"
+        }
+      ],
+      "explanation": "Expectation GRIPPER-CLOSES-IN-TIME requires /gripper/state.value to be 'CLOSED' within 500000000 ns after entering 'CLOSING'. the sample that entered the from_value contradicts it: 'CLOSING' was entered at 1700000000500000000 ns and 'CLOSED' was not observed by 1700000001000000000 ns. This is the first mismatch of this expectation in the evidence evaluated; it is not a statement about cause.",
+      "uncertainty": [],
+      "ordering": "later_than_earliest"
+    }
+  ],
+  "expectation_results": [
+    {
+      "expectation_id": "ARM-TEMP-LIMIT",
+      "status": "divergence_found",
+      "reason_code": "mismatch_established",
+      "reason": "70.01 is above the maximum 70.0 by 0.01",
+      "clock_domain": "mcap_log_time",
+      "declared_window_domain": "mcap_log_time",
+      "covered_window": {
+        "clock_domain": "mcap_log_time",
+        "start_ns": 1700000000000000000,
+        "end_ns": 1700000002000000000
+      },
+      "evaluated_observation_count": 6,
+      "not_applicable_count": 0,
+      "blind_spot_count": 0,
+      "blind_spots": [],
+      "first_blind_spot_ns": null,
+      "blind_spot_unplaced": false,
+      "missing_evidence": [],
+      "evidence_complete": true,
+      "finding": {
+        "finding_id": "FND-65741562a09f8c14",
+        "expectation_id": "ARM-TEMP-LIMIT",
+        "expectation_kind": "range",
+        "description": "While the arm is RUNNING its temperature must not exceed 70.0 C.",
+        "rule": {
+          "check_kind": "range",
+          "comparison": "value >= min and value <= max (bounds inclusive; exact decimal arithmetic)",
+          "parameters": {
+            "max": "70.0"
+          },
+          "tolerance_used": null
+        },
+        "expected": "at most 70.0",
+        "observed": "/arm/temperature.celsius = 70.01 at 1700000000900000000 ns (mcap_log_time)",
+        "discrepancy": "70.01 is above the maximum 70.0 by 0.01",
+        "time": {
+          "ns": 1700000000900000000,
+          "clock_domain": "mcap_log_time",
+          "timestamp_basis": "mcap_log_time",
+          "kind": "observation"
+        },
+        "sources": [
+          {
+            "artifact_ref": "artifact:example_recording.mcap",
+            "relative_path": "example_recording.mcap",
+            "artifact_sha256": "4bad0c7ace9be0e305cb115ddc35ece2c3eaf47c0b5f3a4cc539f28125f674f5",
+            "topic": "/arm/temperature",
+            "channel_id": 2,
+            "observation_id": "obs:example_recording.mcap#8",
+            "role": "divergent_observation"
+          },
+          {
+            "artifact_ref": "artifact:example_recording.mcap",
+            "relative_path": "example_recording.mcap",
+            "artifact_sha256": "4bad0c7ace9be0e305cb115ddc35ece2c3eaf47c0b5f3a4cc539f28125f674f5",
+            "topic": "/arm/mode",
+            "channel_id": 1,
+            "observation_id": "obs:example_recording.mcap#0",
+            "role": "prerequisite"
+          }
+        ],
+        "observations": [
+          {
+            "observation_id": "obs:example_recording.mcap#8",
+            "artifact_ref": "artifact:example_recording.mcap",
+            "topic": "/arm/temperature",
+            "channel_id": 2,
+            "message_index": 8,
+            "signal": "celsius",
+            "value": "70.01",
+            "value_type": "number",
+            "timestamp_ns": 1700000000900000000,
+            "timestamp_basis": "mcap_log_time",
+            "clock_domain": "mcap_log_time",
+            "quality": "ok",
+            "parser_status": "readable"
+          },
+          {
+            "observation_id": "obs:example_recording.mcap#0",
+            "artifact_ref": "artifact:example_recording.mcap",
+            "topic": "/arm/mode",
+            "channel_id": 1,
+            "message_index": 0,
+            "signal": "state",
+            "value": "RUNNING",
+            "value_type": "string",
+            "timestamp_ns": 1700000000000000000,
+            "timestamp_basis": "mcap_log_time",
+            "clock_domain": "mcap_log_time",
+            "quality": "ok",
+            "parser_status": "readable"
+          }
+        ],
+        "explanation": "Expectation ARM-TEMP-LIMIT requires /arm/temperature.celsius to be at most 70.0 while /arm/mode.state eq 'RUNNING'. the observed value contradicts it: 70.01 is above the maximum 70.0 by 0.01. This is the first mismatch of this expectation in the evidence evaluated; it is not a statement about cause.",
+        "uncertainty": [],
+        "ordering": "earliest_defended"
+      }
+    },
+    {
+      "expectation_id": "GRIPPER-CLOSES-IN-TIME",
+      "status": "divergence_found",
+      "reason_code": "mismatch_established",
+      "reason": "'CLOSING' was entered at 1700000000500000000 ns and 'CLOSED' was not observed by 1700000001000000000 ns",
+      "clock_domain": "mcap_log_time",
+      "declared_window_domain": "mcap_log_time",
+      "covered_window": {
+        "clock_domain": "mcap_log_time",
+        "start_ns": 1700000000000000000,
+        "end_ns": 1700000002000000000
+      },
+      "evaluated_observation_count": 6,
+      "not_applicable_count": 0,
+      "blind_spot_count": 0,
+      "blind_spots": [],
+      "first_blind_spot_ns": null,
+      "blind_spot_unplaced": false,
+      "missing_evidence": [],
+      "evidence_complete": true,
+      "finding": {
+        "finding_id": "FND-5660f25760587f46",
+        "expectation_id": "GRIPPER-CLOSES-IN-TIME",
+        "expectation_kind": "transition",
+        "description": "Once the gripper starts CLOSING it must be CLOSED within 500 ms.",
+        "rule": {
+          "check_kind": "transition",
+          "comparison": "after a sample enters from_value, a sample equal to to_value must occur strictly later and no later than the deadline",
+          "parameters": {
+            "from_value": "'CLOSING'",
+            "to_value": "'CLOSED'",
+            "deadline_ns": "500000000"
+          },
+          "tolerance_used": null
+        },
+        "expected": "'CLOSED' within 500000000 ns after entering 'CLOSING'",
+        "observed": "/gripper/state.value = 'CLOSING' at 1700000000500000000 ns (mcap_log_time)",
+        "discrepancy": "'CLOSING' was entered at 1700000000500000000 ns and 'CLOSED' was not observed by 1700000001000000000 ns",
+        "time": {
+          "ns": 1700000001000000000,
+          "clock_domain": "mcap_log_time",
+          "timestamp_basis": "mcap_log_time",
+          "kind": "deadline_expiry"
+        },
+        "sources": [
+          {
+            "artifact_ref": "artifact:example_recording.mcap",
+            "relative_path": "example_recording.mcap",
+            "artifact_sha256": "4bad0c7ace9be0e305cb115ddc35ece2c3eaf47c0b5f3a4cc539f28125f674f5",
+            "topic": "/gripper/state",
+            "channel_id": 3,
+            "observation_id": "obs:example_recording.mcap#5",
+            "role": "transition_entry"
+          }
+        ],
+        "observations": [
+          {
+            "observation_id": "obs:example_recording.mcap#5",
+            "artifact_ref": "artifact:example_recording.mcap",
+            "topic": "/gripper/state",
+            "channel_id": 3,
+            "message_index": 5,
+            "signal": "value",
+            "value": "CLOSING",
+            "value_type": "string",
+            "timestamp_ns": 1700000000500000000,
+            "timestamp_basis": "mcap_log_time",
+            "clock_domain": "mcap_log_time",
+            "quality": "ok",
+            "parser_status": "readable"
+          }
+        ],
+        "explanation": "Expectation GRIPPER-CLOSES-IN-TIME requires /gripper/state.value to be 'CLOSED' within 500000000 ns after entering 'CLOSING'. the sample that entered the from_value contradicts it: 'CLOSING' was entered at 1700000000500000000 ns and 'CLOSED' was not observed by 1700000001000000000 ns. This is the first mismatch of this expectation in the evidence evaluated; it is not a statement about cause.",
+        "uncertainty": [],
+        "ordering": "later_than_earliest"
+      }
+    }
+  ],
+  "contract": {
+    "contract_id": "example-arm-v1",
+    "schema_version": "1.0",
+    "sha256": "558ff55c357aef0b244a588ff5afd01b27eaa0e75df04508d8e44dc89626240a",
+    "expectation_count": 2
+  },
+  "contract_problems": [],
+  "evidence": {
+    "input_kind": "raw_mcap",
+    "input_name": "example_recording.mcap",
+    "inventory_schema_version": "1.0",
+    "inspection_state": "complete",
+    "integrity_state": "not_applicable",
+    "content_basis": "scanned_now",
+    "log_time_basis": "unknown",
+    "recording_readability": "readable",
+    "evidence_complete": true,
+    "log_time_coverage": {
+      "clock_domain": "mcap_log_time",
+      "start_ns": 1700000000000000000,
+      "end_ns": 1700000002000000000
+    },
+    "segments": [
+      {
+        "artifact_ref": "artifact:example_recording.mcap",
+        "relative_path": "example_recording.mcap",
+        "state": "usable_complete",
+        "reason": null,
+        "sha256": "4bad0c7ace9be0e305cb115ddc35ece2c3eaf47c0b5f3a4cc539f28125f674f5",
+        "messages_read": 13
+      }
+    ],
+    "incomplete_reasons": [],
+    "blocked": null
+  },
+  "not_evaluated": [],
+  "not_established": [
+    "A first divergence is the earliest established mismatch with an expectation. It is not a root cause; no causal relationship is asserted.",
+    "'No divergence observed' means no mismatch was established in the expectations and evidence actually evaluated. It does not show the system behaved correctly.",
+    "Expectations are exactly those supplied in the contract; none was derived from the recording.",
+    "Only json-encoded message payloads are decoded. Other encodings (for example CDR) are not interpreted.",
+    "Clock domains are never merged or converted. The relation of MCAP log_time (declared basis: 'unknown') to wall-clock time or any other clock is not established.",
+    "Evidence integrity is as established by the inventory and by re-hashing each segment at investigation time; it is not a statement about truthfulness.",
+    "Live ROS 2 capture is not verified."
+  ],
+  "provenance": {
+    "tool": {
+      "name": "physicore-collector",
+      "version": "0.1.0"
+    },
+    "read_only": true,
+    "root_cause_claimed": false,
+    "live_ros2_capture_verified": false
+  }
+}

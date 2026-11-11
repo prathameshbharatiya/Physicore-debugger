@@ -1,0 +1,24 @@
+                                                                                                    
+ Usage: physicore-collector export [OPTIONS] {recording}                                            
+                                                                                                    
+ Export a portable evidence package. Never overwrites an existing target.                           
+                                                                                                    
+ The package is written with its true status even if that is partial or failed.                     
+ Exit codes: 0 = package written, status complete; 1 = package written, status partial              
+ or failed; 2 = error (nothing is left behind; an existing target is never touched).                
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    recording      <path>  Path to an .mcap file, a rosbag2 bag directory, or a capture session │
+│                             directory.                                                           │
+│                             [required]                                                           │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --profile         <path>  Robot profile to validate against. [required]                       │
+│ *  --out             <path>  Target package directory. Must not already exist. [required]        │
+│    --metadata        <path>  Optional metadata JSON file.                                        │
+│    --trigger         <path>  Optional trigger JSON file.                                         │
+│    --health          <path>  Capture-health sidecar for a bag directory (automatic for a capture │
+│                              session directory).                                                 │
+│    --help                    Show this message and exit.                                         │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

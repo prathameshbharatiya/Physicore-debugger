@@ -1,0 +1,46 @@
+CONTROL (unmodified)                           PASS
+precedes: < -> <=                              KILLED
+order: before uses <=                          KILLED
+order: after uses <=                           KILLED
+order: before/after swapped                    KILLED
+order: unordered returned as before            KILLED
+min_separation uses lower-lower                KILLED
+min_separation off by one                      KILLED
+max_separation uses upper-upper                KILLED
+max_separation reversed sign                   KILLED
+domain check dropped in precedes/order         KILLED
+domain check compares nothing (always raises)  KILLED
+lower>upper allowed                            KILLED
+lower>=upper rejected (points forbidden)       KILLED
+bool accepted as int                           KILLED
+type check dropped                             KILLED
+empty domain allowed                           KILLED
+width off by one                               KILLED
+point() sets wrong upper                       KILLED
+other type check dropped                       KILLED
+unordered_with inverted                        KILLED
+derived order 'before' check removed           KILLED
+derived order 'unordered' check removed        KILLED
+rule id open                                   KILLED
+relation vocabulary open                       KILLED
+interval model bounds unchecked                KILLED
+strict base allows extras                      KILLED
+digest pattern not enforced                    KILLED
+declared edge id may be blank                  KILLED
+float finder blind to floats                   KILLED
+canonical json not sorted                      KILLED
+canonical json accepts floats                  KILLED
+report json keeps None values                  KILLED
+walk misses list items                         KILLED
+forbidden key finder blind                     KILLED
+forbidden term list loses M3d additions        KILLED
+propagation allowed everywhere                 KILLED
+label token not exempt                         KILLED
+forbidden wording case sensitive               KILLED
+forbidden wording matches inside words         KILLED
+hypothesis templates grow to four              KILLED
+path_depth default changed                     KILLED
+chains_reported default changed                KILLED
+statement kinds gain 'inferred'                KILLED
+
+43 killed, 0 not killed/invalid

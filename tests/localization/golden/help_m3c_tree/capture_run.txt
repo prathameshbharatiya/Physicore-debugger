@@ -1,0 +1,34 @@
+                                                                                                    
+ Usage: physicore-collector capture run [OPTIONS] {profile}                                         
+                                                                                                    
+ Record with rosbag2 (`ros2 bag record`) under supervision, in the FOREGROUND.                      
+                                                                                                    
+ Writes <out>/<session>/bag/ (made by rosbag2) and <out>/<session>/capture_health.json. Ctrl+C      
+ (or SIGTERM, or `capture stop`) requests a graceful stop; the recorder is killed if it does        
+ not exit within capture.stop_timeout_seconds. Nothing existing is ever overwritten. The            
+ capture ends if this terminal closes; use `capture start` for a detached recording.                
+                                                                                                    
+ When the capture has ended and its final record is written, an incident package is prepared        
+ automatically in <session>/incident (see `incident prepare`; disable with --no-auto-prepare). A    
+ preparation problem is reported but never changes this command's exit code.                        
+                                                                                                    
+ Exit codes: 0 = clean stop and a fully readable bag, 1 = recording exists but was not clean or     
+ is not fully readable, 2 = nothing was recorded (invalid profile, ros2 missing, ...).              
+                                                                                                    
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    profile      <path>  Profile (schema 1.0 to 1.2). A `capture:` section needs schema 1.1 or  │
+│                           later.                                                                 │
+│                           [required]                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ *  --out                    <path>   EXISTING directory in which the new capture session         │
+│                                      directory is created.                                       │
+│                                      [required]                                                  │
+│    --duration               <float>  Stop automatically after this many seconds. Default: until  │
+│                                      Ctrl+C / `capture stop`.                                    │
+│    --session-id             <str>    Session directory name (default: UTC timestamp + random     │
+│                                      suffix).                                                    │
+│    --no-auto-prepare                 Do NOT prepare an incident package when the capture ends.   │
+│    --help                            Show this message and exit.                                 │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

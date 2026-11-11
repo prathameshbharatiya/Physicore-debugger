@@ -1,0 +1,36 @@
+rosbag2_bagfile_information:
+  version: 9
+  storage_identifier: mcap
+  duration:
+    nanoseconds: 2000000
+  starting_time:
+    nanoseconds_since_epoch: 1700000000001000000
+  message_count: 2
+  topics_with_message_count:
+  - topic_metadata:
+      name: /diagnostics
+      type: synthetic/msg/Sample
+      serialization_format: cdr
+      offered_qos_profiles: []
+      type_description_hash: RIHS01_0
+    message_count: 1
+  - topic_metadata:
+      name: /rosout
+      type: synthetic/msg/Sample
+      serialization_format: cdr
+      offered_qos_profiles: []
+      type_description_hash: RIHS01_0
+    message_count: 1
+  compression_format: ''
+  compression_mode: ''
+  relative_file_paths:
+  - bag_0.mcap
+  files:
+  - path: bag_0.mcap
+    starting_time:
+      nanoseconds_since_epoch: 1700000000001000000
+    duration:
+      nanoseconds: 2000000
+    message_count: 2
+  custom_data: {}
+  ros_distro: synthetic

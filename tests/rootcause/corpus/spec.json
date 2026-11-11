@@ -1,0 +1,497 @@
+{
+  "amendments": [
+    {
+      "families": [
+        "F01",
+        "F06",
+        "F07",
+        "F08"
+      ],
+      "id": "A1",
+      "reason": "The accepted publishing-gap detector never evaluates silence at the end of a topic (only an interval between two captured messages), so a source that stops for good is invisible to M3c. The silent-source scenarios therefore use a bounded silence after which the source resumes. Made before any catalogue entry existed; the limit is recorded in the M4-0 record."
+    }
+  ],
+  "answer_kinds": {
+    "mechanism": "the true class must appear in the competing set of the set that covers the fault topic; a leader, if any, must be in acceptable_leaders",
+    "no_failure": "nothing happened: there must be no hypothesis set and no leader",
+    "unresolved": "the recording cannot decide: any 'leading' hypothesis is a confident wrong leader; the report must say unresolved or cannot be assessed"
+  },
+  "families": [
+    {
+      "acceptable_leaders": [
+        "upstream_source_silent",
+        "software_exception_or_crash",
+        "message_loss_in_transport"
+      ],
+      "answer_kind": "mechanism",
+      "candidates_expected_unassessable": [],
+      "declared_edges": [
+        [
+          "/lidar/scan",
+          "/diagnostics"
+        ]
+      ],
+      "expected_detectors": [
+        "tierB.publishing_gap",
+        "tierA.diagnostics"
+      ],
+      "family_id": "F01",
+      "faults": [
+        {
+          "fault_id": "a",
+          "topic": "/lidar/scan",
+          "true_class": "upstream_source_silent"
+        }
+      ],
+      "forbidden_leader_classes": [],
+      "forbidden_links": [],
+      "injected_fault": "The publisher of /lidar/scan is silent for a seeded 2 to 3 s interval and then resumes; /diagnostics reports an ERROR 0.3 s after the last message before the silence.",
+      "name": "source_silent",
+      "needs_contract": false,
+      "recording_contains": [
+        "topic /lidar/scan at 10 Hz with one silent interval, then resumed",
+        "topic /diagnostics"
+      ],
+      "recording_lacks": [
+        "process list",
+        "publisher or node liveness",
+        "transport statistics"
+      ],
+      "required_missing_evidence": [
+        "node_liveness",
+        "transport_statistics"
+      ],
+      "seed_varies": [
+        "fault onset index",
+        "payload noise"
+      ]
+    },
+    {
+      "acceptable_leaders": [
+        "invalid_sensor_data_propagated"
+      ],
+      "answer_kind": "mechanism",
+      "candidates_expected_unassessable": [],
+      "declared_edges": [
+        [
+          "/imu/data",
+          "/diagnostics"
+        ]
+      ],
+      "expected_detectors": [
+        "tierB.non_finite",
+        "tierA.diagnostics"
+      ],
+      "family_id": "F02",
+      "faults": [
+        {
+          "fault_id": "a",
+          "topic": "/imu/data",
+          "true_class": "invalid_sensor_data_propagated"
+        }
+      ],
+      "forbidden_leader_classes": [],
+      "forbidden_links": [],
+      "injected_fault": "/imu/data carries NaN from a seeded index onward; /diagnostics reports an ERROR 0.2 s later.",
+      "name": "sensor_emits_nan",
+      "needs_contract": false,
+      "recording_contains": [
+        "topic /imu/data with non-finite values",
+        "topic /diagnostics"
+      ],
+      "recording_lacks": [
+        "raw driver output",
+        "calibration state"
+      ],
+      "required_missing_evidence": [
+        "driver_output"
+      ],
+      "seed_varies": [
+        "fault onset index",
+        "payload noise"
+      ]
+    },
+    {
+      "acceptable_leaders": [
+        "command_not_followed",
+        "software_exception_or_crash",
+        "state_or_mode_transition_error"
+      ],
+      "answer_kind": "mechanism",
+      "candidates_expected_unassessable": [],
+      "declared_edges": [
+        [
+          "/cmd_mode",
+          "/robot_state"
+        ]
+      ],
+      "expected_detectors": [
+        "m2.event_response"
+      ],
+      "family_id": "F03",
+      "faults": [
+        {
+          "fault_id": "a",
+          "topic": "/robot_state",
+          "true_class": "command_not_followed"
+        }
+      ],
+      "forbidden_leader_classes": [],
+      "forbidden_links": [],
+      "injected_fault": "A STOP command is issued on /cmd_mode and /robot_state never reports STOPPED within the 300 ms deadline.",
+      "name": "command_not_followed",
+      "needs_contract": true,
+      "recording_contains": [
+        "topic /cmd_mode",
+        "topic /robot_state"
+      ],
+      "recording_lacks": [
+        "actuator feedback",
+        "controller logs"
+      ],
+      "required_missing_evidence": [
+        "actuator_feedback"
+      ],
+      "seed_varies": [
+        "command index",
+        "payload noise"
+      ]
+    },
+    {
+      "acceptable_leaders": [
+        "configuration_mismatch"
+      ],
+      "answer_kind": "mechanism",
+      "candidates_expected_unassessable": [],
+      "declared_edges": [],
+      "expected_detectors": [
+        "tierB.array_length"
+      ],
+      "family_id": "F04",
+      "faults": [
+        {
+          "fault_id": "a",
+          "topic": "/scan",
+          "true_class": "configuration_mismatch"
+        }
+      ],
+      "forbidden_leader_classes": [],
+      "forbidden_links": [],
+      "injected_fault": "/scan/ranges has 359 elements instead of the 360 that the detector rule expects, from a seeded index onward.",
+      "name": "array_length_mismatch",
+      "needs_contract": false,
+      "recording_contains": [
+        "topic /scan with a changed array length"
+      ],
+      "recording_lacks": [
+        "parameter values",
+        "launch configuration"
+      ],
+      "required_missing_evidence": [
+        "parameter_values"
+      ],
+      "seed_varies": [
+        "fault onset index",
+        "payload noise"
+      ]
+    },
+    {
+      "acceptable_leaders": [
+        "timestamp_or_clock_fault",
+        "recording_or_observation_artifact"
+      ],
+      "answer_kind": "mechanism",
+      "candidates_expected_unassessable": [],
+      "declared_edges": [],
+      "expected_detectors": [
+        "tierB.stamp_order"
+      ],
+      "family_id": "F05",
+      "faults": [
+        {
+          "fault_id": "a",
+          "topic": "/odom",
+          "true_class": "timestamp_or_clock_fault"
+        }
+      ],
+      "forbidden_leader_classes": [],
+      "forbidden_links": [],
+      "injected_fault": "The header stamp on /odom jumps backwards by 5 s at a seeded index and then continues.",
+      "name": "timestamp_jump",
+      "needs_contract": false,
+      "recording_contains": [
+        "topic /odom with header stamps"
+      ],
+      "recording_lacks": [
+        "clock source configuration",
+        "time synchronisation status"
+      ],
+      "required_missing_evidence": [
+        "clock_source_status"
+      ],
+      "seed_varies": [
+        "fault onset index",
+        "payload noise"
+      ]
+    },
+    {
+      "acceptable_leaders": [
+        "upstream_source_silent",
+        "software_exception_or_crash",
+        "message_loss_in_transport",
+        "invalid_sensor_data_propagated"
+      ],
+      "answer_kind": "mechanism",
+      "candidates_expected_unassessable": [],
+      "declared_edges": [],
+      "expected_detectors": [
+        "tierB.publishing_gap",
+        "tierB.non_finite"
+      ],
+      "family_id": "F06",
+      "faults": [
+        {
+          "fault_id": "a",
+          "topic": "/lidar/scan",
+          "true_class": "upstream_source_silent"
+        },
+        {
+          "fault_id": "b",
+          "topic": "/imu/data",
+          "true_class": "invalid_sensor_data_propagated"
+        }
+      ],
+      "forbidden_leader_classes": [],
+      "forbidden_links": [
+        [
+          "/lidar/scan",
+          "/imu/data"
+        ]
+      ],
+      "injected_fault": "/lidar/scan is silent for a seeded interval and then resumes (fault a); in the second half /imu/data emits NaN (fault b); no edge connects them.",
+      "name": "two_unrelated_faults",
+      "needs_contract": false,
+      "recording_contains": [
+        "topic /lidar/scan with one silent interval",
+        "topic /imu/data with NaN later"
+      ],
+      "recording_lacks": [
+        "any link between the two sources"
+      ],
+      "required_missing_evidence": [
+        "node_liveness"
+      ],
+      "seed_varies": [
+        "fault onset indexes",
+        "payload noise"
+      ]
+    },
+    {
+      "acceptable_leaders": [
+        "upstream_source_silent",
+        "software_exception_or_crash",
+        "message_loss_in_transport"
+      ],
+      "answer_kind": "mechanism",
+      "candidates_expected_unassessable": [],
+      "declared_edges": [
+        [
+          "/lidar/scan",
+          "/diagnostics"
+        ]
+      ],
+      "expected_detectors": [
+        "tierB.publishing_gap",
+        "tierA.diagnostics",
+        "tierA.ros_log"
+      ],
+      "family_id": "F07",
+      "faults": [
+        {
+          "fault_id": "a",
+          "topic": "/lidar/scan",
+          "true_class": "upstream_source_silent"
+        }
+      ],
+      "forbidden_leader_classes": [],
+      "forbidden_links": [
+        [
+          "/rosout",
+          "/lidar/scan"
+        ]
+      ],
+      "injected_fault": "/lidar/scan is silent for a seeded interval as in F01; an unrelated WARN burst on /rosout occurs just before; no edge connects /rosout to anything.",
+      "name": "red_herring",
+      "needs_contract": false,
+      "recording_contains": [
+        "topic /rosout with WARN messages unrelated to the fault",
+        "topic /lidar/scan with one silent interval",
+        "topic /diagnostics"
+      ],
+      "recording_lacks": [
+        "any link from /rosout to the fault"
+      ],
+      "required_missing_evidence": [
+        "node_liveness"
+      ],
+      "seed_varies": [
+        "fault onset index",
+        "payload noise"
+      ]
+    },
+    {
+      "acceptable_leaders": [],
+      "answer_kind": "unresolved",
+      "candidates_expected_unassessable": [],
+      "declared_edges": [
+        [
+          "/sensor_a",
+          "/sensor_b"
+        ]
+      ],
+      "expected_detectors": [
+        "tierB.publishing_gap"
+      ],
+      "family_id": "F08",
+      "faults": [
+        {
+          "fault_id": "a",
+          "topic": "/sensor_b",
+          "true_class": "upstream_source_silent"
+        }
+      ],
+      "forbidden_leader_classes": [],
+      "forbidden_links": [],
+      "injected_fault": "Edge /sensor_a -> /sensor_b is declared, but /sensor_b is silent first for 2 s and /sensor_a starts its own 2 s silence 0.5 s later: the declared direction contradicts the recorded order.",
+      "name": "reversed_dependency",
+      "needs_contract": false,
+      "recording_contains": [
+        "topic /sensor_b silent first, then resumed",
+        "topic /sensor_a silent 0.5 s later, then resumed"
+      ],
+      "recording_lacks": [
+        "evidence of which dependency is real"
+      ],
+      "required_missing_evidence": [
+        "verified_dependency_direction"
+      ],
+      "seed_varies": [
+        "fault onset index",
+        "payload noise"
+      ]
+    },
+    {
+      "acceptable_leaders": [],
+      "answer_kind": "no_failure",
+      "candidates_expected_unassessable": [],
+      "declared_edges": [
+        [
+          "/lidar/scan",
+          "/diagnostics"
+        ]
+      ],
+      "expected_detectors": [],
+      "family_id": "F09",
+      "faults": [],
+      "forbidden_leader_classes": [],
+      "forbidden_links": [],
+      "injected_fault": "A healthy recording: steady streams, no finding of any kind.",
+      "name": "no_fault",
+      "needs_contract": false,
+      "recording_contains": [
+        "topic /lidar/scan at 10 Hz",
+        "topic /imu/data at 10 Hz",
+        "topic /diagnostics with OK status"
+      ],
+      "recording_lacks": [],
+      "required_missing_evidence": [],
+      "seed_varies": [
+        "payload noise"
+      ]
+    },
+    {
+      "acceptable_leaders": [],
+      "answer_kind": "unresolved",
+      "candidates_expected_unassessable": [
+        "hardware_degradation",
+        "resource_exhaustion"
+      ],
+      "declared_edges": [],
+      "expected_detectors": [
+        "tierB.rate_change"
+      ],
+      "family_id": "F10",
+      "faults": [
+        {
+          "fault_id": "a",
+          "topic": "/odom",
+          "true_class": "hardware_degradation"
+        }
+      ],
+      "forbidden_leader_classes": [],
+      "forbidden_links": [],
+      "injected_fault": "The publishing rate of /odom falls to about 40 percent from a seeded index; the recording holds no hardware telemetry.",
+      "name": "hardware_degradation_no_telemetry",
+      "needs_contract": false,
+      "recording_contains": [
+        "topic /odom at reduced rate"
+      ],
+      "recording_lacks": [
+        "motor current",
+        "motor temperature",
+        "cpu load",
+        "memory use"
+      ],
+      "required_missing_evidence": [
+        "motor_current",
+        "motor_temperature",
+        "cpu_load"
+      ],
+      "seed_varies": [
+        "fault onset index",
+        "payload noise"
+      ]
+    }
+  ],
+  "mechanism_classes": [
+    "upstream_source_silent",
+    "message_loss_in_transport",
+    "rate_degradation_under_load",
+    "invalid_sensor_data_propagated",
+    "command_not_followed",
+    "state_or_mode_transition_error",
+    "configuration_mismatch",
+    "timestamp_or_clock_fault",
+    "resource_exhaustion",
+    "hardware_degradation",
+    "software_exception_or_crash",
+    "recording_or_observation_artifact"
+  ],
+  "note": "Frozen before any catalogue entry exists. Written by the same author as the catalogue; the limits are stated in the M4 plan section 6. Results on this corpus show that the software follows its definitions; they are not accuracy on real robots.",
+  "spec_version": 1,
+  "splits": {
+    "dev": {
+      "namespace": "",
+      "seeds": [
+        1,
+        2,
+        3
+      ]
+    },
+    "holdout": {
+      "namespace_by_seed": {
+        "101": "/ns1",
+        "102": "/ns2"
+      },
+      "seeds": [
+        101,
+        102
+      ]
+    }
+  },
+  "timing": {
+    "messages": 100,
+    "rate_hz": 10,
+    "start_ns": 1700000000000000000
+  }
+}

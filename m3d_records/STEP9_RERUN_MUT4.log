@@ -1,0 +1,39 @@
+CONTROL (unmodified)                                    PASS
+layer: strict < becomes <=                              KILLED
+layer: count of predecessors style (never settles max)  KILLED
+layer: settles min instead of max                       KILLED
+layer: off by one                                       KILLED
+layer: pushes lower bound instead of upper              KILLED
+layer: pushes layer+1                                   KILLED
+layer: sort by upper bound                              KILLED
+layer: mixed domains allowed                            KILLED
+layer: duplicate ids allowed                            KILLED
+layers: unsorted within a layer                         KILLED
+layers: reversed layer order                            KILLED
+earliest: last layer instead of first                   KILLED
+earliest: tie collapses to first member                 KILLED
+earliest: tie not reported                              KILLED
+earliest: blockers ignored                              KILLED
+earliest: truncation ignored                            KILLED
+earliest: truncation of any symptom blocks              KILLED
+earliest: blockers dropped from the report              KILLED
+earliest: blockers not de-duplicated                    KILLED
+earliest: empty lane claims defended                    KILLED
+earliest: wrong statement for not_defended              KILLED
+earliest: wrong statement for tied                      KILLED
+model: none_observed with symptoms allowed              KILLED
+model: tied with one symptom allowed                    KILLED
+model: defended with several symptoms allowed           KILLED
+model: defended with blockers allowed                   KILLED
+model: defence vocabulary open                          KILLED
+lane: symptom_count wrong                               KILLED
+lanes: secondary placements ignored                     KILLED
+lanes: not sorted by domain                             KILLED
+lanes: blockers applied to every lane                   KILLED
+lanes: extra lanes ignored                              KILLED
+lanes: no cross-lane statement                          KILLED
+lanes: cross-lane statement for one lane                KILLED
+lanes: truncated flag lost                              KILLED
+lane model allows extra fields                          KILLED
+
+36 killed, 0 not killed/invalid

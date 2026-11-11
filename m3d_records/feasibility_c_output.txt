@@ -1,0 +1,8 @@
+M3c findings: 0 exit 0 evidence digests: [('artifact:example_recording.mcap', '4bad0c7ace9b')]
+inventory artifacts: [('artifact:example_recording.mcap', 'mcap_recording', '4bad0c7ace9b')] inv exit 0
+digest binding equal: True
+inventory.integrity: {'state': 'not_applicable', 'checked_now': False, 'problems': [], 'manifest_present': False, 'manifest_sha256': None, 'manifest_schema_version': None, 'listed_artifact_count': None, 'not_established': ['No manifest exists for a raw recordi
+inventory.inspection: {'state': 'complete', 'reasons': []}
+M2 in-process on same inventory: divergence_found candidates: 2 results: [('ARM-TEMP-LIMIT', 'divergence_found', True), ('GRIPPER-CLOSES-IN-TIME', 'divergence_found', True)]
+  M2 finding FND-65741562a09f8c14 range 1700000000900000000 observation mcap_log_time [('divergent_observation', 'obs:example_recording.mcap#8'), ('prerequisite', 'obs:example_recording.mcap#0')]
+  M2 finding FND-5660f25760587f46 transition 1700000001000000000 deadline_expiry mcap_log_time [('transition_entry', 'obs:example_recording.mcap#5')]

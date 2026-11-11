@@ -1,0 +1,15 @@
+# Example robot profile (synthetic; no real robot data).
+profile_schema_version: "1.0"
+profile_id: example-arm-v1
+robot_name: Example Arm
+log_time_basis: unknown        # what MCAP log_time represents for this robot; unknown unless you can attest it
+required_metadata_keys: [operator, session_label]
+topics:
+  - name: /joint_states
+    required: true
+    expected_hz: 50            # threshold = gap_factor / expected_hz = 2.0/50 = 0.04 s
+  - name: /camera/image
+    required: true
+    max_gap_seconds: 0.5       # explicit threshold wins over expected_hz
+  - name: /diagnostics
+    required: false

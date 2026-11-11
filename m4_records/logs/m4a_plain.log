@@ -1,0 +1,168 @@
+...s.......ss........................................................... [  2%]
+........................................................................ [  4%]
+.......................................s................................ [  6%]
+........................sss.............................ss.............. [  9%]
+..................ss....................s..................sss.......s.. [ 11%]
+.......s....ss.....................................sssss.s.sssss......ss [ 13%]
+......sss............................................................... [ 16%]
+........s.......ss...................................................... [ 18%]
+........................................................................ [ 20%]
+........................................................................ [ 22%]
+........................................................................ [ 25%]
+........................................................................ [ 27%]
+........................................................................ [ 29%]
+........................................................................ [ 32%]
+........................................................................ [ 34%]
+........................................................................ [ 36%]
+........................................................................ [ 38%]
+........................................................................ [ 41%]
+........................................................................ [ 43%]
+........................................................................ [ 45%]
+........................................................................ [ 48%]
+........................................................................ [ 50%]
+........................................................................ [ 52%]
+.............F..s....................................................... [ 55%]
+................s....................................................... [ 57%]
+........................................................................ [ 59%]
+........................................................................ [ 61%]
+.................ss..................................................... [ 64%]
+......sssssssssssssssssss.ssssssssssssssssssssss...ss................... [ 66%]
+........................................................................ [ 68%]
+.........................................s.............................. [ 71%]
+........................................................................ [ 73%]
+........................................................................ [ 75%]
+........................................................................ [ 77%]
+........................................................................ [ 80%]
+..................s..................................................... [ 82%]
+........................................................................ [ 84%]
+........................................................................ [ 87%]
+....................sssssssssssss.ss....ssssss.......................... [ 89%]
+........................................................................ [ 91%]
+.....................s.................................................. [ 94%]
+........................................................................ [ 96%]
+........................................................................ [ 98%]
+...........................................                              [100%]
+=================================== FAILURES ===================================
+_________ test_SCL_07_all_symptoms_overlapping_layering_is_near_linear _________
+
+    def test_SCL_07_all_symptoms_overlapping_layering_is_near_linear():
+        """Worst case for layering: every interval overlaps every other (one layer). 50k and 100k intervals; time(2n)/time(n) <= 3 (bound stated in advance)."""
+        import time
+        from physicore_collector.localization.intervals import Interval
+        from physicore_collector.localization.precedence import layer_map
+    
+        def run(n):
+            entries = [(f"s{i:07d}", Interval(domain="mcap_log_time", lower_ns=1000 + i, upper_ns=10**12 + i)) for i in range(n)]
+            t = time.perf_counter()
+            lm = layer_map(entries)
+            return time.perf_counter() - t, lm
+        a, la = run(50_000)
+        b, lb = run(100_000)
+>       assert set(la.values()) == {0} and set(lb.values()) == {0} and b / max(a, 0.01) <= 3.0, (a, b)
+E       AssertionError: (0.029257761999986087, 0.1844581210000058)
+E       assert ({0} == {0}
+E         
+E         Use -v to get more diff and {0} == {0}
+E         
+E         Use -v to get more diff and (0.1844581210000058 / 0.029257761999986087) <= 3.0)
+E        +  where 0.029257761999986087 = max(0.029257761999986087, 0.01)
+
+tests/localization/test_scl.py:43: AssertionError
+=========================== short test summary info ============================
+SKIPPED [1] tests/investigation_view/test_js.py:8: could not import 'playwright': No module named 'playwright'
+SKIPPED [1] tests/cdr_fixtures.py:25: could not import 'rosbags': No module named 'rosbags'
+SKIPPED [1] tests/anomaly/test_access.py:111: could not import 'rosbags': No module named 'rosbags'
+SKIPPED [1] tests/anomaly/test_access.py:127: could not import 'rosbags': No module named 'rosbags'
+SKIPPED [1] tests/anomaly/test_provenance_replay.py:94: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_a_battery.py:206: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_a_battery.py:222: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_a_battery.py:233: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_a_diagnostics.py:226: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_a_diagnostics.py:246: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_a_goal_status.py:204: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_a_goal_status.py:222: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_a_log.py:135: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_a_log.py:276: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_a_log.py:294: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_a_log.py:307: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_array_length.py:90: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_array_length.py:164: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_array_length.py:200: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_array_length.py:210: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:79: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:97: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:110: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:125: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:140: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:153: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:167: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:176: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:191: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:200: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:210: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:253: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:261: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:307: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:317: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_non_finite.py:328: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_stamp_order.py:245: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_stamp_order.py:311: decoder extra not installed
+SKIPPED [1] tests/anomaly/test_tier_b_stamp_order.py:332: decoder extra not installed
+SKIPPED [1] tests/localization/test_scl.py:63: heavy benchmark; set M3D_BENCH=1 (minutes, several GB)
+SKIPPED [1] tests/localization/test_sym.py:168: optional extra 'ros2' is not installed (the M3b example recording is CDR)
+SKIPPED [1] tests/ros2_integration/test_real_ros2.py:73: ROS 2 with rosbag2_storage_mcap is not available in this environment
+SKIPPED [1] tests/ros2_integration/test_real_ros2.py:108: ROS 2 with rosbag2_storage_mcap is not available in this environment
+SKIPPED [1] tests/test_cdr_m3a.py:132: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:145: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:172: could not import 'rosbags': No module named 'rosbags'
+SKIPPED [1] tests/test_cdr_m3a.py:181: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:196: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:219: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [9] tests/test_cdr_m3a.py:269: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:288: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:301: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:315: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:325: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:346: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:356: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:390: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:403: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:420: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [4] tests/test_cdr_m3a.py:429: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:438: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [4] tests/test_cdr_m3a.py:445: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:454: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:467: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:484: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:504: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:520: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:529: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:539: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:549: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:613: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_cdr_m3a.py:626: optional extra 'ros2' (mcap-ros2-support) is not installed
+SKIPPED [1] tests/test_day3_service.py:251: root can write anywhere
+SKIPPED [1] tests/test_inventory.py:840: root bypasses file permissions; the same cases are simulated above and were also run for real as user 'nobody' (see report)
+SKIPPED [1] tests/test_m3b_event_response.py:723: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:733: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:741: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:754: optional extra 'ros2' is not installed
+SKIPPED [2] tests/test_m3b_event_response.py:767: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:782: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:794: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:808: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:816: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:832: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:842: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:859: could not import 'rosbags': No module named 'rosbags'
+SKIPPED [1] tests/test_m3b_event_response.py:878: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:885: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:951: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:959: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:971: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:979: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:995: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_m3b_event_response.py:1002: optional extra 'ros2' is not installed
+SKIPPED [1] tests/test_path_safety.py:282: root bypasses file permissions; the simulated cases above cover the logic
+FAILED tests/localization/test_scl.py::test_SCL_07_all_symptoms_overlapping_layering_is_near_linear
+1 failed, 3029 passed, 110 skipped in 283.20s (0:04:43)

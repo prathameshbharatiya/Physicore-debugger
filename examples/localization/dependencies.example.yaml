@@ -1,0 +1,5 @@
+# Dependencies THIS FILE'S AUTHOR declares. The tool cannot verify them and never infers any.
+dependency_schema_version: 1
+declared_by: "example: navigation team (illustration only)"
+edges:
+  - {id: e1, from: /rosout, to: /diagnostics, relation: data_flow, window_ns: 10000000}   # window is optional

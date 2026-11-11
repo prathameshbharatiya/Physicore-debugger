@@ -1,0 +1,13 @@
+                                                                                                    
+ Usage: physicore-collector session [OPTIONS] COMMAND [ARGS]...                                     
+                                                                                                    
+ Inspect and validate existing recordings (an .mcap file or a rosbag2 bag directory).               
+                                                                                                    
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+│ --help          Show this message and exit.                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
+│ inspect   Show topics, message counts, and min/max log_time of a recording.                      │
+│ validate  Validate a recording against a profile and report session status.                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
