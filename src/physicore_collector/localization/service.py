@@ -20,7 +20,7 @@ from . import consistency as C
 from .dependencies import WorkBudget, load_dependencies
 from .output import Coverage, DependencyInput, DetectorStatus, EvidenceDigest, Inputs, LIMITATIONS, LocalizationReport, Problem
 from .precedence import build_lanes
-from .symptoms import apply_cap, from_m2, from_m3c
+from .symptoms import apply_cap, from_m2, from_m3c, from_signal_profile
 from .vocabulary import DEFAULT_LIMITS, SEVERITY_DISCLAIMER
 
 LOG_LANE = "mcap_log_time"
@@ -52,12 +52,13 @@ def _base(*, limits, params_hash, cfg_hash, exp_sha, dep, problems, code, reason
 
 
 def run_localization(path: str | Path, anomaly_config: str | Path, *, expectations: str | Path | None = None, dependencies: str | Path | None = None,
-                     detector_ids: Iterable[str] | None = None, limits: dict | None = None) -> LocalizationReport:
+                     detector_ids: Iterable[str] | None = None, limits: dict | None = None,
+                     signal_profile: str | Path | None = None, registry: str | Path | None = None) -> LocalizationReport:
     from physicore_collector.anomaly.config import load_config
     from physicore_collector.anomaly.service import run_anomaly_detection
 
     lim = {**DEFAULT_LIMITS, **{k: min(int(v), DEFAULT_LIMITS[k]) for k, v in (limits or {}).items() if k in DEFAULT_LIMITS}}
-    detector_ids = sorted(set(detector_ids)) if detector_ids else None
+    detector_ids = sorted(set(detector_ids)) if detector_ids else None\n    if (signal_profile is None) != (registry is None):\n        raise ValueError("signal_profile and registry must be supplied together")
 
     # 1. every input file is validated before anything is analysed
     problems: list[Problem] = []
@@ -83,7 +84,7 @@ def run_localization(path: str | Path, anomaly_config: str | Path, *, expectatio
     exp_sha = contract.sha256 if contract is not None and contract.contract is not None else None
     dep_in = (DependencyInput(sha256=deps.sha256 or "", semantic_hash=deps.graph.semantic_hash, edge_count=len(deps.graph.edges))
               if deps is not None and deps.graph is not None else None)
-    params_hash = _hash({"config": cfg_hash, "detectors": detector_ids, "limits": lim, "expectations": exp_sha, "dependencies": dep_in.semantic_hash if dep_in else None})
+    params_hash = _hash({"config": cfg_hash, "detectors": detector_ids, "limits": lim, "expectations": exp_sha, "dependencies": dep_in.semantic_hash if dep_in else None, "signal_profile": str(signal_profile) if signal_profile else None, "registry": str(registry) if registry else None})
     if reasons:
         return _base(limits=lim, params_hash=params_hash, cfg_hash=cfg_hash, exp_sha=exp_sha, dep=dep_in, problems=problems, code=3, reasons=_reasons(reasons))
 

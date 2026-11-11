@@ -30,7 +30,7 @@ MECHANISM_IDS_V1 = ("upstream_source_silent", "message_loss_in_transport", "rate
                     "software_exception_or_crash", "recording_or_observation_artifact")
 FAMILIES = ("communication", "timing", "data_validity", "state", "configuration", "resource", "hardware", "software_fault", "observation_artifact")
 M2_CATEGORIES = tuple(f"m2_{k}" for k in ("range", "tolerance", "equals", "transition", "event_response"))
-SYMPTOM_CATEGORIES = tuple(M3C_CATEGORIES) + M2_CATEGORIES
+SYMPTOM_CATEGORIES = tuple(M3C_CATEGORIES) + M2_CATEGORIES + ("signal_rate_of_change", "signal_stuck", "signal_discontinuity", "signal_oscillation", "cross_signal_inconsistency")
 SLOT_SELECTS = ("symptom_topics", "declared_upstream_topics", "declared_downstream_topics", "sibling_topics")
 ROLE_SELECT_RE = re.compile(r"binding_role:[A-Za-z0-9_][A-Za-z0-9_.:-]*")
 RULE_OPS = ("symptom_present", "symptom_absent", "check_violated", "not_evaluable")

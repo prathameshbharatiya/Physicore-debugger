@@ -8,7 +8,7 @@ from ..anomaly.findings import FORBIDDEN_TERMS as _M3C_FORBIDDEN_TERMS
 
 # ---- statements and labels
 STATEMENT_KINDS = ("observed", "derived_order", "declared")
-SYMPTOM_SOURCES = ("m3c_finding", "m2_finding")
+SYMPTOM_SOURCES = ("m3c_finding", "m2_finding", "signal_profile_event")
 ONSET_BASES = ("received_message", "silence_between_captured_messages", "window_span", "received_sample", "deadline_window", "payload_stamp_value")
 RULE_IDS = ("interval_order.strict_precedence", "edge_consistency.declared_window")
 ORDER_RELATIONS = ("before", "unordered")

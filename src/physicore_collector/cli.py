@@ -1238,6 +1238,8 @@ def evidence_localize(
     expectations: Path = typer.Option(None, "--expectations", help="Optional expectation contract; its divergences are included as symptoms."),
     dependencies: Path = typer.Option(None, "--dependencies", help="Optional dependency declarations (YAML or JSON, schema 1); without it only symptoms, lanes and earliest symptoms are reported."),
     detector: list[str] = typer.Option(None, "--detector", help="Run only this detector id (repeatable); default: every detector enabled in the configuration."),
+    signal_profile: Optional[Path] = typer.Option(None, "--signal-profile", help="Optional numeric signal profile; requires --registry."),
+    registry: Optional[Path] = typer.Option(None, "--registry", help="Robot-family signal registry for the numeric profile."),
     json_output: bool = typer.Option(False, "--json", help="Machine-readable JSON report (stdout) instead of the readable report."),
 ) -> None:
     """Order the symptoms observed in the evidence at PATH and relate them along dependencies you declare. Read-only.
@@ -1256,7 +1258,10 @@ def evidence_localize(
         raise typer.BadParameter(f"unknown detector id {unknown[0]!r}; known: {', '.join(DETECTOR_IDS)}", param_hint="--detector")
     if str(dependencies) == "-" or str(expectations) == "-" or str(anomaly_config) == "-":
         raise typer.BadParameter("standard input is not accepted; give a file path", param_hint="--dependencies")
-    report = run_localization(path, anomaly_config, expectations=expectations, dependencies=dependencies, detector_ids=detector or None)
+    if (signal_profile is None) != (registry is None):
+        raise typer.BadParameter("--signal-profile and --registry must be supplied together")
+    report = run_localization(path, anomaly_config, expectations=expectations, dependencies=dependencies,
+                              detector_ids=detector or None, signal_profile=signal_profile, registry=registry)
     typer.echo(to_json(report) if json_output else render_text(report), nl=False)
     if report.exit_code:
         raise typer.Exit(code=report.exit_code)

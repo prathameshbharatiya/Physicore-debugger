@@ -240,6 +240,42 @@ def _build(*, source, source_id, rule, category, topic, ident, severity, basis, 
                    secondary_onsets=rest, evidence=evidence, source_coverage=coverage, source_uncertainty=notes_in, notes=m3d_notes, truncated=truncated)
 
 
+def from_signal_profile(report: dict[str, Any]) -> Normalised:
+    """Convert profile events into ordinary observed symptoms for the M3d/hypothesis pipeline."""
+    out = Normalised()
+    categories = {
+        "rate_of_change": "signal_rate_of_change",
+        "stuck": "signal_stuck",
+        "discontinuity": "signal_discontinuity",
+        "oscillation": "signal_oscillation",
+        "cross_signal_inconsistency": "cross_signal_inconsistency",
+    }
+    for event in report.get("events", []):
+        refs = event.get("source_refs", [])
+        if not refs:
+            out.problems.append(NormalisationProblem(event.get("event_id", "unknown"), "unplaceable_signal_event",
+                                                     "the profile event has no retained source message"))
+            continue
+        primary = refs[0]
+        domain = event["clock_domain"]
+        start, end = event["start_ns"], event["end_ns"]
+        evidence = [EvidenceRef(artifact_ref=r["artifact_ref"], sha256=r["sha256"], topic=r["topic"],
+                                message_index=r["message_index"], time_ns=start, clock_domain=domain)
+                    for r in refs]
+        iv = IntervalModel(domain=domain, lower_ns=start, upper_ns=max(start, end))
+        onset = IntervalModel(domain=domain, lower_ns=start, upper_ns=start)
+        sid = event["event_id"]
+        out.symptoms.append(_build(
+            source="signal_profile_event", source_id=sid, rule=f"signal_profile.{event['rule']}",
+            category=categories[event["rule"]], topic=primary["topic"], ident={}, severity="notice", basis="config",
+            extent=iv, placements=[Placement(lane=domain, onset=onset, onset_basis="received_message")],
+            evidence=evidence, coverage=SourceCoverage(topic_coverage="complete" if report.get("evidence_complete") else "incomplete",
+                incomplete_reasons=list(report.get("incomplete_reasons", [])), messages_examined=len(refs)),
+            notes_in=[SourceNote(code="signal_profile_event", params={"persistent": "yes" if event["persistent"] else "no"})],
+            truncated=False))
+    return out
+
+
 # ---------------------------------------------------------------------------------------------- M2 adapter
 
 def _m2_evidence(f: M2Finding) -> list[EvidenceRef]:
