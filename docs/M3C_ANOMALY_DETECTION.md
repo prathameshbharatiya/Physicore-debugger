@@ -95,3 +95,17 @@ float64 NaN/Inf: bits re-encoded from the decoded Python float (a start-up self-
 
 See the test report (`docs/M3C_TEST_REPORT.md`) for the measured throughput and memory. The timing detectors retain 16 bytes per message of the topic; transient interval lists make the
 measured figure higher (reported as measured).
+
+
+## Numeric signal-rule primitives (additive)
+
+`anomaly.signal_rules` adds deterministic rule functions for robot-profile numeric signals:
+
+- rate-of-change thresholds with explicit units per second;
+- stuck-value runs, gated by an explicit caller-supplied expectation that the signal should change;
+- discontinuity thresholds;
+- oscillation detection using configured direction-change and amplitude limits;
+- cross-signal inconsistency only under a declared affine relationship, matching units, a shared clock domain, and an explicit maximum timestamp skew;
+- persistence labeling that retains short-lived events instead of silently deleting them.
+
+The functions accept finite, already-normalized `SignalPoint` values with source references. They do not infer units, expected transitions, clock synchronization, or signal relationships. They currently form a tested rule-engine layer; the existing M3c CLI detector registry/configuration is unchanged, so these new rules are not yet selectable through `evidence detect-anomalies`. Pilot-specific config integration and validation against reviewed/labeled recordings remain outstanding.
