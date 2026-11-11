@@ -1136,6 +1136,7 @@ def evidence_investigate(
     path: Path = typer.Argument(..., help="Evidence to investigate: anything `evidence inventory` accepts."),
     expectations: Path = typer.Option(..., "--expectations", "-e", help="Explicit expectation contract (JSON or YAML, schema 1.0)."),
     json_output: bool = typer.Option(False, "--json", help="Machine-readable, versioned JSON (stdout) instead of the readable report."),
+    registry_path: Optional[Path] = typer.Option(None, "--registry", help="Optional robot-family signal registry (YAML or JSON)."),
 ) -> None:
     """Compare explicitly expected behaviour with the evidence at PATH and report the earliest defensible divergence. Read-only.
 
@@ -1148,12 +1149,17 @@ def evidence_investigate(
     from .investigator import exit_code as investigation_exit_code
     from .investigator import investigate, investigation_json, load_contract, render_investigation
     from .investigator.engine import invalid_result
+    from .investigator.signal_registry import RegistryError, load_signal_registry
 
     loaded = load_contract(expectations)
     if loaded.contract is None:
         result = invalid_result(loaded.problems)
     else:
-        result = investigate(inspect_evidence(path), loaded)
+        try:
+            registry = load_signal_registry(registry_path) if registry_path is not None else None
+            result = investigate(inspect_evidence(path), loaded, registry=registry)
+        except RegistryError as exc:
+            raise typer.BadParameter(str(exc), param_hint="--registry") from exc
     typer.echo(investigation_json(result) if json_output else render_investigation(result), nl=False)
     code = investigation_exit_code(result)
     if code:
