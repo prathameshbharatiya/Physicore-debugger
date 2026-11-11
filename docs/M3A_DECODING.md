@@ -92,5 +92,13 @@ Unit normalization is opt-in. A conversion must declare its source unit, target 
 The result retains the raw source value, source unit, normalized value/unit, source topic/field, robot family, and conversion expression.
 No conversion is inferred from topic names, field names, ROS types, or customary conventions. Boolean and non-finite numeric values are rejected.
 
-This is a configuration/API foundation; it does not silently rewrite existing Investigator observations or the Phase 2 contract. Integrating
-a selected robot-family registry into a pilot's observation pipeline requires an explicit profile selection and reviewed signal mapping.
+A registry can now be selected explicitly for a real investigation with `evidence investigate RECORDING -e EXPECTATIONS --registry ROBOT.yaml`.
+The YAML root contains exactly `robot_family` and `signals`. Each signal declares `canonical_name`, `topic`, `field_path`,
+`semantic`, optional `unit`, optional `source_unit`, aliases, and explicit transforms. When a contract signal matches a registered
+canonical name or alias, Investigator reads the registered topic/field path and records the canonical name, semantic, robot family,
+raw value/unit, normalized value/unit, and exact conversion expression on each finding observation. The contract topic must match the
+registered topic. Unregistered contract signals retain the existing direct topic/field-path behaviour; no fuzzy alias lookup occurs.
+Unit normalization runs only for numeric values with a declared target unit. The source unit defaults to the registered unit unless
+`source_unit` is explicitly set. A requested conversion without an exact configured transform is a blind spot, not a guessed conversion.
+Registry files are read-only, limited to 1 MiB, and parsed with safe YAML loading. Without `--registry`, Phase 2 and existing M3a
+behaviour remain unchanged.
