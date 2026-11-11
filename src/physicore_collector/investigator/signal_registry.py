@@ -155,16 +155,36 @@ def registry_from_mapping(robot_family: str, data: Mapping[str, object]) -> Sign
         if not isinstance(item, Mapping):
             raise RegistryError(f"signals[{index}] must be a mapping")
         allowed = {"canonical_name", "topic", "field_path", "semantic", "unit", "aliases", "transforms", "source_unit"}
-        if set(item) - allowed:
-            raise RegistryError(f"signals[{index}] has unknown keys: {sorted(set(item) - allowed)}")
-        transforms = tuple(UnitTransform(**t) for t in item.get("transforms", ()))
+        unknown = set(item) - allowed
+        if unknown:
+            raise RegistryError(f"signals[{index}] has unknown keys: {sorted(unknown)}")
+        required = {"canonical_name", "topic", "field_path", "semantic"}
+        missing = required - set(item)
+        if missing:
+            raise RegistryError(f"signals[{index}] is missing required keys: {sorted(missing)}")
+        for key in ("canonical_name", "topic", "field_path", "semantic"):
+            if not isinstance(item[key], str) or not item[key].strip():
+                raise RegistryError(f"signals[{index}].{key} must be a non-empty string")
+        for key in ("unit", "source_unit"):
+            if item.get(key) is not None and not isinstance(item[key], str):
+                raise RegistryError(f"signals[{index}].{key} must be a string")
+        aliases = item.get("aliases", ())
+        if not isinstance(aliases, (list, tuple)) or any(not isinstance(alias, str) or not alias for alias in aliases):
+            raise RegistryError(f"signals[{index}].aliases must be a list of non-empty strings")
+        raw_transforms = item.get("transforms", ())
+        if not isinstance(raw_transforms, (list, tuple)) or any(not isinstance(t, Mapping) for t in raw_transforms):
+            raise RegistryError(f"signals[{index}].transforms must be a list of mappings")
+        try:
+            transforms = tuple(UnitTransform(**t) for t in raw_transforms)
+        except (TypeError, ValueError) as exc:
+            raise RegistryError(f"signals[{index}] has an invalid unit transform: {exc}") from exc
         definitions.append(SignalDefinition(
-            canonical_name=str(item["canonical_name"]),
-            topic=str(item["topic"]),
-            field_path=str(item["field_path"]),
-            semantic=str(item["semantic"]),
+            canonical_name=item["canonical_name"],
+            topic=item["topic"],
+            field_path=item["field_path"],
+            semantic=item["semantic"],
             unit=item.get("unit"),
-            aliases=tuple(item.get("aliases", ())),
+            aliases=tuple(aliases),
             transforms=transforms,
             source_unit=item.get("source_unit"),
         ))
