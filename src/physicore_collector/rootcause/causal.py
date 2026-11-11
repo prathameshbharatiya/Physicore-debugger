@@ -183,13 +183,17 @@ def assign(ev: dict, built: dict, report: dict, model=None, baseline: dict | Non
         u["propagation_facts"] = propagation_analysis(report, u)
         reqs = []
         if u["set_status"] != "leading":
+            # Only name alternatives that actually apply to this unit and remain
+            # viable. Catalogue rivals outside this unit are not live alternatives.
+            viable = {x["entry_id"] for x in u["instances"] if x["tier"] != "contradicted"}
             for i in u["instances"]:
                 if i["tier"] == "contradicted":
                     continue
                 src = reqs_by_inst[i["instance_id"]]
+                rivals = sorted(r for r in src["rivals"] if r in viable and r != i["entry_id"])
                 for rq in src["evidence_requirements"]:
                     if rq["usual_availability"] == "usually_absent":
-                        reqs.append({"entry_id": i["entry_id"], "measurement": rq["token"], "description": rq["description"], "would_discriminate_from": sorted(src["rivals"]),
+                        reqs.append({"entry_id": i["entry_id"], "measurement": rq["token"], "description": rq["description"], "would_discriminate_from": rivals,
                                      "meaning": REQUEST_MEANING})
         u["diagnostic_asks"] = sorted(reqs, key=lambda r: (r["measurement"], r["entry_id"]))
     out["causal_version"] = CAUSAL_VERSION
