@@ -58,7 +58,9 @@ def run_localization(path: str | Path, anomaly_config: str | Path, *, expectatio
     from physicore_collector.anomaly.service import run_anomaly_detection
 
     lim = {**DEFAULT_LIMITS, **{k: min(int(v), DEFAULT_LIMITS[k]) for k, v in (limits or {}).items() if k in DEFAULT_LIMITS}}
-    detector_ids = sorted(set(detector_ids)) if detector_ids else None\n    if (signal_profile is None) != (registry is None):\n        raise ValueError("signal_profile and registry must be supplied together")
+    detector_ids = sorted(set(detector_ids)) if detector_ids else None
+    if (signal_profile is None) != (registry is None):
+        raise ValueError("signal_profile and registry must be supplied together")
 
     # 1. every input file is validated before anything is analysed
     problems: list[Problem] = []
