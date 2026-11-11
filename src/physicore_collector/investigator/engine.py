@@ -47,6 +47,7 @@ from . import cdr as cdrmod
 from .observations import (
     LOG_TIME_DOMAIN, TIME_TYPE, Evidence, Observation, Sample, decode_message, extract, load_evidence, value_type,
 )
+from .signal_registry import RegistryError, SignalRegistry
 
 INVESTIGATION_SCHEMA_VERSION = "1.0"
 MAX_LISTED_BLIND_SPOTS = 20
@@ -259,9 +260,10 @@ def _eq(a: Any, b: Any) -> bool:
 class _Ctx:
     """Per-investigation caches. Decoding each message once keeps evaluation O(messages)."""
 
-    def __init__(self, ev: Evidence, inv: EvidenceInventory) -> None:
+    def __init__(self, ev: Evidence, inv: EvidenceInventory, registry: SignalRegistry | None = None) -> None:
         self.ev = ev
         self.inv = inv
+        self.registry = registry
         self._decoded: dict[tuple[str, int], Any] = {}
         self._series: dict[tuple[str, str], tuple[list[int], list[Sample]]] = {}
         self.paths = {a.ref_id: a.relative_path for a in inv.artifacts}
@@ -274,11 +276,30 @@ class _Ctx:
 
     def samples(self, topic: str, signal: str, time_source: str, time_field: str | None) -> list[Sample]:
         out: list[Sample] = []
+        definition = self.registry.resolve(signal) if self.registry is not None else None
+        if definition is not None and definition.topic != topic:
+            raise RegistryError(
+                f"registered signal {signal!r} belongs to topic {definition.topic!r}, not contract topic {topic!r}"
+            )
+        field_path = definition.field_path if definition is not None else signal
         for m in self.ev.messages.get(topic, []):
-            value, quality, ts, _basis, _dom, ros_type = extract(m, self.decoded(m), signal, time_source, time_field)
+            value, quality, ts, _basis, _dom, ros_type = extract(m, self.decoded(m), field_path, time_source, time_field)
+            source_value = source_unit = normalized_unit = conversion = robot_family = None
+            if definition is not None and isinstance(value, Decimal) and definition.unit is not None:
+                source_unit = definition.source_unit or definition.unit
+                try:
+                    normalized = self.registry.normalize(signal, value, source_unit=source_unit)
+                    source_value = normalized.source_value
+                    normalized_unit = normalized.normalized_unit
+                    conversion = normalized.conversion
+                    robot_family = normalized.robot_family
+                    value = Decimal(normalized.normalized_value)
+                except RegistryError:
+                    value, quality = None, "type_unsupported"
             out.append(Sample(ts=ts, seq=(m.order, m.index), value=value, quality=quality, channel_id=m.channel_id,
                               artifact_ref=m.artifact_ref, segment_sha256=m.segment_sha256, parser_status=m.parser_status,
-                              ros_type=ros_type))
+                              ros_type=ros_type, source_value=source_value, source_unit=source_unit,
+                              normalized_unit=normalized_unit, unit_conversion=conversion, robot_family=robot_family))
         out.sort(key=lambda s: (s.ts is None, s.ts if s.ts is not None else 0, s.seq))
         return out
 
@@ -297,7 +318,9 @@ def _obs_id(ctx: _Ctx, s: Sample) -> str:
 def _observation(ctx: _Ctx, s: Sample, topic: str, signal: str, basis: str, domain: str) -> Observation:
     return Observation(observation_id=_obs_id(ctx, s), artifact_ref=s.artifact_ref, topic=topic, channel_id=s.channel_id,
                        message_index=s.seq[1], signal=signal, value=s.value, value_type=value_type(s.value), timestamp_ns=s.ts,
-                       timestamp_basis=basis, clock_domain=domain, quality=s.quality, parser_status=s.parser_status, ros_type=s.ros_type)
+                       timestamp_basis=basis, clock_domain=domain, quality=s.quality, parser_status=s.parser_status, ros_type=s.ros_type,
+                       source_value=s.source_value, source_unit=s.source_unit, normalized_unit=s.normalized_unit,
+                       unit_conversion=s.unit_conversion, robot_family=s.robot_family)
 
 
 def _source(ctx: _Ctx, s: Sample, topic: str, role: str) -> SourceRef:
@@ -908,7 +931,8 @@ def invalid_result(problems: list[ContractProblem]) -> InvestigationResult:
         contract_problems=problems, not_established=_standing_statements(None))
 
 
-def investigate(inventory: EvidenceInventory, loaded: LoadedContract, *, evidence_root: Path | None = None) -> InvestigationResult:
+def investigate(inventory: EvidenceInventory, loaded: LoadedContract, *, evidence_root: Path | None = None,
+                registry: SignalRegistry | None = None) -> InvestigationResult:
     """Run one investigation. Read-only; never raises for bad content (it is reported in the result)."""
     if loaded.contract is None or loaded.sha256 is None:
         return invalid_result(loaded.problems)
@@ -918,7 +942,7 @@ def investigate(inventory: EvidenceInventory, loaded: LoadedContract, *, evidenc
     wanted = ({e.topic for e in c.expectations} | {p.topic for e in c.expectations for p in e.applies_when}
               | {e.check.response.topic for e in c.expectations if isinstance(e.check, EventResponseCheck)})
     ev = load_evidence(inventory, wanted, evidence_root)
-    ctx = _Ctx(ev, inventory)
+    ctx = _Ctx(ev, inventory, registry)
     results = [_evaluate(e, ctx) for e in c.expectations]
     not_eval = [r.expectation_id for r in results if r.status in (Status.INSUFFICIENT_EVIDENCE, Status.INCOMPARABLE_TIMEBASES)]
     findings = [r.finding for r in results if r.finding is not None]
