@@ -46,7 +46,7 @@ class TimelineEvent:
             if self.clock_domain is not None:
                 raise ValueError("an event without a timestamp cannot declare a clock domain")
         elif not self.clock_domain:
-            raise ValueError("a timestamped event must declare its clock domain")
+            raise ValueError("a timestamped event must declare a clock domain")
         if self.time_kind == "inferred" and self.time_ns is None:
             raise ValueError("an inferred time requires an explicit timestamp")
 
