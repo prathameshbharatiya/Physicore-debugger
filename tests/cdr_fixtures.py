@@ -20,11 +20,12 @@ BASE = mf.BASE_NS
 MS = 1_000_000
 
 
-def typestore():
-    """The ROS 2 Humble type store, or skip the calling test when `rosbags` (extra `xcheck`) is not installed."""
+def typestore(store="ROS2_HUMBLE"):
+    """A ROS 2 distribution type store, or skip when `rosbags` (extra `xcheck`) is absent."""
     pytest.importorskip("rosbags")
     from rosbags.typesys import Stores, get_typestore
-    return get_typestore(Stores.ROS2_HUMBLE)
+    selected = getattr(Stores, store) if isinstance(store, str) else store
+    return get_typestore(selected)
 
 
 def schema_text(msgtype: str) -> bytes:
