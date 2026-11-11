@@ -8,6 +8,7 @@ from physicore_collector.investigator.signal_registry import (
     SignalRegistry,
     UnitTransform,
     registry_from_mapping,
+    load_signal_registry,
 )
 
 
@@ -135,7 +136,7 @@ signals:
 
     assert result.first_divergence is not None
     observation = result.first_divergence.observations[0]
-    assert observation.value == "1.00"
+    assert observation.value == Decimal("1.00")
     assert observation.source_value == "4"
     assert observation.source_unit == "km/h"
     assert observation.normalized_unit == "m/s"
