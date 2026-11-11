@@ -33,7 +33,7 @@ def test_alias_resolution_and_exact_unit_conversion_preserve_source_provenance()
     assert result.source_value == "180"
     assert result.source_unit == "deg"
     assert result.normalized_unit == "rad"
-    assert result.normalized_value == "3.141592653589793238462609382"
+    assert result.normalized_value == "3.14159265358979323846264338240"
     assert result.conversion.startswith("deg->rad; scale=")
 
 
