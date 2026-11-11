@@ -7,7 +7,7 @@ affine transforms expressed as exact decimal strings and are retained in the res
 from __future__ import annotations
 
 from dataclasses import dataclass
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal, InvalidOperation, localcontext
 from typing import Mapping
 
 
@@ -112,7 +112,11 @@ class SignalRegistry:
             if transform.target_unit != definition.unit:
                 raise RegistryError("unit transform target does not match the registered unit")
             scale, offset = Decimal(transform.scale), Decimal(transform.offset)
-            normalized = raw * scale + offset
+            # Keep enough precision for the declared decimal operands; do not inherit the
+            # process-wide Decimal default (28 digits) and silently round conversions.
+            with localcontext() as context:
+                context.prec = max(50, len(raw.as_tuple().digits) + len(scale.as_tuple().digits) + len(offset.as_tuple().digits) + 8)
+                normalized = raw * scale + offset
             conversion = (
                 f"{transform.source_unit}->{transform.target_unit}; "
                 f"scale={transform.scale}; offset={transform.offset}"
