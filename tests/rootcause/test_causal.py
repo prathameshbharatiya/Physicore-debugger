@@ -198,7 +198,7 @@ def test_CAUSAL_13_diagnostic_asks_name_measurement_and_rivals_and_skip_contradi
     u = out["units"][0]
     assert u["set_status"] != "leading" and u["diagnostic_asks"]
     for r in u["diagnostic_asks"]:
-        assert set(r) == {"entry_id", "measurement", "description", "would_discriminate_from", "meaning"} and r["meaning"] == K.REQUEST_MEANING
+        assert set(r) == {"entry_id", "measurement", "description", "would_discriminate_from", "open_predictions", "meaning"} and r["meaning"] == K.REQUEST_MEANING
     assert [(r["measurement"], r["entry_id"]) for r in u["diagnostic_asks"]] == sorted((r["measurement"], r["entry_id"]) for r in u["diagnostic_asks"])
     lead = full(CAT, LINKED)
     assert lead["units"][0]["set_status"] == "leading" and lead["units"][0]["diagnostic_asks"] == []
@@ -396,3 +396,17 @@ def test_CAUSAL_29_diagnostic_asks_only_name_viable_rivals_in_the_same_unit():
     unit = next(u for u in out["units"] if u["topics"] == ["/a"])
     ask = next(x for x in unit["diagnostic_asks"] if x["entry_id"] == "user.a")
     assert ask["would_discriminate_from"] == ["user.b"]
+
+
+
+def test_CAUSAL_30_diagnostic_asks_carry_candidate_open_prediction_context():
+    out = full(CAT, report(BASE))
+    asks = out["units"][0]["diagnostic_asks"]
+    assert asks
+    for ask in asks:
+        candidate = next(i for i in out["units"][0]["instances"] if i["entry_id"] == ask["entry_id"])
+        expected = [
+            {"prediction_id": p["prediction_id"], "state": p["state"], "text": p["text"]}
+            for p in candidate["predictions"] if p["state"] not in ("satisfied", "contradicted")
+        ]
+        assert ask["open_predictions"] == expected
