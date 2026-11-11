@@ -112,10 +112,24 @@ def run_localization(path: str | Path, anomaly_config: str | Path, *, expectatio
         from physicore_collector.investigator import investigate
         m2 = investigate(inv, contract)
 
+    signal_profile_report = None
+    if signal_profile is not None:
+        from physicore_collector.anomaly.profile_pipeline import run_signal_profile_detection
+        try:
+            signal_profile_report = run_signal_profile_detection(path, signal_profile, registry)
+        except (OSError, ValueError) as exc:
+            return _base(limits=lim, params_hash=params_hash, cfg_hash=cfg_hash, exp_sha=exp_sha, dep=dep_in,
+                         problems=[Problem(source="signal_profile", path=str(signal_profile), message=str(exc))],
+                         code=3, reasons=["signal_profile_invalid"], detectors=dets, evidence=ev)
+
     # 3. symptoms, blockers, lanes
     norm = from_m3c(report)
     syms = list(norm.symptoms)
     norm_problems = list(norm.problems)
+    if signal_profile_report is not None:
+        nsp = from_signal_profile(signal_profile_report)
+        syms += nsp.symptoms
+        norm_problems += nsp.problems
     if m2 is not None:
         n2 = from_m2(m2)
         syms += n2.symptoms
