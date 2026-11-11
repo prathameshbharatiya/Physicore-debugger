@@ -45,6 +45,7 @@ class SignalDefinition:
     unit: str | None = None
     aliases: tuple[str, ...] = ()
     transforms: tuple[UnitTransform, ...] = ()
+    source_unit: str | None = None
 
     def __post_init__(self) -> None:
         for name in (self.canonical_name, self.topic, self.field_path, self.semantic):
@@ -150,7 +151,7 @@ def registry_from_mapping(robot_family: str, data: Mapping[str, object]) -> Sign
     for index, item in enumerate(data["signals"]):
         if not isinstance(item, Mapping):
             raise RegistryError(f"signals[{index}] must be a mapping")
-        allowed = {"canonical_name", "topic", "field_path", "semantic", "unit", "aliases", "transforms"}
+        allowed = {"canonical_name", "topic", "field_path", "semantic", "unit", "aliases", "transforms", "source_unit"}
         if set(item) - allowed:
             raise RegistryError(f"signals[{index}] has unknown keys: {sorted(set(item) - allowed)}")
         transforms = tuple(UnitTransform(**t) for t in item.get("transforms", ()))
@@ -162,5 +163,6 @@ def registry_from_mapping(robot_family: str, data: Mapping[str, object]) -> Sign
             unit=item.get("unit"),
             aliases=tuple(item.get("aliases", ())),
             transforms=transforms,
+            source_unit=item.get("source_unit"),
         ))
     return SignalRegistry(robot_family, tuple(definitions))
