@@ -70,7 +70,7 @@ def run_signal_profile_detection(path: str | Path, profile_path: str | Path, reg
                 continue
             topic, msg = msg_info
             refs.append({"artifact_ref": artifact_ref, "artifact_path": artifact_paths.get(artifact_ref, artifact_ref),
-                         "sha256": msg.segment_sha256, "topic": topic, "message_index": int(raw_index), "reference": ref})
+                         "sha256": msg.segment_sha256, "topic": topic, "message_index": int(raw_index), "time_ns": msg.log_time, "reference": ref})
         event_id = f"sp-{index:06d}"
         event_rows.append({"event_id": event_id, "rule": event.rule, "start_ns": event.start_ns, "end_ns": event.end_ns,
                            "clock_domain": event.clock_domain, "unit": event.unit, "observed": list(event.observed),

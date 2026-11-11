@@ -260,7 +260,7 @@ def from_signal_profile(report: dict[str, Any]) -> Normalised:
         domain = event["clock_domain"]
         start, end = event["start_ns"], event["end_ns"]
         evidence = [EvidenceRef(artifact_ref=r["artifact_ref"], sha256=r["sha256"], topic=r["topic"],
-                                message_index=r["message_index"], time_ns=start, clock_domain=domain)
+                                message_index=r["message_index"], time_ns=r.get("time_ns", start), clock_domain=domain)
                     for r in refs]
         iv = IntervalModel(domain=domain, lower_ns=start, upper_ns=max(start, end))
         onset = IntervalModel(domain=domain, lower_ns=start, upper_ns=start)
