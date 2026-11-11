@@ -99,3 +99,20 @@ Require passing automated tests on the exact commit, package export/verify round
 **Phase 2: implementation substantially present; not complete.** Exact-commit test execution, operational failure-mode verification and real-incident validation remain outstanding.
 
 No phase is represented as production-ready solely on the basis of code presence or historical test reports.
+
+
+## CI failure investigation update
+
+The pre-repair CI run for baseline commit `6f6c84788d1f6ce6ed03b4d4f239456c38ff9b02` was inspected from GitHub Actions job logs:
+
+- Python 3.10 and 3.11 failed during collection because `tests/investigation_view/tools/parity.py` used a backslash inside an f-string expression.
+- Python 3.12 reported 58 failures; Python 3.13 reported 57 failures. The suite did execute thousands of tests, but the overall result was failure.
+- The observed failure groups included CLI help snapshot drift after Typer 0.29.1 was installed despite the README identifying Typer 0.27.3 as the checked CLI version; preservation snapshots detecting the README and new CI workflow; service tests rejecting a world-writable installed executable; a setup-script ownership test attempting `chown` without sufficient permission; and a committed example output mismatch.
+- The performance-boundary test also failed on one observed runner execution; it requires a separate repeatability assessment rather than a blind threshold increase.
+
+Repairs committed after that failed baseline:
+- Pin Typer to the documented checked version, 0.27.3.
+- Refactor the parity verifier to compute escaped clock-domain text outside the f-string expression for Python 3.10/3.11 compatibility.
+- Harden CI with a job timeout, `pip check`, an installed CLI smoke test, and removal of group/other write permission from the installed CLI executable before tests.
+
+These changes have been pushed to `meeting-sprint`. A new CI run was queued for the latest commit during this audit; its result must be checked before accepting the repairs. The remaining preservation, ownership-test, and generated-example failures are not yet resolved.
