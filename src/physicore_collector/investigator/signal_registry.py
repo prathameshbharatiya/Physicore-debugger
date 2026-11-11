@@ -8,7 +8,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation, localcontext
+from pathlib import Path
 from typing import Mapping
+
+import yaml
 
 
 class RegistryError(ValueError):
@@ -166,3 +169,25 @@ def registry_from_mapping(robot_family: str, data: Mapping[str, object]) -> Sign
             source_unit=item.get("source_unit"),
         ))
     return SignalRegistry(robot_family, tuple(definitions))
+
+
+def load_signal_registry(path: Path) -> SignalRegistry:
+    """Load a robot-family registry from a bounded YAML or JSON file."""
+    try:
+        raw = path.read_bytes()
+    except OSError as exc:
+        raise RegistryError(f"cannot read signal registry: {exc}") from exc
+    if len(raw) > 1024 * 1024:
+        raise RegistryError("signal registry exceeds the 1 MiB limit")
+    try:
+        data = yaml.safe_load(raw)
+    except yaml.YAMLError as exc:
+        raise RegistryError(f"invalid signal registry YAML: {exc}") from exc
+    if not isinstance(data, Mapping):
+        raise RegistryError("signal registry root must be a mapping")
+    if set(data) != {"robot_family", "signals"}:
+        raise RegistryError("signal registry must contain exactly 'robot_family' and 'signals'")
+    family = data["robot_family"]
+    if not isinstance(family, str) or not family.strip():
+        raise RegistryError("robot_family must be a non-empty string")
+    return registry_from_mapping(family, {"signals": data["signals"]})
