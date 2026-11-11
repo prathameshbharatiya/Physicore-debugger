@@ -13,14 +13,23 @@ ROW_CAP = 200
 
 
 def _unesc(s: str) -> str:
-    return re.sub(r"\\([!-/:-@\[-`{-~])", r"\1", s)
+    return re.sub(r"\\([!-/:-@\\[-`{-~])", r"\\1", s)
+
+
+def _escape_md(s: str) -> str:
+    """Escape punctuation for the Markdown table cell using the renderer's rule."""
+    return re.sub(
+        r"([!-/:-@\\[-`{-~])",
+        lambda mm: "\\\\" + mm.group(1) if mm.group(1) not in "/,;?'\"%^$.-_" else mm.group(1),
+        s,
+    )
 
 
 def md_tables(text: str):
     out, cur = [], None
     for ln in text.splitlines():
         if ln.startswith("|"):
-            cells = [c.strip() for c in re.split(r"(?<!\\)\|", ln.strip())[1:-1]]
+            cells = [c.strip() for c in re.split(r"(?<!\\\\)\\|", ln.strip())[1:-1]]
             if cur is None:
                 cur = {"head": cells, "rows": [], "sep": False}
             elif not cur["sep"]:
@@ -100,7 +109,7 @@ def check_markdown(report_bytes: bytes, md: str) -> list[str]:
     check_rows(problems, "blockers", [r[:2] for r in t["rows"]] if t else [], blk_rows[:ROW_CAP] if False else blk_rows) if (t or blk_rows) else None
     t = _tab(tabs, "Ref", "Artifact")
     check_rows(problems, "evidence", [r[:7] for r in t["rows"]] if t else [], ev_rows) if (t or ev_rows) else None
-    m = re.search(r"Counts: (\d+) symptom\(s\), (\d+) link\(s\) reported of (\d+), (\d+) component\(s\), (\d+) chain\(s\) reported, (\d+) blocker\(s\), (\d+) caveat\(s\), (\d+) evidence reference\(s\)\.", md)
+    m = re.search(r"Counts: (\\d+) symptom\\(s\\), (\\d+) link\\(s\\) reported of (\\d+), (\\d+) component\\(s\\), (\\d+) chain\\(s\\) reported, (\\d+) blocker\\(s\\), (\\d+) caveat\\(s\\), (\\d+) evidence reference\\(s\\)\\.", md)
     if not m:
         problems.append("counts line missing")
     else:
@@ -109,9 +118,10 @@ def check_markdown(report_bytes: bytes, md: str) -> list[str]:
         if got != want:
             problems.append(f"counts {got} != {want}")
     for ln in rep["lanes"]:
-        if f"Clock domain: {re.sub(r'([!-/:-@[-`{-~])', lambda mm: '\\' + mm.group(1) if mm.group(1) not in '/,;?\'\"%^$.-_' else mm.group(1), ln['domain'])}." not in md and ln["domain"] not in md.replace("\\", ""):
+        escaped_domain = _escape_md(ln["domain"])
+        if f"Clock domain: {escaped_domain}." not in md and ln["domain"] not in md.replace("\\\\", ""):
             problems.append(f"lane {ln['domain']} missing")
-    if f"SHA-256 {hashlib.sha256(report_bytes).hexdigest()}" not in md.replace("\\", ""):
+    if f"SHA-256 {hashlib.sha256(report_bytes).hexdigest()}" not in md.replace("\\\\", ""):
         problems.append("report digest missing")
     if rep["parameters_hash"] not in md:
         problems.append("parameters hash missing")
