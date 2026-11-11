@@ -68,11 +68,14 @@ class Observation(_Strict):
     normalized_unit: str | None = None
     unit_conversion: str | None = None
     robot_family: str | None = None
+    canonical_signal: str | None = None
+    signal_semantic: str | None = None
+    source_field_path: str | None = None
 
     @model_serializer(mode="wrap")
     def _omit_unknown_ros_type(self, handler: Any) -> Any:  # keeps the JSON of JSON-payload investigations byte-identical to Phase 2
         d = handler(self)
-        for key in ("ros_type", "source_value", "source_unit", "normalized_unit", "unit_conversion", "robot_family"):
+        for key in ("ros_type", "source_value", "source_unit", "normalized_unit", "unit_conversion", "robot_family", "canonical_signal", "signal_semantic", "source_field_path"):
             if d.get(key) is None:
                 d.pop(key, None)
         return d
@@ -100,6 +103,9 @@ class Sample:
     normalized_unit: str | None = None
     unit_conversion: str | None = None
     robot_family: str | None = None
+    canonical_signal: str | None = None
+    signal_semantic: str | None = None
+    source_field_path: str | None = None
 
 
 @dataclass
