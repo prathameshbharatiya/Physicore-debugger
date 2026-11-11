@@ -1,0 +1,31 @@
+# Example thresholds only; validate every value against the robot specification and reviewed operating envelopes.
+profile_version: 1
+robot_family: mobile_base_v1
+persistence_ns: 100000000
+signals:
+  - name: wheel_speed
+    unit: rad/s
+    rate_max: "20.0"
+    stuck_epsilon: "0.01"
+    stuck_min_duration_ns: 500000000
+    change_expected: true
+    discontinuity_max_delta: "8.0"
+    oscillation_min_turns: 4
+    oscillation_min_amplitude: "1.0"
+  - name: odom_speed
+    unit: m/s
+    rate_max: "3.0"
+relationships:
+  - left_signal: wheel_speed
+    right_signal: odom_speed
+    left_unit: rad/s
+    right_unit: m/s
+    scale: "0.25"
+    offset: "0"
+    tolerance: "0.2"
+    max_skew_ns: 5000000
+expected_transitions:
+  - start_ns: 0
+    end_ns: 1000000000
+    clock_domain: mcap_log_time
+    label: startup

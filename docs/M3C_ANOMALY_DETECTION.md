@@ -109,3 +109,33 @@ measured figure higher (reported as measured).
 - persistence labeling that retains short-lived events instead of silently deleting them.
 
 The functions accept finite, already-normalized `SignalPoint` values with source references. They do not infer units, expected transitions, clock synchronization, or signal relationships. They currently form a tested rule-engine layer; the existing M3c CLI detector registry/configuration is unchanged, so these new rules are not yet selectable through `evidence detect-anomalies`. Pilot-specific config integration and validation against reviewed/labeled recordings remain outstanding.
+
+
+
+## Robot-specific numeric signal profiles
+
+The existing M3c detector suite continues to cover ROS logs, diagnostics, action status, battery health, publishing gaps, rate changes,
+stamp ordering, array-length changes and non-finite values. For numeric telemetry, `anomaly.signal_profile` now provides a strict
+robot-family profile and evaluator around the deterministic signal-rule primitives.
+
+A profile declares a unit for every signal and may explicitly configure rate-of-change, stuck-value, discontinuity and oscillation
+thresholds. Stuck detection is rejected unless `change_expected: true` is stated. Cross-signal checks require a declared affine
+relationship, exact unit matches, one shared clock domain and a maximum timestamp skew. No unit conversion is inferred by this evaluator:
+supply already-normalized samples from the robot registry and retain the original values/provenance upstream.
+
+Expected transition intervals are explicit and clock-domain-scoped. Overlapping events are retained and annotated with the transition
+label rather than silently suppressed; this keeps startup/shutdown context visible for engineer review. Persistence/debounce labels
+short events without deleting them. Every event retains its source references and observed values.
+
+API: `validate_signal_profile(mapping)`, `load_signal_profile(path)`, and `evaluate_signal_profile(profile, samples)`.
+The YAML example is `examples/anomaly/signal_profile.example.yaml`. The profile evaluator is an additive library API; it is not yet
+wired into the existing `evidence detect-anomalies` report/CLI or the hypothesis catalogue. Timeline integration is exposed through
+the event's clock domain, interval and source refs, but automatic timeline/hypothesis insertion is not claimed. Real-robot labels and
+reviewed operating envelopes are still required before threshold quality, false-positive rate or false-negative rate can be claimed.
+
+### Validation status
+
+Synthetic rule-level tests exercise each detector family, explicit units, transition annotation, short-event retention, and strict
+configuration rejection. The repository's existing M3c test corpus remains the regression basis for the existing CLI detectors.
+No labeled real-robot corpus is available; therefore false-positive/false-negative rates and customer operating thresholds remain
+unmeasured. Synthetic test counts are not presented as field accuracy.
