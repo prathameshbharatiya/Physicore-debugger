@@ -41,7 +41,9 @@ jobs:
           python -m pip check
 
       - name: Verify installed CLI entry point
-        run: physicore-collector --help
+        run: |
+          chmod go-w "$(command -v physicore-collector)"
+          physicore-collector --help
 
       - name: Run test suite
         run: python -m pytest -q
