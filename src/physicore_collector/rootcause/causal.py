@@ -193,8 +193,16 @@ def assign(ev: dict, built: dict, report: dict, model=None, baseline: dict | Non
                 rivals = sorted(r for r in src["rivals"] if r in viable and r != i["entry_id"])
                 for rq in src["evidence_requirements"]:
                     if rq["usual_availability"] == "usually_absent":
+                        # Keep the evidence request connected to the candidate's
+                        # actual unresolved predictions. This is candidate-level
+                        # context; it does not claim that one measurement proves a
+                        # particular prediction unless the catalogue says so.
+                        open_predictions = [
+                            {"prediction_id": p["prediction_id"], "state": p["state"], "text": p["text"]}
+                            for p in i["predictions"] if p["state"] not in ("satisfied", "contradicted")
+                        ]
                         reqs.append({"entry_id": i["entry_id"], "measurement": rq["token"], "description": rq["description"], "would_discriminate_from": rivals,
-                                     "meaning": REQUEST_MEANING})
+                                     "open_predictions": open_predictions, "meaning": REQUEST_MEANING})
         u["diagnostic_asks"] = sorted(reqs, key=lambda r: (r["measurement"], r["entry_id"]))
     out["causal_version"] = CAUSAL_VERSION
     out["ladder"] = [{"level": n, "name": name, "wording": s, "reachable": n <= MAX_REACHABLE} for n, name, s in LEVELS] + [
