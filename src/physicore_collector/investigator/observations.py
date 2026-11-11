@@ -63,12 +63,18 @@ class Observation(_Strict):
     quality: Quality
     parser_status: str  # readability of the source segment as established by the Collector: readable | partially_readable
     ros_type: str | None = None  # primitive ROS type of the leaf (`float32`, `int32`, ...) for CDR messages; omitted from JSON when unknown
+    source_value: str | None = None
+    source_unit: str | None = None
+    normalized_unit: str | None = None
+    unit_conversion: str | None = None
+    robot_family: str | None = None
 
     @model_serializer(mode="wrap")
     def _omit_unknown_ros_type(self, handler: Any) -> Any:  # keeps the JSON of JSON-payload investigations byte-identical to Phase 2
         d = handler(self)
-        if d.get("ros_type") is None:
-            d.pop("ros_type", None)
+        for key in ("ros_type", "source_value", "source_unit", "normalized_unit", "unit_conversion", "robot_family"):
+            if d.get(key) is None:
+                d.pop(key, None)
         return d
 
     @field_serializer("value")
@@ -89,6 +95,11 @@ class Sample:
     segment_sha256: str
     parser_status: str
     ros_type: str | None = None
+    source_value: str | None = None
+    source_unit: str | None = None
+    normalized_unit: str | None = None
+    unit_conversion: str | None = None
+    robot_family: str | None = None
 
 
 @dataclass
