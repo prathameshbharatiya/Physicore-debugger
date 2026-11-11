@@ -56,7 +56,7 @@ The stages are not interchangeable. For example, a localization report is not it
 ## Requirements
 
 - Python **3.10 or newer**
-- Runtime dependencies are declared in `pyproject.toml`: Typer, Pydantic, MCAP and PyYAML.
+- Runtime dependencies are declared in `pyproject.toml`: Typer (`>=0.24,<1`), Pydantic, MCAP and PyYAML. The CLI was checked with Typer 0.27.3; the declared range is broader than that checked version, so pin the version in a reproducible environment if exact CLI behaviour matters.
 - ROS 2 is **not** required for offline inspection, validation, packaging, inventory or supported analysis of existing files.
 - Live capture requires a sourced ROS 2 environment, `rosbag2` and the MCAP storage plugin.
 - Optional CDR decoding support is installed with the `ros2` extra. The `xcheck` extra is for independent decoder cross-checking in development/testing.
@@ -71,6 +71,8 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 pip install -e ".[dev]"
 ```
+
+**Platform note:** Linux is the documented and tested environment. The Windows PowerShell command below is standard virtual-environment activation syntax, not a claim that PhysiCore has been validated on Windows. Live ROS 2 capture is Linux-only.
 
 On Windows PowerShell, activate the environment with:
 
@@ -140,11 +142,11 @@ The export target must be a new directory. A package may still be written when v
 # Prepare an incident package from a recording, bag or capture session
 physicore-collector incident prepare examples/fixtures/valid.mcap \
   --profile examples/profiles/synthetic_fixture.profile.yaml \
-  --out /tmp/physicore-incidents
+  --out /tmp/physicore-incidents/incident-001
 
-# List incidents and inspect one
+# List incidents and inspect the incident directory created above
 physicore-collector incident list /tmp/physicore-incidents
-physicore-collector incident show /tmp/physicore-incidents/<incident-directory>
+physicore-collector incident show /tmp/physicore-incidents/incident-001
 ```
 
 Preparation is guarded against active writers and can be deferred. See [Operations](docs/OPERATIONS.md) for recovery, pending work, background capture and service deployment.
@@ -238,6 +240,7 @@ The repository's implementation reports and stage-specific documents contain the
 - Live ROS 2 recording and systemd behaviour require validation in the target robot environment; scripted recorder tests are not equivalent to a real robot deployment.
 - CDR decoding is limited to supported message schemas and types. Unsupported encodings, missing schemas, malformed messages and out-of-scope payloads are reported as blind spots rather than guessed.
 - Image and point-cloud understanding is outside the documented M3a decoding scope.
+- **M4 catalogue status:** all 12 version-1 mechanisms are `proposed` and 0 are reviewed, as recorded in [the catalogue review pack](docs/M4_CATALOGUE_REVIEW.md). They are candidate mechanisms, not established diagnoses; validation is on generated scenarios, and validation against real robot recordings remains outstanding.
 - Root-cause outputs are constrained by the catalogue review state, available observations, system model, declared dependencies and explicit rule set. They are not calibrated probabilities and should not be treated as autonomous repair instructions.
 - A clean result means no issue was established within the checks and evidence coverage that ran. It does not prove a robot is fault-free or that no data was lost.
 - Large-bag performance, multi-GB verification cost and deployment behaviour on varied robot hardware/storage require workload-specific measurement.
