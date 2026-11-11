@@ -53,6 +53,17 @@ def cli(*args):
     return RUN.invoke(app, ["evidence", "localize", *map(str, args)])
 
 
+def test_signal_profile_validation_problem_is_returned_as_a_report_problem(tmp_path):
+    bag, cfg = cascade(tmp_path)
+    bad_profile = tmp_path / "bad-signal-profile.yaml"
+    bad_profile.write_text("{}")
+    report = run_localization(bag, cfg, signal_profile=bad_profile, registry=tmp_path / "unused-registry.json")
+    assert report.exit_code == 3
+    assert report.exit_reasons == ["signal_profile_invalid"]
+    assert report.problems and report.problems[0].source == "signal_profile"
+    assert report.symptoms == [] and report.links == []
+
+
 # ---------------------------------------------------------------------------------------------------------------------------------- CLI
 
 def test_CLI_01_clean_recording_without_dependencies_is_order_only(tmp_path):
