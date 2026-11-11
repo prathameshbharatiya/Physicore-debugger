@@ -96,9 +96,14 @@ def intervention_contrast(inst: dict, report: dict, model) -> dict | None:
         t = [e["time_ns"] for e in s.get("evidence", []) if e.get("time_ns") is not None]
         if t:
             times.setdefault((s["node"], s["category"]), []).append(min(t))
+    # A contrast is only available when every supporting topic/category has a
+    # timestamp. Ignoring an untimed symptom would silently turn incomplete
+    # temporal evidence into an apparent before/after comparison.
+    pair_times = [times.get(pair, []) for pair in sorted(pairs)]
+    if not pair_times or any(not values for values in pair_times):
+        return None
     for iv in sorted(model.content["interventions"], key=lambda x: x["id"]):
-        ts = [t for p in pairs for t in times.get(p, [])]
-        if ts and all(t > iv["at_ns"] for t in ts):
+        if all(t > iv["at_ns"] for values in pair_times for t in values):
             return {"intervention_id": iv["id"], "at_ns": iv["at_ns"]}
     return None
 
