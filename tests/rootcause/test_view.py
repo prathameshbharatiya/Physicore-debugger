@@ -112,3 +112,18 @@ def test_VIEW_09_no_causal_words_in_any_generated_text(reps):
         text = (W.render_markdown(reps[k]) + W.render_html(reps[k])).lower().replace("\\", "")
         for w in ("caused", "because", "root cause", "probability", "likelihood"):
             assert w not in text, (k, w)
+
+
+
+def test_VIEW_10_diagnostic_asks_render_the_open_prediction_context(reps):
+    report = next((x for x in (reps["F02"], reps["F03"], reps["F01"]) if any(u["diagnostic_asks"] for u in x["units"])), None)
+    if report is None:
+        pytest.skip("the selected fixtures do not produce diagnostic asks")
+    unit = next(u for u in report["units"] if u["diagnostic_asks"])
+    ask = unit["diagnostic_asks"][0]
+    md = W.render_markdown(report).replace("\\", "")
+    html = W.render_html(report)
+    assert "Open predictions" in md and "Open predictions" in html
+    if ask["open_predictions"]:
+        p = ask["open_predictions"][0]
+        assert p["prediction_id"] in md and p["state"] in md and p["text"] in md
