@@ -21,7 +21,7 @@ from .vocabulary import CHAINS_TOTAL_STATUS, SEVERITY_DISCLAIMER
 
 EXIT_REASONS = ("anomaly_config_invalid", "expectations_invalid", "dependencies_invalid", "evidence_not_inspectable", "evidence_partial_or_unverified",
                 "evidence_changed_during_run", "completed")
-PROBLEM_SOURCES = ("anomaly_config", "expectations", "dependencies", "normalisation", "evidence")
+PROBLEM_SOURCES = ("anomaly_config", "expectations", "dependencies", "normalisation", "signal_profile", "evidence")
 DATA_CHARS = 80
 
 LIMITATIONS = (
