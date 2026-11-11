@@ -39,7 +39,7 @@ def test_profile_evaluates_all_numeric_rules_and_relationships_with_provenance()
 def test_profile_preserves_short_events_as_nonpersistent():
     p = validate_signal_profile({"profile_version": 1, "robot_family": "arm", "persistence_ns": 10,
         "signals": [{"name": "joint", "unit": "rad", "discontinuity_max_delta": "1"}]})
-    result = evaluate_signal_profile(p, {"joint": pts([0, 5], "j")})
+    result = evaluate_signal_profile(p, {"joint": [SignalPoint(0, "mcap_log_time", Decimal("0"), "rad", "j:0"),\n                                         SignalPoint(1_000_000_000, "mcap_log_time", Decimal("5"), "rad", "j:1")]})
     assert len(result.events) == 1 and result.events[0].event.persistent is False
 
 
