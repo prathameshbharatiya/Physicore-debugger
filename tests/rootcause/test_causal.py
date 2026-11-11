@@ -383,3 +383,16 @@ def test_CAUSAL_28_intervention_contrast_requires_a_timestamp_for_every_supporti
     assert K.intervention_contrast(ledger, report_with_all_times, model) == {
         "intervention_id": "restart1", "at_ns": 50
     }
+
+
+
+def test_CAUSAL_29_diagnostic_asks_only_name_viable_rivals_in_the_same_unit():
+    a = entry("user.a", [pr("p1", "symptom_present", "dn", ["diagnostic_status"])], ["user.b", "user.c"])
+    b = entry("user.b", [pr("p1", "symptom_present", "dn", ["diagnostic_status"])], ["user.a"])
+    c = entry("user.c", [pr("p1", "symptom_present", "dn", ["diagnostic_status"])], ["user.a"])
+    c["applies_to"] = {"symptom_categories": ["rate_change"]}
+
+    out = full(user_cat(a, b, c), report(BASE))
+    unit = next(u for u in out["units"] if u["topics"] == ["/a"])
+    ask = next(x for x in unit["diagnostic_asks"] if x["entry_id"] == "user.a")
+    assert ask["would_discriminate_from"] == ["user.b"]
