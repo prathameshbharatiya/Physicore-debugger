@@ -76,6 +76,56 @@ def odometry(stamp_ns: int, x: float, y: float, vx: float, wz: float, frame: str
     return ts.types["nav_msgs/msg/Odometry"](header=_hdr(stamp_ns, frame), child_frame_id=child, pose=pwc, twist=tw)
 
 
+def _f32(xs):
+    import numpy as np
+    return np.array(xs, dtype=np.float32)
+
+def quaternion(x=0.0, y=0.0, z=0.0, w=1.0):
+    return typestore().types["geometry_msgs/msg/Quaternion"](x=x, y=y, z=z, w=w)
+
+def imu(stamp_ns: int):
+    ts = typestore()
+    return ts.types["sensor_msgs/msg/Imu"](header=_hdr(stamp_ns, "imu_link"), orientation=quaternion(0.0, 0.0, 0.25, 0.9682458366),
+        orientation_covariance=_f64(range(9)), angular_velocity=vector3(0.1, 0.2, 0.3), angular_velocity_covariance=_f64(range(9)),
+        linear_acceleration=vector3(1.0, 2.0, 9.81), linear_acceleration_covariance=_f64(range(9)))
+
+def laser_scan(stamp_ns: int):
+    return typestore().types["sensor_msgs/msg/LaserScan"](header=_hdr(stamp_ns, "laser"), angle_min=-1.0, angle_max=1.0,
+        angle_increment=0.5, time_increment=0.01, scan_time=0.1, range_min=0.05, range_max=20.0,
+        ranges=_f32([1.25, 2.5, 3.75]), intensities=_f32([10.0, 20.0, 30.0]))
+
+def nav_sat_fix(stamp_ns: int):
+    ts = typestore()
+    status = ts.types["sensor_msgs/msg/NavSatStatus"](status=0, service=1)
+    return ts.types["sensor_msgs/msg/NavSatFix"](header=_hdr(stamp_ns, "gps"), status=status, latitude=19.0760, longitude=72.8777,
+        altitude=14.5, position_covariance=_f64([0.0, 0.1, 0.0, 0.1, 0.0, 0.0, 0.0, 0.0, 0.2]), position_covariance_type=2)
+
+def range_sensor(stamp_ns: int):
+    return typestore().types["sensor_msgs/msg/Range"](header=_hdr(stamp_ns, "front_range"), radiation_type=0,
+        field_of_view=0.5, min_range=0.02, max_range=4.0, range=1.35)
+
+def pose_stamped(stamp_ns: int):
+    ts = typestore()
+    point = ts.types["geometry_msgs/msg/Point"](x=4.0, y=5.0, z=0.0)
+    pose = ts.types["geometry_msgs/msg/Pose"](position=point, orientation=quaternion())
+    return ts.types["geometry_msgs/msg/PoseStamped"](header=_hdr(stamp_ns, "map"), pose=pose)
+
+def twist_stamped(stamp_ns: int):
+    return typestore().types["geometry_msgs/msg/TwistStamped"](header=_hdr(stamp_ns, "base_link"),
+        twist=twist((0.4, 0.0, 0.0), (0.0, 0.0, 0.15)))
+
+def wrench_stamped(stamp_ns: int):
+    ts = typestore()
+    wrench = ts.types["geometry_msgs/msg/Wrench"](force=vector3(1.0, 2.0, 3.0), torque=vector3(0.1, 0.2, 0.3))
+    return ts.types["geometry_msgs/msg/WrenchStamped"](header=_hdr(stamp_ns, "tool0"), wrench=wrench)
+
+def joint_trajectory(stamp_ns: int):
+    ts = typestore()
+    duration = ts.types["builtin_interfaces/msg/Duration"](sec=1, nanosec=250_000_000)
+    point = ts.types["trajectory_msgs/msg/JointTrajectoryPoint"](positions=_f64([0.1, 0.2]), velocities=_f64([0.0, 0.0]),
+        accelerations=_f64([]), effort=_f64([]), time_from_start=duration)
+    return ts.types["trajectory_msgs/msg/JointTrajectory"](header=_hdr(stamp_ns, "base"), joint_names=["shoulder", "elbow"], points=[point])
+
 def float64(x: float):
     return typestore().types["std_msgs/msg/Float64"](data=x)
 

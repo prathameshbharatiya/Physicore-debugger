@@ -121,3 +121,28 @@ The support boundary is explicit: `ros2msg` schemas are decoded when supported b
 schema encodings return `schema_encoding_unsupported`; unsupported field types such as `wstring` return a per-message status;
 image and point-cloud payloads remain intentionally out of scope. The decoder version is printed by CI rather than inferred from
 the dependency range. Update this section whenever the CI matrix or tested decoder version changes.
+
+
+## Step 4 — pilot-oriented ROS 2 message families
+
+The decoder is schema-driven rather than hard-coded to a small list of ROS message names. Step 4 therefore expands the supported message corpus
+and documents the pilot profile instead of adding brittle per-type decoder branches. The initial profile assumes a mobile base with an optional
+manipulator and common navigation/perception sensors; actual customer topic names and message definitions must be confirmed during onboarding.
+
+| Robot subsystem / use | ROS 2 message types covered | Representative typed paths |
+|---|---|---|
+| Joint feedback | `sensor_msgs/msg/JointState` (existing) | `position[name=elbow]`, `velocity.0`, `effort.0` |
+| State estimation / odometry | `nav_msgs/msg/Odometry` (existing), `geometry_msgs/msg/PoseStamped` | `pose.pose.position.x`, `twist.twist.angular.z`, `pose.position.x` |
+| IMU | `sensor_msgs/msg/Imu` | `orientation.z`, `angular_velocity.z`, `linear_acceleration.z`, covariance arrays |
+| 2D lidar | `sensor_msgs/msg/LaserScan` | `ranges.1`, `intensities.2`, angular/range limits |
+| GNSS | `sensor_msgs/msg/NavSatFix` | `latitude`, `longitude`, `status.status`, `position_covariance.4` |
+| Proximity | `sensor_msgs/msg/Range` | `range`, `min_range`, `max_range` |
+| Motion command | `geometry_msgs/msg/Twist` (existing), `geometry_msgs/msg/TwistStamped` | `linear.x`, `angular.z`, `twist.linear.x` |
+| Manipulator command | `trajectory_msgs/msg/JointTrajectory` | `joint_names.1`, `points.0.positions.1`, `points.0.time_from_start.sec` |
+| Force / torque | `geometry_msgs/msg/WrenchStamped` | `wrench.force.z`, `wrench.torque.y` |
+| Power | `sensor_msgs/msg/BatteryState` (existing) | `voltage`, `percentage`, `present` |
+
+The expanded synthetic corpus is defined in `tests/cdr_fixtures.py` and exercised by `tests/test_cdr_message_families.py`. It includes nested message
+members, covariance arrays, variable-length scan arrays, nested sequences, enums and stamped messages. Fixtures are serialized with the independent
+`rosbags` typestore and carry embedded `ros2msg` definitions. This is fixture coverage, not evidence that every vendor custom message package or
+customer topic convention is supported. Images, compressed images and point clouds remain out of scope.
