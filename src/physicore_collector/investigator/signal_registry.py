@@ -141,8 +141,11 @@ class SignalRegistry:
 
 def registry_from_mapping(robot_family: str, data: Mapping[str, object]) -> SignalRegistry:
     """Build a registry from a plain mapping; reject unknown keys instead of silently ignoring them."""
-    if set(data) != {"signals"} or not isinstance(data.get("signals"), list):
-        raise RegistryError("registry mapping must contain only a 'signals' list")
+    unknown = set(data) - {"signals"}
+    if unknown:
+        raise RegistryError(f"registry mapping has unknown keys: {sorted(unknown)}")
+    if not isinstance(data.get("signals"), list):
+        raise RegistryError("registry mapping must contain a 'signals' list")
     definitions: list[SignalDefinition] = []
     for index, item in enumerate(data["signals"]):
         if not isinstance(item, Mapping):
