@@ -20,7 +20,7 @@ def _escape_md(s: str) -> str:
     """Escape punctuation for the Markdown table cell using the renderer's rule."""
     def escape(match):
         ch = match.group(1)
-        return chr(92) + ch if ch not in "/,;?'\\"%^$.-_" else ch
+        return chr(92) + ch if ch not in ("/", ",", ";", "?", "'", '"', "%", "^", "$", ".", "-", "_") else ch
     return re.sub(r"([!-/:-@[-`{-~])", escape, s)
 
 
