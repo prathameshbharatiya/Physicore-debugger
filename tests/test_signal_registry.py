@@ -1,6 +1,10 @@
 from decimal import Decimal
+import json
 
 import pytest
+from typer.testing import CliRunner
+
+from physicore_collector.cli import app
 
 from physicore_collector.investigator.signal_registry import (
     RegistryError,
@@ -145,3 +149,41 @@ signals:
     assert observation.signal_semantic == "linear_velocity"
     assert observation.source_field_path == "v"
     assert observation.unit_conversion.startswith("km/h->m/s")
+
+
+def test_cli_registry_option_uses_profile_in_investigation(tmp_path):
+    from tests.investigator_fixtures import contract, expectation, write_mcap
+
+    recording = write_mcap(tmp_path / "robot.mcap", {
+        "/wheel_speed_raw": [(1_700_000_000_000_000_000, {"v": 4})],
+    })
+    expectations = tmp_path / "expectations.json"
+    expectations.write_text(json.dumps(contract([expectation(
+        topic="/wheel_speed_raw", signal="wheel_speed",
+        check={"kind": "range", "max": 0.5},
+    )])))
+    profile = tmp_path / "robot.yaml"
+    profile.write_text("""
+robot_family: demo_rover
+signals:
+  - canonical_name: wheel.speed
+    aliases: [wheel_speed]
+    topic: /wheel_speed_raw
+    field_path: v
+    semantic: linear_velocity
+    unit: m/s
+    source_unit: km/h
+    transforms:
+      - source_unit: km/h
+        target_unit: m/s
+        scale: "0.25"
+        rationale: fixture conversion
+""")
+    result = CliRunner().invoke(app, [
+        "evidence", "investigate", str(recording), "-e", str(expectations),
+        "--registry", str(profile), "--json",
+    ])
+    assert result.exit_code == 1, result.output
+    assert '"canonical_signal": "wheel.speed"' in result.output
+    assert '"source_value": "4"' in result.output
+    assert '"normalized_unit": "m/s"' in result.output

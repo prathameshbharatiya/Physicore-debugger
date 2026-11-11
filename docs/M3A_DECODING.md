@@ -102,3 +102,22 @@ Unit normalization runs only for numeric values with a declared target unit. The
 `source_unit` is explicitly set. A requested conversion without an exact configured transform is a blind spot, not a guessed conversion.
 Registry files are read-only, limited to 1 MiB, and parsed with safe YAML loading. Without `--registry`, Phase 2 and existing M3a
 behaviour remain unchanged.
+
+
+## Compatibility verification (CI)
+
+The `cdr-compatibility` GitHub Actions job installs the optional `ros2` and `xcheck` extras on Python 3.10–3.13,
+records the actual decoder versions, and runs the CDR, independent-decoder, and robot-registry acceptance tests. The current
+matrix has exercised `mcap-ros2-support 0.6.0` against `rosbags 0.11.9`; the CDR acceptance suite includes an independent
+value-by-value cross-check on identical MCAP message bytes.
+
+Distribution-schema coverage uses the `rosbags` embedded message typestores for ROS 2 Humble, Jazzy, Kilted, and Lyrical.
+For each store, CI serializes a common `std_msgs/msg/Float64` message with that distribution's own embedded definition and
+checks that the Investigator decodes the same typed value. The broader nested/array message corpus and independent value-by-value
+cross-check use the Humble definitions. This is schema-fixture coverage, **not** an installation or end-to-end test of four ROS 2
+distributions. Actual rosbag2 runtime compatibility still requires recordings and runtime tests from those environments.
+
+The support boundary is explicit: `ros2msg` schemas are decoded when supported by the optional decoder; `ros2idl` and other
+schema encodings return `schema_encoding_unsupported`; unsupported field types such as `wstring` return a per-message status;
+image and point-cloud payloads remain intentionally out of scope. The decoder version is printed by CI rather than inferred from
+the dependency range. Update this section whenever the CI matrix or tested decoder version changes.

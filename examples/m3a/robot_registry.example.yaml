@@ -1,0 +1,23 @@
+# Example only: replace topics, field paths, units, and aliases with values verified for the target robot.
+# No unit or semantic meaning is inferred by Physicore.
+robot_family: example_mobile_base
+signals:
+  - canonical_name: base.linear_velocity
+    aliases: [wheel_odom.velocity_x]
+    topic: /wheel/odometry
+    field_path: twist.twist.linear.x
+    semantic: linear_velocity
+    unit: m/s
+    source_unit: km/h
+    transforms:
+      - source_unit: km/h
+        target_unit: m/s
+        scale: "0.2777777777777777777777777778"
+        offset: "0"
+        rationale: exact declared km/h to m/s conversion
+  - canonical_name: base.angular_velocity
+    aliases: [wheel_odom.yaw_rate]
+    topic: /wheel/odometry
+    field_path: twist.twist.angular.z
+    semantic: angular_velocity
+    unit: rad/s
