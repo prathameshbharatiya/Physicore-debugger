@@ -92,8 +92,10 @@ def build_blocks(r: dict) -> list[tuple]:
             B.append(("list", [_d(t) for t in u["missing_evidence"]]))
         if u["diagnostic_asks"]:
             B.append(("h", 3, _fixed("Diagnostic asks (nothing here runs a test)")))
-            B.append(("table", [_fixed(h) for h in ("Entry", "Measurement", "Separates it from", "Meaning")],
-                      [[_d(a["entry_id"]), _d(a["measurement"] + ": " + a["description"]), _d(", ".join(a["would_discriminate_from"]) or "none"), _fixed(a["meaning"])] for a in u["diagnostic_asks"]]))
+            B.append(("table", [_fixed(h) for h in ("Entry", "Measurement", "Separates it from", "Open predictions", "Meaning")],
+                      [[_d(a["entry_id"]), _d(a["measurement"] + ": " + a["description"]), _d(", ".join(a["would_discriminate_from"]) or "none"),
+                        _d("; ".join(f"{p['prediction_id']} ({p['state']}): {p['text']}" for p in a["open_predictions"]) or "none"),
+                        _fixed(a["meaning"])] for a in u["diagnostic_asks"]]))
         if u["propagation_facts"]:
             B.append(("h", 3, _fixed("Declared edges at this unit (from the localization step's coverage)")))
             B.append(("list", [_fixed(f"Edge {f['edge_id']}: {f['from_node']} to {f['to_node']}. {f['sentence']}") for f in u["propagation_facts"]]))
