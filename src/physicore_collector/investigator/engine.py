@@ -284,12 +284,15 @@ class _Ctx:
         field_path = definition.field_path if definition is not None else signal
         for m in self.ev.messages.get(topic, []):
             value, quality, ts, _basis, _dom, ros_type = extract(m, self.decoded(m), field_path, time_source, time_field)
-            source_value = source_unit = normalized_unit = conversion = robot_family = None
+            source_value = str(value) if definition is not None and value is not None else None
+            source_unit = definition.source_unit or definition.unit if definition is not None else None
+            normalized_unit = definition.unit if definition is not None else None
+            conversion = "identity" if definition is not None and definition.unit is not None and isinstance(value, Decimal) else None
+            robot_family = self.registry.robot_family if definition is not None and self.registry is not None else None
             canonical_signal = definition.canonical_name if definition is not None else None
             signal_semantic = definition.semantic if definition is not None else None
             source_field_path = definition.field_path if definition is not None else None
             if definition is not None and isinstance(value, Decimal) and definition.unit is not None:
-                source_unit = definition.source_unit or definition.unit
                 try:
                     normalized = self.registry.normalize(signal, value, source_unit=source_unit)
                     source_value = normalized.source_value
