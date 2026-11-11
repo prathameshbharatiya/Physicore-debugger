@@ -99,3 +99,45 @@ def test_mapping_loader_rejects_unknown_keys_and_builds_transforms():
 
     with pytest.raises(RegistryError, match="unknown keys"):
         registry_from_mapping("arm", {"signals": [], "defaults": {}})
+
+
+def test_registry_is_applied_inside_real_investigation_and_retains_raw_units(tmp_path):
+    from physicore_collector.inventory import inspect_evidence
+    from physicore_collector.investigator import investigate, parse_contract
+    from tests.investigator_fixtures import contract, expectation, write_mcap
+
+    recording = write_mcap(tmp_path / "robot.mcap", {
+        "/wheel_speed_raw": [(1_700_000_000_000_000_000, {"v": 4})],
+    })
+    profile = tmp_path / "robot.yaml"
+    profile.write_text("""
+robot_family: demo_rover
+signals:
+  - canonical_name: wheel.speed
+    aliases: [wheel_speed]
+    topic: /wheel_speed_raw
+    field_path: v
+    semantic: linear_velocity
+    unit: m/s
+    source_unit: km/h
+    transforms:
+      - source_unit: km/h
+        target_unit: m/s
+        scale: "0.25"
+        rationale: fixture conversion
+""")
+    registry = load_signal_registry(profile)
+    loaded = parse_contract(contract([expectation(
+        topic="/wheel_speed_raw", signal="wheel_speed",
+        check={"kind": "range", "max": 0.5},
+    )]))
+    result = investigate(inspect_evidence(recording), loaded, registry=registry)
+
+    assert result.first_divergence is not None
+    observation = result.first_divergence.observations[0]
+    assert observation.value == "1.00"
+    assert observation.source_value == "4"
+    assert observation.source_unit == "km/h"
+    assert observation.normalized_unit == "m/s"
+    assert observation.robot_family == "demo_rover"
+    assert observation.unit_conversion.startswith("km/h->m/s")
