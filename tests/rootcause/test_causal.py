@@ -363,3 +363,23 @@ def test_CAUSAL_27_sentences_carry_the_levels_of_their_hypotheses():
     for u in out["units"]:
         for i in u["instances"]:
             assert {"text": i["claim_sentence"], "claim_level": i["claim_level"]} in ss
+
+
+
+def test_CAUSAL_28_intervention_contrast_requires_a_timestamp_for_every_supporting_symptom():
+    model = parse_system_model(MODEL_IV.replace(b"AT", b"50"), name="m.yaml").model
+    ledger = {"ledger": [
+        {"kind": "observed", "topic": "/a", "category": "c1"},
+        {"kind": "observed", "topic": "/b", "category": "c1"},
+    ]}
+    report_with_missing_time = {"symptoms": [
+        {"node": "/a", "category": "c1", "evidence": [{"time_ns": 100}]},
+        {"node": "/b", "category": "c1", "evidence": []},
+    ]}
+    assert K.intervention_contrast(ledger, report_with_missing_time, model) is None
+
+    report_with_all_times = copy.deepcopy(report_with_missing_time)
+    report_with_all_times["symptoms"][1]["evidence"] = [{"time_ns": 120}]
+    assert K.intervention_contrast(ledger, report_with_all_times, model) == {
+        "intervention_id": "restart1", "at_ns": 50
+    }
