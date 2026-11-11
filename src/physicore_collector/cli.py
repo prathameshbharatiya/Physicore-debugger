@@ -1193,17 +1193,16 @@ def evidence_detect_anomalies(
     path: Path = typer.Argument(..., help="Evidence to analyse: anything `evidence inventory` accepts."),
     anomaly_config: Path = typer.Option(..., "--anomaly-config", help="Explicit anomaly detection configuration (YAML or JSON, schema 1)."),
     detector: list[str] = typer.Option(None, "--detector", help="Run only this detector id (repeatable); default: every detector enabled in the configuration."),
+    signal_profile: Optional[Path] = typer.Option(None, "--signal-profile", help="Optional strict numeric signal-anomaly profile (YAML). Requires --registry."),
+    registry: Optional[Path] = typer.Option(None, "--registry", help="Optional robot-family signal registry used to decode and normalize profile signals."),
     json_output: bool = typer.Option(False, "--json", help="Machine-readable JSON report (stdout) instead of the readable report."),
     fail_on_findings: bool = typer.Option(False, "--fail-on-findings", help="Exit 1 when at least one finding is reported."),
 ) -> None:
     """Report explicit failure indicators and signal/timing anomalies observed in the evidence at PATH. Read-only.
 
-    Findings describe what was observed in the recorded stream, where, and under which parameters; they are not diagnoses and never state a
-    cause. Detectors run only when enabled in the configuration; nothing is inferred or defaulted. Nothing is written into PATH.
-
-    Exit codes: 0 = completed (findings do not change the exit code by default); 1 = findings with --fail-on-findings, or the evidence is
-    partial / failed integrity (the report is still produced); 2 = the evidence could not be inspected (or a usage error); 3 = the anomaly
-    configuration is invalid (nothing is analysed)."""
+    Findings describe observations and configured parameters; they are not diagnoses. Numeric signal profiles require both
+    --signal-profile and --registry; their events are also placed on per-clock-domain timelines. No cross-domain ordering
+    or causal conclusion is inferred. Nothing is written into PATH."""
     from .anomaly.findings import DETECTOR_IDS
     from .anomaly.report import render_json, render_text
     from .anomaly.service import run_anomaly_detection
@@ -1211,8 +1210,23 @@ def evidence_detect_anomalies(
     unknown = [d for d in (detector or []) if d not in DETECTOR_IDS]
     if unknown:
         raise typer.BadParameter(f"unknown detector id {unknown[0]!r}; known: {', '.join(DETECTOR_IDS)}", param_hint="--detector")
+    if (signal_profile is None) != (registry is None):
+        raise typer.BadParameter("--signal-profile and --registry must be supplied together")
     report = run_anomaly_detection(path, anomaly_config, detector_ids=detector or None, fail_on_findings=fail_on_findings)
-    typer.echo(render_json(report) if json_output else render_text(report), nl=False)
+    if signal_profile is None:
+        typer.echo(render_json(report) if json_output else render_text(report), nl=False)
+    else:
+        from .anomaly.profile_pipeline import run_signal_profile_detection, render_signal_profile_text
+        try:
+            profile_result = run_signal_profile_detection(path, signal_profile, registry)
+        except (OSError, ValueError) as exc:
+            raise typer.BadParameter(str(exc), param_hint="--signal-profile/--registry") from exc
+        if json_output:
+            payload = {"anomaly_report": report.model_dump(mode="json", exclude_none=True), "signal_profile": profile_result}
+            typer.echo(json.dumps(payload, indent=2, sort_keys=True))
+        else:
+            typer.echo(render_text(report), nl=False)
+            typer.echo(render_signal_profile_text(profile_result), nl=False)
     if report.exit_code:
         raise typer.Exit(code=report.exit_code)
 
