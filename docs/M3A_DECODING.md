@@ -80,3 +80,17 @@ Process baseline after imports: 37 MB.
 Memory grows with the number of messages held for the investigated signals (about 1–7 KB per message here), so very long recordings with large messages are
 not bounded by a streaming design yet; the existing evidence budget caps what is retained but this was not stress-tested beyond these sizes.
 An earlier scratch run (50k JointState in ~0.96 s) is consistent with the JointState row. Do not extrapolate to real recordings.
+
+
+## Robot-family signal registries (additive)
+
+`investigator.signal_registry` provides an explicit registry for a named robot family. A signal definition binds a canonical signal name to its
+source topic, field path, semantic meaning, declared unit, and optional aliases. Aliases are exact configuration entries; unknown names are
+not guessed and collisions are rejected.
+
+Unit normalization is opt-in. A conversion must declare its source unit, target unit, exact decimal scale, and optional offset/rationale.
+The result retains the raw source value, source unit, normalized value/unit, source topic/field, robot family, and conversion expression.
+No conversion is inferred from topic names, field names, ROS types, or customary conventions. Boolean and non-finite numeric values are rejected.
+
+This is a configuration/API foundation; it does not silently rewrite existing Investigator observations or the Phase 2 contract. Integrating
+a selected robot-family registry into a pilot's observation pipeline requires an explicit profile selection and reviewed signal mapping.
